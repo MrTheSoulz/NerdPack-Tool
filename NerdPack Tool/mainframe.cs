@@ -61,15 +61,22 @@ namespace WindowsFormsApplication1
         //Build Core Info
         private async void GetCoreInfo()
         {
-            var client = new GitHubClient(new ProductHeaderValue("NerdPack"));
-            var repo = await client.Repository.Get("MrTheSoulz", "NerdPack");
-            UPDATED_TEXT.Text = ""+repo.PushedAt;
-            STARS_TEXT.Text = ""+repo.StargazersCount;
-            FORKS_TEXT.Text = ""+repo.ForksCount;
-            GIT_BT.Click += (sender, args) =>
+            try
             {
-                System.Diagnostics.Process.Start("" + repo.HtmlUrl+ "/issues");
-            };
+                var client = new GitHubClient(new ProductHeaderValue("NerdPack"));
+                var repo = await client.Repository.Get("MrTheSoulz", "NerdPack");
+                UPDATED_TEXT.Text = "" + repo.PushedAt;
+                STARS_TEXT.Text = "" + repo.StargazersCount;
+                FORKS_TEXT.Text = "" + repo.ForksCount;
+                GIT_BT.Click += (sender, args) =>
+                {
+                    System.Diagnostics.Process.Start("" + repo.HtmlUrl + "/issues");
+                };
+            } catch {
+                UPDATED_TEXT.Text = "UNAVAILABLE";
+                STARS_TEXT.Text = "UNAVAILABLE";
+                FORKS_TEXT.Text = "UNAVAILABLE";
+            }
         }
 
         // Launch WoW button
@@ -104,6 +111,7 @@ namespace WindowsFormsApplication1
             string timestamp = "";
             foreach (string s in words){timestamp = timestamp + s;}
             // Download and save it into the current exe folder.
+            CONSOLE_DATA.Rows.Add("- Downloading: " + name);
             WebClient myWebClient = new WebClient();
             myWebClient.DownloadFile(uri + "/archive/master.zip", fileName);
             //Create a backup
@@ -113,16 +121,21 @@ namespace WindowsFormsApplication1
                 {
                     Directory.CreateDirectory(exePath + "\\Backups");
                 }
+                CONSOLE_DATA.Rows.Add("-- Creating a backup ...");
                 ZipFile.CreateFromDirectory(tPath, exePath + "\\Backups\\"+ name + " - " + timestamp + ".zip");
                 Directory.Delete(tPath, true);
             }
             // Extract the zip
+            CONSOLE_DATA.Rows.Add("-- Extracting ...");
             ZipFile.ExtractToDirectory(oPath + ".zip", zPath);
             // rename the folder (remove -master)
+            CONSOLE_DATA.Rows.Add("-- Moving to: "+ tPath);
             Directory.Move(tPath + "-master", tPath);
             // delete the temp zip
+            CONSOLE_DATA.Rows.Add("-- Deleting temp. zip");
             File.Delete(exePath + "\\" + fileName);
             // add a version file
+            CONSOLE_DATA.Rows.Add("-- Adding a version file...");
             if (!File.Exists(tPath + "//Version.txt"))
             {
                 using (StreamWriter file = new StreamWriter(tPath + "//Version.txt", true))
@@ -135,21 +148,32 @@ namespace WindowsFormsApplication1
         // Check if should be updated
         private async void CheckForUpDate(string owner, string _repo)
         {
-            // get the github info
-            var client = new GitHubClient(new ProductHeaderValue(_repo));
-            var repo = await client.Repository.Get(owner, _repo);
-            string name = repo.Name;
-            string tPath = LOC_INPUT.Text + "\\" + name;
-            string text = "0.0";
-            if (File.Exists(tPath + "\\Version.txt"))
+            try
             {
-                text = File.ReadAllText(tPath + "\\Version.txt");
-            }
-            if (!text.Contains("" + repo.PushedAt))
+                // get the github info
+                var client = new GitHubClient(new ProductHeaderValue(_repo));
+                var repo = await client.Repository.Get(owner, _repo);
+                string name = repo.Name;
+                string tPath = LOC_INPUT.Text + "\\" + name;
+                string text = "0.0";
+                if (File.Exists(tPath + "\\Version.txt"))
+                {
+                    text = File.ReadAllText(tPath + "\\Version.txt");
+                }
+                if (!text.Contains("" + repo.PushedAt))
+                {
+                    CONSOLE_DATA.Rows.Add("Found update for :" + repo.Name);
+                    Download(owner, _repo);
+                }
+                else
+                {
+                    CONSOLE_DATA.Rows.Add(repo.Name + " is already updated");
+                }
+            } catch
             {
-                MessageBox.Show("found update for :" +  repo.Name);
-                Download(owner, _repo);
+                MessageBox.Show("Sorry but the servers are unavailable right now, try again later...");
             }
+           
         }
 
     }

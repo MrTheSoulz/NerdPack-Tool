@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(mainframe));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.CORE_TAB = new System.Windows.Forms.TabPage();
@@ -36,7 +38,10 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.LOC_INPUT = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.GIT_BT = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.UPDATED_TEXT = new System.Windows.Forms.TextBox();
+            this.STARS_TEXT = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.FORKS_TEXT = new System.Windows.Forms.TextBox();
@@ -47,21 +52,24 @@
             this.CR_Tab = new System.Windows.Forms.TabPage();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.INSTALL_BT = new System.Windows.Forms.Button();
-            this.STARS_TEXT = new System.Windows.Forms.TextBox();
-            this.UPDATED_TEXT = new System.Windows.Forms.TextBox();
-            this.GIT_BT = new System.Windows.Forms.Button();
+            this.CONSOLE_Tab = new System.Windows.Forms.TabPage();
+            this.CONSOLE_DATA = new System.Windows.Forms.DataGridView();
+            this.Data = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.CORE_TAB.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            this.CONSOLE_Tab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.CONSOLE_DATA)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.CORE_TAB);
             this.tabControl1.Controls.Add(this.CR_Tab);
+            this.tabControl1.Controls.Add(this.CONSOLE_Tab);
             this.tabControl1.Location = new System.Drawing.Point(0, 2);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -138,6 +146,15 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "NerdPack\'s Core Settings";
             // 
+            // GIT_BT
+            // 
+            this.GIT_BT.Location = new System.Drawing.Point(10, 163);
+            this.GIT_BT.Name = "GIT_BT";
+            this.GIT_BT.Size = new System.Drawing.Size(184, 23);
+            this.GIT_BT.TabIndex = 4;
+            this.GIT_BT.Text = "Report Issues";
+            this.GIT_BT.UseVisualStyleBackColor = true;
+            // 
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.UPDATED_TEXT);
@@ -152,6 +169,22 @@
             this.groupBox4.TabIndex = 3;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Core Information";
+            // 
+            // UPDATED_TEXT
+            // 
+            this.UPDATED_TEXT.Location = new System.Drawing.Point(52, 61);
+            this.UPDATED_TEXT.Name = "UPDATED_TEXT";
+            this.UPDATED_TEXT.ReadOnly = true;
+            this.UPDATED_TEXT.Size = new System.Drawing.Size(128, 20);
+            this.UPDATED_TEXT.TabIndex = 7;
+            // 
+            // STARS_TEXT
+            // 
+            this.STARS_TEXT.Location = new System.Drawing.Point(52, 40);
+            this.STARS_TEXT.Name = "STARS_TEXT";
+            this.STARS_TEXT.ReadOnly = true;
+            this.STARS_TEXT.Size = new System.Drawing.Size(128, 20);
+            this.STARS_TEXT.TabIndex = 6;
             // 
             // label4
             // 
@@ -245,30 +278,60 @@
             this.INSTALL_BT.UseVisualStyleBackColor = true;
             this.INSTALL_BT.Click += new System.EventHandler(this.INSTALL_BT_Click);
             // 
-            // STARS_TEXT
+            // CONSOLE_Tab
             // 
-            this.STARS_TEXT.Location = new System.Drawing.Point(52, 40);
-            this.STARS_TEXT.Name = "STARS_TEXT";
-            this.STARS_TEXT.ReadOnly = true;
-            this.STARS_TEXT.Size = new System.Drawing.Size(128, 20);
-            this.STARS_TEXT.TabIndex = 6;
+            this.CONSOLE_Tab.Controls.Add(this.CONSOLE_DATA);
+            this.CONSOLE_Tab.Location = new System.Drawing.Point(4, 22);
+            this.CONSOLE_Tab.Name = "CONSOLE_Tab";
+            this.CONSOLE_Tab.Size = new System.Drawing.Size(792, 336);
+            this.CONSOLE_Tab.TabIndex = 2;
+            this.CONSOLE_Tab.Text = "Console";
+            this.CONSOLE_Tab.UseVisualStyleBackColor = true;
             // 
-            // UPDATED_TEXT
+            // CONSOLE_DATA
             // 
-            this.UPDATED_TEXT.Location = new System.Drawing.Point(52, 61);
-            this.UPDATED_TEXT.Name = "UPDATED_TEXT";
-            this.UPDATED_TEXT.ReadOnly = true;
-            this.UPDATED_TEXT.Size = new System.Drawing.Size(128, 20);
-            this.UPDATED_TEXT.TabIndex = 7;
+            this.CONSOLE_DATA.AllowUserToAddRows = false;
+            this.CONSOLE_DATA.AllowUserToDeleteRows = false;
+            this.CONSOLE_DATA.AllowUserToResizeColumns = false;
+            this.CONSOLE_DATA.AllowUserToResizeRows = false;
+            this.CONSOLE_DATA.BackgroundColor = System.Drawing.Color.Black;
+            this.CONSOLE_DATA.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.CONSOLE_DATA.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.CONSOLE_DATA.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.CONSOLE_DATA.ColumnHeadersVisible = false;
+            this.CONSOLE_DATA.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Data});
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.CONSOLE_DATA.DefaultCellStyle = dataGridViewCellStyle2;
+            this.CONSOLE_DATA.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.CONSOLE_DATA.Enabled = false;
+            this.CONSOLE_DATA.EnableHeadersVisualStyles = false;
+            this.CONSOLE_DATA.Location = new System.Drawing.Point(0, 0);
+            this.CONSOLE_DATA.Name = "CONSOLE_DATA";
+            this.CONSOLE_DATA.ReadOnly = true;
+            this.CONSOLE_DATA.RowHeadersVisible = false;
+            this.CONSOLE_DATA.Size = new System.Drawing.Size(792, 336);
+            this.CONSOLE_DATA.TabIndex = 0;
             // 
-            // GIT_BT
+            // Data
             // 
-            this.GIT_BT.Location = new System.Drawing.Point(10, 163);
-            this.GIT_BT.Name = "GIT_BT";
-            this.GIT_BT.Size = new System.Drawing.Size(184, 23);
-            this.GIT_BT.TabIndex = 4;
-            this.GIT_BT.Text = "Report Issues";
-            this.GIT_BT.UseVisualStyleBackColor = true;
+            this.Data.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Data.HeaderText = "Data";
+            this.Data.Name = "Data";
+            this.Data.ReadOnly = true;
             // 
             // mainframe
             // 
@@ -290,6 +353,8 @@
             this.groupBox1.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
+            this.CONSOLE_Tab.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.CONSOLE_DATA)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -317,6 +382,9 @@
         private System.Windows.Forms.TextBox UPDATED_TEXT;
         private System.Windows.Forms.TextBox STARS_TEXT;
         private System.Windows.Forms.Button GIT_BT;
+        private System.Windows.Forms.TabPage CONSOLE_Tab;
+        private System.Windows.Forms.DataGridView CONSOLE_DATA;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Data;
     }
 }
 
