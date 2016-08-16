@@ -71,7 +71,7 @@
             // CORE_TAB
             // 
             this.CORE_TAB.BackColor = System.Drawing.Color.White;
-            this.CORE_TAB.BackgroundImage = global::WindowsFormsApplication1.Properties.Resources.NEPlogo;
+            this.CORE_TAB.BackgroundImage = global::NerdPackToolBox.Properties.Resources.NEPlogo;
             this.CORE_TAB.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.CORE_TAB.Controls.Add(this.groupBox3);
             this.CORE_TAB.Controls.Add(this.groupBox2);

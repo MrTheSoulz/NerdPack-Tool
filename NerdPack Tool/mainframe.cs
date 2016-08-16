@@ -134,8 +134,12 @@ namespace WindowsFormsApplication1
             }
         }
 
-        private void CheckForUpDate(string owner, string _repo)
+        // Check if should be updated
+        private async void CheckForUpDate(string owner, string _repo)
         {
+            // get the github info
+            var client = new GitHubClient(new ProductHeaderValue(_repo));
+            var repo = await client.Repository.Get(owner, _repo);
 
         }
 
