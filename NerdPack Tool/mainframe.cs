@@ -12,6 +12,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using System.IO.Compression;
+using System.Threading;
+
 
 namespace WindowsFormsApplication1
 {
@@ -28,6 +30,7 @@ namespace WindowsFormsApplication1
             //TEMP DISABLED
             CORE_R_COMBO.Enabled = false;
         }
+
 
         public void UpdateCore()
         {
@@ -89,11 +92,18 @@ namespace WindowsFormsApplication1
         private void INSTALL_BT_Click(object sender, EventArgs e)
         {
             UpdateCore();
+
         }
 
         // Download
         private async void Download(string owner, string _repo)
         {
+            IProgress<int> progress = new Progress<int>(value => { progressBar1.Value = value; });
+            await Task.Run(() =>
+            {
+                for (int i = 0; i <= 100; i++)
+                    progress.Report(i);
+            });
             // get the github info
             var client = new GitHubClient(new ProductHeaderValue(_repo));
             var repo = await client.Repository.Get(owner, _repo);
