@@ -97,6 +97,7 @@ namespace WindowsFormsApplication1
             string exePath = System.Windows.Forms.Application.StartupPath;
             string oPath = exePath + "\\" + name;
             string tPath = LOC_INPUT.Text + "\\Test";
+            // Create a backup
             // Extract the zip
             ZipFile.ExtractToDirectory(oPath + ".zip", tPath);
             // rename the folder (remove -master)
