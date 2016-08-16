@@ -89,21 +89,45 @@ namespace WindowsFormsApplication1
             // get the github info
             var client = new GitHubClient(new ProductHeaderValue(_repo));
             var repo = await client.Repository.Get(owner, _repo);
-            var name = repo.Name;
+            string name = repo.Name;
             string uri = repo.HtmlUrl;
             string fileName = name + ".zip";
             string exePath = System.Windows.Forms.Application.StartupPath;
             string oPath = exePath + "\\" + name;
-            string tPath = LOC_INPUT.Text + "\\Test";
+            string tPath = LOC_INPUT.Text + "\\Test" + "\\" + name;
+            string zPath = LOC_INPUT.Text + "\\Test";
+            // Get days
+
+            string FU = "" + DateTime.Now;
+            char[] delimiterChars = { '/', ':'};
+            string[] words = FU.Split(delimiterChars);
+            string timestamp = "";
+
+            foreach (string s in words)
+            {
+                timestamp = timestamp + s;
+            }
+
             // Download and save it into the current exe folder.
             WebClient myWebClient = new WebClient();
             myWebClient.DownloadFile(uri + "/archive/master.zip", fileName);
-            // TODO: Create a backup
+            //Create a backup
+            if (Directory.Exists(tPath)) {
+                // create the backup folder if dosent exist
+                MessageBox.Show(""+timestamp);
+                if (!Directory.Exists(exePath+"\\Backups"))
+                {
+                    Directory.CreateDirectory(exePath + "\\Backups");
+                }
+                ZipFile.CreateFromDirectory(tPath, exePath + "\\Backups\\"+ name + " - " + timestamp + ".zip");
+                Directory.Delete(tPath, true);
+            }
             // Extract the zip
-            ZipFile.ExtractToDirectory(oPath + ".zip", tPath);
+            ZipFile.ExtractToDirectory(oPath + ".zip", zPath);
             // rename the folder (remove -master)
-            Directory.Move(tPath + "\\" + name + "-master", tPath + "\\" + name);
+            Directory.Move(tPath + "-master", tPath);
             // TODO: Finally we need to delete the temp zip
         }
+
     }
 }
