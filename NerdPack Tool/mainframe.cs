@@ -34,7 +34,10 @@ namespace WindowsFormsApplication1
         {
             //TODO: We need to check for versions before downloading and installing
             Download("MrTheSoulz", "NerdPack");
-            //TODO: if PROTECTED_CHECK.Checked, update it aswell
+            if (PROTECTED_CHECK.Checked)
+            {
+                Download("MrTheSoulz", "NerdPack-Protected");
+            }
         }
 
         // GET WoW Location
@@ -96,25 +99,18 @@ namespace WindowsFormsApplication1
             string oPath = exePath + "\\" + name;
             string tPath = LOC_INPUT.Text + "\\Test" + "\\" + name;
             string zPath = LOC_INPUT.Text + "\\Test";
-            // Get days
-
+            // Build the fkng time
             string FU = "" + DateTime.Now;
             char[] delimiterChars = { '/', ':'};
             string[] words = FU.Split(delimiterChars);
             string timestamp = "";
-
-            foreach (string s in words)
-            {
-                timestamp = timestamp + s;
-            }
-
+            foreach (string s in words){timestamp = timestamp + s;}
             // Download and save it into the current exe folder.
             WebClient myWebClient = new WebClient();
             myWebClient.DownloadFile(uri + "/archive/master.zip", fileName);
             //Create a backup
             if (Directory.Exists(tPath)) {
                 // create the backup folder if dosent exist
-                MessageBox.Show(""+timestamp);
                 if (!Directory.Exists(exePath+"\\Backups"))
                 {
                     Directory.CreateDirectory(exePath + "\\Backups");
