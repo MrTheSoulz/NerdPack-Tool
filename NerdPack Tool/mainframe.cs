@@ -25,8 +25,16 @@ namespace WindowsFormsApplication1
             LOC_INPUT.Text = GetWoWLoc()+"\\Interface\\AddOns";
             PROTECTED_CHECK.Checked = true;
             GetCoreInfo();
+            UpdateCore();
             //TEMP DISABLED
             CORE_R_COMBO.Enabled = false;
+        }
+
+        public void UpdateCore()
+        {
+            // We need to check for versions before downloading and installing
+            Download("NerdPack", "https://github.com/MrTheSoulz/NerdPack/archive/master.zip");
+            // if PROTECTED_CHECK.Checked, update it aswell
         }
 
         // GET WoW Location
@@ -72,7 +80,7 @@ namespace WindowsFormsApplication1
         // Install / Update Button
         private void INSTALL_BT_Click(object sender, EventArgs e)
         {
-            Download("NerdPack", "https://github.com/MrTheSoulz/NerdPack/archive/master.zip");
+            MessageBox.Show("TO BE DONE...");
         }
 
         // Download
@@ -93,6 +101,7 @@ namespace WindowsFormsApplication1
             ZipFile.ExtractToDirectory(oPath + ".zip", tPath);
             // rename the folder (remove -master)
             Directory.Move(tPath + "\\" + name + "-master", tPath + "\\" + name);
+            // Finally we need to delete the temp zip
         }
     }
 }
