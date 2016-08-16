@@ -134,5 +134,10 @@ namespace WindowsFormsApplication1
             }
         }
 
+        private void CheckForUpDate(string owner, string _repo)
+        {
+
+        }
+
     }
 }
