@@ -90,14 +90,14 @@ namespace WindowsFormsApplication1
             var client = new GitHubClient(new ProductHeaderValue(_repo));
             var repo = await client.Repository.Get(owner, _repo);
             var name = repo.Name;
-            var uri = repo.HtmlUrl;
+            string uri = repo.HtmlUrl;
             string fileName = name + ".zip";
             string exePath = System.Windows.Forms.Application.StartupPath;
             string oPath = exePath + "\\" + name;
             string tPath = LOC_INPUT.Text + "\\Test";
             // Download and save it into the current exe folder.
             WebClient myWebClient = new WebClient();
-            myWebClient.DownloadFile(uri, fileName);
+            myWebClient.DownloadFile(uri + "/archive/master.zip", fileName);
             // TODO: Create a backup
             // Extract the zip
             ZipFile.ExtractToDirectory(oPath + ".zip", tPath);
