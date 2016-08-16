@@ -14,7 +14,6 @@ using System.IO;
 using System.IO.Compression;
 using System.Threading;
 using System.Xml;
-using System.Xml.Linq;
 
 namespace WindowsFormsApplication1
 {
@@ -187,29 +186,30 @@ namespace WindowsFormsApplication1
                 MessageBox.Show("Sorry but the servers are unavailable right now, try again later...");
             }
         }
-
         private async void BuildCombatRoutines()
-        {		
-            try		
-            {		
-                XmlDocument xdcDocument = new XmlDocument();		
-                XDocument.Load("https://dl.dropboxusercontent.com/u/101560647/NerdPack/NeP_Updater_Data.xml");		
-                XmlElement xelRoot = xdcDocument.DocumentElement;		
-                XmlNodeList xnlNodes = xelRoot.SelectNodes("/ArrayOfButtons/Button");		
-                foreach (XmlNode xndNode in xnlNodes)		
-                     {		
-                        string Owner = xndNode["Owner"].InnerText;		
-                        string Repo = xndNode["Repo"].InnerText;		
-                        try		
-                        {		
-                            var client = new GitHubClient(new ProductHeaderValue(Owner));		
-                            var repo = await client.Repository.Get(Owner, Repo);		
-                            CR_DATA.Rows.Add(true, repo.Name, repo.Description);		
-                     } catch { } 		
-                }		
-            }		
-            catch { }		
-        }   
+        {
+            try
+            {
+                XmlDocument xdcDocument = new XmlDocument();
+                xdcDocument.Load("https://dl.dropboxusercontent.com/u/101560647/NerdPack/NeP_Updater_Data.xml");
+                XmlElement xelRoot = xdcDocument.DocumentElement;
+                XmlNodeList xnlNodes = xelRoot.SelectNodes("/ArrayOfButtons/Button");
+
+                foreach (XmlNode xndNode in xnlNodes)
+                {
+                    string Owner = xndNode["Owner"].InnerText;
+                    string Repo = xndNode["Repo"].InnerText;
+                    try
+                    {
+                        var client = new GitHubClient(new ProductHeaderValue(Owner));
+                        var repo = await client.Repository.Get(Owner, Repo);
+                        CR_DATA.Rows.Add(true, repo.Name, repo.Description);
+                    }
+                    catch { }
+                }
+            }
+            catch { }
+        }
     }
 
 }
