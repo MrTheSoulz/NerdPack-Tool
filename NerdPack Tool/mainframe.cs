@@ -33,7 +33,7 @@ namespace WindowsFormsApplication1
         public void UpdateCore()
         {
             // We need to check for versions before downloading and installing
-            Download("NerdPack", "https://github.com/MrTheSoulz/NerdPack/archive/master.zip");
+            Download("MrTheSoulz", "NerdPack");
             // if PROTECTED_CHECK.Checked, update it aswell
         }
 
@@ -84,25 +84,27 @@ namespace WindowsFormsApplication1
         }
 
         // Download
-        private void Download(string name, string url)
+        private async void Download(string owner, string _repo)
         {
-            string fileName = name+".zip", myStringWebResource = null;
-            // Create a new WebClient instance.
-            WebClient myWebClient = new WebClient();
-            // Concatenate the domain with the Web resource filename.
-            myStringWebResource = url;
-            // Download the Web resource and save it into the current filesystem folder.
-            myWebClient.DownloadFile(myStringWebResource, fileName);
-            // paths
+            // get the github info
+            var client = new GitHubClient(new ProductHeaderValue(_repo));
+            var repo = await client.Repository.Get(owner, _repo);
+            var name = repo.Name;
+            var uri = repo.HtmlUrl;
+            MessageBox.Show(name);
+            string fileName = name + ".zip";
             string exePath = System.Windows.Forms.Application.StartupPath;
             string oPath = exePath + "\\" + name;
             string tPath = LOC_INPUT.Text + "\\Test";
-            // Create a backup
+            // Download and save it into the current exe folder.
+            WebClient myWebClient = new WebClient();
+            myWebClient.DownloadFile(uri, fileName);
+            // TODO: Create a backup
             // Extract the zip
             ZipFile.ExtractToDirectory(oPath + ".zip", tPath);
             // rename the folder (remove -master)
             Directory.Move(tPath + "\\" + name + "-master", tPath + "\\" + name);
-            // Finally we need to delete the temp zip
+            // TODO: Finally we need to delete the temp zip
         }
     }
 }
