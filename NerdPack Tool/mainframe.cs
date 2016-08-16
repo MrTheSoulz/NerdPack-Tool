@@ -32,9 +32,9 @@ namespace WindowsFormsApplication1
 
         public void UpdateCore()
         {
-            // We need to check for versions before downloading and installing
+            //TODO: We need to check for versions before downloading and installing
             Download("MrTheSoulz", "NerdPack");
-            // if PROTECTED_CHECK.Checked, update it aswell
+            //TODO: if PROTECTED_CHECK.Checked, update it aswell
         }
 
         // GET WoW Location
@@ -91,7 +91,6 @@ namespace WindowsFormsApplication1
             var repo = await client.Repository.Get(owner, _repo);
             var name = repo.Name;
             var uri = repo.HtmlUrl;
-            MessageBox.Show(name);
             string fileName = name + ".zip";
             string exePath = System.Windows.Forms.Application.StartupPath;
             string oPath = exePath + "\\" + name;
