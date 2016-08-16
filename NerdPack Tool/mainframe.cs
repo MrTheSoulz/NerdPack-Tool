@@ -123,6 +123,7 @@ namespace WindowsFormsApplication1
             // rename the folder (remove -master)
             Directory.Move(tPath + "-master", tPath);
             // TODO: Finally we need to delete the temp zip
+            File.Delete(exePath + "\\" + fileName);
         }
 
     }
