@@ -25,18 +25,16 @@ namespace WindowsFormsApplication1
             LOC_INPUT.Text = GetWoWLoc()+"\\Interface\\AddOns";
             PROTECTED_CHECK.Checked = true;
             GetCoreInfo();
-            UpdateCore();
             //TEMP DISABLED
             CORE_R_COMBO.Enabled = false;
         }
 
         public void UpdateCore()
         {
-            //TODO: We need to check for versions before downloading and installing
-            Download("MrTheSoulz", "NerdPack");
+            CheckForUpDate("MrTheSoulz", "NerdPack");
             if (PROTECTED_CHECK.Checked)
             {
-                Download("MrTheSoulz", "NerdPack-Protected");
+                CheckForUpDate("MrTheSoulz", "NerdPack-Protected");
             }
         }
 
@@ -83,7 +81,7 @@ namespace WindowsFormsApplication1
         // Install / Update Button
         private void INSTALL_BT_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("TO BE DONE...");
+            UpdateCore();
         }
 
         // Download
@@ -97,8 +95,8 @@ namespace WindowsFormsApplication1
             string fileName = name + ".zip";
             string exePath = System.Windows.Forms.Application.StartupPath;
             string oPath = exePath + "\\" + name;
-            string tPath = LOC_INPUT.Text + "\\Test" + "\\" + name;
-            string zPath = LOC_INPUT.Text + "\\Test";
+            string tPath = LOC_INPUT.Text + "\\" + name;
+            string zPath = LOC_INPUT.Text ;
             // Build the fkng time
             string FU = "" + DateTime.Now;
             char[] delimiterChars = { '/', ':'};
@@ -140,7 +138,18 @@ namespace WindowsFormsApplication1
             // get the github info
             var client = new GitHubClient(new ProductHeaderValue(_repo));
             var repo = await client.Repository.Get(owner, _repo);
-
+            string name = repo.Name;
+            string tPath = LOC_INPUT.Text + "\\" + name;
+            string text = "0.0";
+            if (File.Exists(tPath + "\\Version.txt"))
+            {
+                text = File.ReadAllText(tPath + "\\Version.txt");
+            }
+            if (!text.Contains("" + repo.PushedAt))
+            {
+                MessageBox.Show("found update for :" +  repo.Name);
+                Download(owner, _repo);
+            }
         }
 
     }
