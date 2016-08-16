@@ -122,8 +122,16 @@ namespace WindowsFormsApplication1
             ZipFile.ExtractToDirectory(oPath + ".zip", zPath);
             // rename the folder (remove -master)
             Directory.Move(tPath + "-master", tPath);
-            // TODO: Finally we need to delete the temp zip
+            // delete the temp zip
             File.Delete(exePath + "\\" + fileName);
+            // add a version file
+            if (!File.Exists(tPath + "//Version.txt"))
+            {
+                using (StreamWriter file = new StreamWriter(tPath + "//Version.txt", true))
+                {
+                    file.WriteLine(repo.PushedAt);
+                }
+            }
         }
 
     }
