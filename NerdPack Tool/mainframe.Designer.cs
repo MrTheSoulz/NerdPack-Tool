@@ -50,19 +50,25 @@
             this.label1 = new System.Windows.Forms.Label();
             this.CORE_R_COMBO = new System.Windows.Forms.ComboBox();
             this.CR_Tab = new System.Windows.Forms.TabPage();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
-            this.INSTALL_BT = new System.Windows.Forms.Button();
             this.CONSOLE_Tab = new System.Windows.Forms.TabPage();
             this.CONSOLE_DATA = new System.Windows.Forms.DataGridView();
             this.Data = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.INSTALL_BT = new System.Windows.Forms.Button();
+            this.CR_DATA = new System.Windows.Forms.DataGridView();
+            this.CheckBox = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.Addon = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Description = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.CORE_TAB.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            this.CR_Tab.SuspendLayout();
             this.CONSOLE_Tab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CONSOLE_DATA)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CR_DATA)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -253,6 +259,7 @@
             // 
             // CR_Tab
             // 
+            this.CR_Tab.Controls.Add(this.CR_DATA);
             this.CR_Tab.Location = new System.Drawing.Point(4, 22);
             this.CR_Tab.Name = "CR_Tab";
             this.CR_Tab.Padding = new System.Windows.Forms.Padding(3);
@@ -260,23 +267,6 @@
             this.CR_Tab.TabIndex = 1;
             this.CR_Tab.Text = "Combat Routines";
             this.CR_Tab.UseVisualStyleBackColor = true;
-            // 
-            // progressBar1
-            // 
-            this.progressBar1.Location = new System.Drawing.Point(0, 370);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(613, 23);
-            this.progressBar1.TabIndex = 1;
-            // 
-            // INSTALL_BT
-            // 
-            this.INSTALL_BT.Location = new System.Drawing.Point(612, 369);
-            this.INSTALL_BT.Name = "INSTALL_BT";
-            this.INSTALL_BT.Size = new System.Drawing.Size(184, 24);
-            this.INSTALL_BT.TabIndex = 2;
-            this.INSTALL_BT.Text = "INSTALL/UPDATE";
-            this.INSTALL_BT.UseVisualStyleBackColor = true;
-            this.INSTALL_BT.Click += new System.EventHandler(this.INSTALL_BT_Click);
             // 
             // CONSOLE_Tab
             // 
@@ -333,6 +323,61 @@
             this.Data.Name = "Data";
             this.Data.ReadOnly = true;
             // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(0, 370);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(613, 23);
+            this.progressBar1.TabIndex = 1;
+            // 
+            // INSTALL_BT
+            // 
+            this.INSTALL_BT.Location = new System.Drawing.Point(612, 369);
+            this.INSTALL_BT.Name = "INSTALL_BT";
+            this.INSTALL_BT.Size = new System.Drawing.Size(184, 24);
+            this.INSTALL_BT.TabIndex = 2;
+            this.INSTALL_BT.Text = "INSTALL/UPDATE";
+            this.INSTALL_BT.UseVisualStyleBackColor = true;
+            this.INSTALL_BT.Click += new System.EventHandler(this.INSTALL_BT_Click);
+            // 
+            // CR_DATA
+            // 
+            this.CR_DATA.AllowUserToAddRows = false;
+            this.CR_DATA.AllowUserToDeleteRows = false;
+            this.CR_DATA.AllowUserToResizeColumns = false;
+            this.CR_DATA.AllowUserToResizeRows = false;
+            this.CR_DATA.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.CR_DATA.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.CheckBox,
+            this.Addon,
+            this.Description});
+            this.CR_DATA.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.CR_DATA.Location = new System.Drawing.Point(3, 3);
+            this.CR_DATA.Name = "CR_DATA";
+            this.CR_DATA.RowHeadersVisible = false;
+            this.CR_DATA.Size = new System.Drawing.Size(786, 330);
+            this.CR_DATA.TabIndex = 0;
+            // 
+            // CheckBox
+            // 
+            this.CheckBox.HeaderText = "X";
+            this.CheckBox.Name = "CheckBox";
+            this.CheckBox.Width = 25;
+            // 
+            // Addon
+            // 
+            this.Addon.HeaderText = "Addon";
+            this.Addon.Name = "Addon";
+            this.Addon.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Addon.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Addon.Width = 200;
+            // 
+            // Description
+            // 
+            this.Description.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Description.HeaderText = "Description";
+            this.Description.Name = "Description";
+            // 
             // mainframe
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -353,8 +398,10 @@
             this.groupBox1.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
+            this.CR_Tab.ResumeLayout(false);
             this.CONSOLE_Tab.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.CONSOLE_DATA)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CR_DATA)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -385,6 +432,10 @@
         private System.Windows.Forms.TabPage CONSOLE_Tab;
         private System.Windows.Forms.DataGridView CONSOLE_DATA;
         private System.Windows.Forms.DataGridViewTextBoxColumn Data;
+        private System.Windows.Forms.DataGridView CR_DATA;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn CheckBox;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Addon;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Description;
     }
 }
 
