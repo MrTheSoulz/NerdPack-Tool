@@ -204,7 +204,8 @@ namespace WindowsFormsApplication1
                         var client = new GitHubClient(new ProductHeaderValue(Owner));
                         var repo = await client.Repository.Get(Owner, Repo);
                         var installed = false;
-                        if (File.Exists(LOC_INPUT+"\\"+repo.Name+"\\Version.txt"))
+                        // Check if we have it installed
+                        if (File.Exists(LOC_INPUT.Text+"\\"+repo.Name+"\\Version.txt"))
                         {
                             installed = true;
                         }
