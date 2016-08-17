@@ -14,11 +14,16 @@ using System.IO;
 using System.IO.Compression;
 using System.Threading;
 using System.Xml;
+using Octokit.Reactive;
+using Octokit.Internal;
 
 namespace WindowsFormsApplication1
 {
     public partial class mainframe : Form
     {
+ 
+        static GitHubClient client = new GitHubClient(new ProductHeaderValue("NerdPack-Tool"));
+
         // START
         public mainframe()
         {
@@ -32,7 +37,6 @@ namespace WindowsFormsApplication1
             //TEMP DISABLED
             CORE_R_COMBO.Enabled = false;
         }
-
 
         public void UpdateCore()
         {
@@ -68,12 +72,6 @@ namespace WindowsFormsApplication1
         {
             try
             {
-                var client = new GitHubClient(new ProductHeaderValue("NerdPack"));
-                if (GIT_CHECK.Enabled)
-                {
-                    var basicAuth = new Credentials(GIT_USERNAME.Text, GIT_PW.Text); // NOTE: not real credentials
-                    client.Credentials = basicAuth;
-                }
                 var repo = await client.Repository.Get("MrTheSoulz", "NerdPack");
                 UPDATED_TEXT.Text = "" + repo.PushedAt;
                 STARS_TEXT.Text = "" + repo.StargazersCount;
@@ -115,8 +113,7 @@ namespace WindowsFormsApplication1
                     for (int i = 0; i <= 100; i++)
                         progress.Report(i);
                 });
-                // get the github info
-                var client = new GitHubClient(new ProductHeaderValue(_repo));
+
                 var repo = await client.Repository.Get(owner, _repo);
                 string name = repo.Name;
                 string uri = repo.HtmlUrl;
@@ -196,7 +193,6 @@ namespace WindowsFormsApplication1
             try
             {
                 // get the github info
-                var client = new GitHubClient(new ProductHeaderValue(_repo));
                 var repo = await client.Repository.Get(owner, _repo);
                 string name = repo.Name;
                 string tPath = LOC_INPUT.Text + "\\" + name;
@@ -240,7 +236,6 @@ namespace WindowsFormsApplication1
                     string Repo = xndNode["Repo"].InnerText;
                     try
                     {
-                        var client = new GitHubClient(new ProductHeaderValue(Owner));
                         var repo = await client.Repository.Get(Owner, Repo);
                         var installed = false;
                         // Check if we have it installed
@@ -281,7 +276,6 @@ namespace WindowsFormsApplication1
                     string Repo = xndNode["Repo"].InnerText;
                     try
                     {
-                        var client = new GitHubClient(new ProductHeaderValue(Owner));
                         var repo = await client.Repository.Get(Owner, Repo);
                         var installed = false;
                         // Check if we have it installed
