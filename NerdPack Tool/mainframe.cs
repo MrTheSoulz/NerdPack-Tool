@@ -21,8 +21,9 @@ namespace WindowsFormsApplication1
 {
     public partial class mainframe : Form
     {
- 
-        static GitHubClient client = new GitHubClient(new ProductHeaderValue("NerdPack-Tool"));
+
+        static InMemoryCredentialStore credentials = new InMemoryCredentialStore(new Credentials("30056b2d3c0ae1b13319d6aa8d997e5ffc9cfcec"));
+        static GitHubClient client = new GitHubClient(new ProductHeaderValue("NerdPack-Tool"), credentials);
 
         // START
         public mainframe()
@@ -172,19 +173,18 @@ namespace WindowsFormsApplication1
 
                 { // add a version file
                     CONSOLE_DATA.Rows.Add("-- Adding a version file...");
-                    if (!File.Exists(tPath + "//Version.txt"))
+                    // if the file Exists (user has one) remove it.
+                    if (File.Exists(tPath + "//Version.txt"))
                     {
-                        using (StreamWriter file = new StreamWriter(tPath + "//Version.txt", true))
-                        {
-                            file.WriteLine(repo.PushedAt);
-                        }
+                        File.Delete(tPath + "//Version.txt");
+                    }
+                    using (StreamWriter file = new StreamWriter(tPath + "//Version.txt", true))
+                    {
+                        file.WriteLine(repo.PushedAt);
                     }
                 }
             }
-            catch
-            {
-                MessageBox.Show("Something has Gone Wrong with the download");
-            }
+            catch{}
         }
 
         // Check if should be updated
@@ -211,10 +211,7 @@ namespace WindowsFormsApplication1
                     CONSOLE_DATA.Rows.Add(repo.Name + " is already updated");
                 }
             }
-            catch
-            {
-                MessageBox.Show("Sorry but the servers are unavailable right now, try again later...");
-            }
+            catch{}
         }
 
         // Build the CR list
@@ -239,22 +236,16 @@ namespace WindowsFormsApplication1
                         var repo = await client.Repository.Get(Owner, Repo);
                         var installed = false;
                         // Check if we have it installed
-                        if (File.Exists(LOC_INPUT.Text+"\\"+repo.Name+"\\Version.txt"))
+                        if (File.Exists(LOC_INPUT.Text + "\\" + repo.Name + "\\Version.txt"))
                         {
                             installed = true;
                         }
                         CR_DATA.Rows.Add(installed, repo.Name, repo.Description, repo.StargazersCount, Owner, Repo);
                     }
-                    catch {
-                        CR_DATA.Rows.Add(false, "UNAVAILABLE", "Something is wrong...", 0, "", "");
-                        CR_DATA.Enabled = false;
-                    }
+                    catch {}
                 }
             }
-            catch {
-                CR_DATA.Rows.Add(false, "UNAVAILABLE", "THE XML IS BROKEN!!!", 0, "", "");
-                CR_DATA.Enabled = false;
-            }
+            catch {}
         }
 
         //Build the modules list
@@ -285,18 +276,10 @@ namespace WindowsFormsApplication1
                         }
                         MOD_DATA.Rows.Add(installed, repo.Name, repo.Description, repo.StargazersCount, Owner, Repo);
                     }
-                    catch
-                    {
-                        MOD_DATA.Rows.Add(false, "UNAVAILABLE", "Something is wrong...", 0, "", "");
-                        MOD_DATA.Enabled = false;
-                    }
+                    catch {}
                 }
             }
-            catch
-            {
-                MOD_DATA.Rows.Add(false, "UNAVAILABLE", "THE XML IS BROKEN!!!", 0, "", "");
-                MOD_DATA.Enabled = false;
-            }
+            catch {}
         }
 
         // Updates the Selected CRs
@@ -309,8 +292,7 @@ namespace WindowsFormsApplication1
                 {
                     string owner = (string)row.Cells["OWNER"].Value;
                     string repo = (string)row.Cells["REPO"].Value;
-                    MessageBox.Show(owner + " - " + repo);
-                    Download(owner, repo);
+                    CheckForUpDate(owner, repo);
                 }
             }
         }
@@ -325,8 +307,7 @@ namespace WindowsFormsApplication1
                 {
                     string owner = (string)row.Cells["dataGridViewTextBoxColumn4"].Value;
                     string repo = (string)row.Cells["dataGridViewTextBoxColumn5"].Value;
-                    MessageBox.Show(owner + " - " + repo);
-                    Download(owner, repo);
+                    CheckForUpDate(owner, repo);
                 }
             }
         }
