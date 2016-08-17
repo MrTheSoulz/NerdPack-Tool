@@ -205,7 +205,6 @@
             this.CR_DATA.Dock = System.Windows.Forms.DockStyle.Fill;
             this.CR_DATA.Location = new System.Drawing.Point(3, 3);
             this.CR_DATA.Name = "CR_DATA";
-            this.CR_DATA.ReadOnly = true;
             this.CR_DATA.RowHeadersVisible = false;
             this.CR_DATA.Size = new System.Drawing.Size(786, 329);
             this.CR_DATA.TabIndex = 0;
@@ -214,14 +213,12 @@
             // 
             this.CheckBox.HeaderText = "X";
             this.CheckBox.Name = "CheckBox";
-            this.CheckBox.ReadOnly = true;
             this.CheckBox.Width = 25;
             // 
             // Addon
             // 
             this.Addon.HeaderText = "Addon";
             this.Addon.Name = "Addon";
-            this.Addon.ReadOnly = true;
             this.Addon.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.Addon.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.Addon.Width = 200;
@@ -231,27 +228,23 @@
             this.Description.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Description.HeaderText = "Description";
             this.Description.Name = "Description";
-            this.Description.ReadOnly = true;
             // 
             // Starts
             // 
             this.Starts.HeaderText = "Stars";
             this.Starts.Name = "Starts";
-            this.Starts.ReadOnly = true;
             this.Starts.Width = 50;
             // 
             // OWNER
             // 
             this.OWNER.HeaderText = "OWNER";
             this.OWNER.Name = "OWNER";
-            this.OWNER.ReadOnly = true;
             this.OWNER.Visible = false;
             // 
             // REPO
             // 
             this.REPO.HeaderText = "REPO";
             this.REPO.Name = "REPO";
-            this.REPO.ReadOnly = true;
             this.REPO.Visible = false;
             // 
             // REFRESH_BT
@@ -469,7 +462,6 @@
             this.MOD_DATA.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MOD_DATA.Location = new System.Drawing.Point(0, 0);
             this.MOD_DATA.Name = "MOD_DATA";
-            this.MOD_DATA.ReadOnly = true;
             this.MOD_DATA.RowHeadersVisible = false;
             this.MOD_DATA.Size = new System.Drawing.Size(792, 335);
             this.MOD_DATA.TabIndex = 1;
@@ -478,14 +470,12 @@
             // 
             this.dataGridViewCheckBoxColumn1.HeaderText = "X";
             this.dataGridViewCheckBoxColumn1.Name = "dataGridViewCheckBoxColumn1";
-            this.dataGridViewCheckBoxColumn1.ReadOnly = true;
             this.dataGridViewCheckBoxColumn1.Width = 25;
             // 
             // dataGridViewTextBoxColumn1
             // 
             this.dataGridViewTextBoxColumn1.HeaderText = "Addon";
             this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
             this.dataGridViewTextBoxColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.dataGridViewTextBoxColumn1.Width = 200;
@@ -495,27 +485,23 @@
             this.dataGridViewTextBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.dataGridViewTextBoxColumn2.HeaderText = "Description";
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.ReadOnly = true;
             // 
             // dataGridViewTextBoxColumn3
             // 
             this.dataGridViewTextBoxColumn3.HeaderText = "Stars";
             this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            this.dataGridViewTextBoxColumn3.ReadOnly = true;
             this.dataGridViewTextBoxColumn3.Width = 50;
             // 
             // dataGridViewTextBoxColumn4
             // 
             this.dataGridViewTextBoxColumn4.HeaderText = "OWNER";
             this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            this.dataGridViewTextBoxColumn4.ReadOnly = true;
             this.dataGridViewTextBoxColumn4.Visible = false;
             // 
             // dataGridViewTextBoxColumn5
             // 
             this.dataGridViewTextBoxColumn5.HeaderText = "REPO";
             this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            this.dataGridViewTextBoxColumn5.ReadOnly = true;
             this.dataGridViewTextBoxColumn5.Visible = false;
             // 
             // groupBox5
