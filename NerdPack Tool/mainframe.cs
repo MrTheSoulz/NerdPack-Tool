@@ -203,7 +203,12 @@ namespace WindowsFormsApplication1
                     {
                         var client = new GitHubClient(new ProductHeaderValue(Owner));
                         var repo = await client.Repository.Get(Owner, Repo);
-                        CR_DATA.Rows.Add(true, repo.Name, repo.Description);
+                        var installed = false;
+                        if (File.Exists(LOC_INPUT+"\\"+repo.Name+"\\Version.txt"))
+                        {
+                            installed = true;
+                        }
+                        CR_DATA.Rows.Add(installed, repo.Name, repo.Description, repo.StargazersCount);
                     }
                     catch { }
                 }

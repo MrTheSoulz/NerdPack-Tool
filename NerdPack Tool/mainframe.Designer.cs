@@ -59,6 +59,7 @@
             this.CheckBox = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.Addon = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Description = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Starts = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.CORE_TAB.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -350,7 +351,8 @@
             this.CR_DATA.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.CheckBox,
             this.Addon,
-            this.Description});
+            this.Description,
+            this.Starts});
             this.CR_DATA.Dock = System.Windows.Forms.DockStyle.Fill;
             this.CR_DATA.Location = new System.Drawing.Point(3, 3);
             this.CR_DATA.Name = "CR_DATA";
@@ -377,6 +379,12 @@
             this.Description.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Description.HeaderText = "Description";
             this.Description.Name = "Description";
+            // 
+            // Starts
+            // 
+            this.Starts.HeaderText = "Stars";
+            this.Starts.Name = "Starts";
+            this.Starts.Width = 50;
             // 
             // mainframe
             // 
@@ -436,6 +444,7 @@
         private System.Windows.Forms.DataGridViewCheckBoxColumn CheckBox;
         private System.Windows.Forms.DataGridViewTextBoxColumn Addon;
         private System.Windows.Forms.DataGridViewTextBoxColumn Description;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Starts;
     }
 }
 
