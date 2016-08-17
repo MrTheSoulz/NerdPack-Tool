@@ -141,7 +141,7 @@ namespace WindowsFormsApplication1
                 // rename the folder (remove -master)
                 if (Directory.Exists(tPath + "-master"))
                 {
-                    CONSOLE_DATA.Rows.Add("-- Found: \" -master\" in the folder name, Remaming");
+                    CONSOLE_DATA.Rows.Add("-- Found: \" -master\" in the folder name, Renaming");
                     Directory.Move(tPath + "-master", tPath);
                 }
                 // delete the temp zip
