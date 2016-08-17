@@ -99,60 +99,84 @@ namespace WindowsFormsApplication1
         // Download
         private async void Download(string owner, string _repo)
         {
-            IProgress<int> progress = new Progress<int>(value => { progressBar1.Value = value; });
-            await Task.Run(() =>
+            try
             {
-                for (int i = 0; i <= 100; i++)
-                    progress.Report(i);
-            });
-            // get the github info
-            var client = new GitHubClient(new ProductHeaderValue(_repo));
-            var repo = await client.Repository.Get(owner, _repo);
-            string name = repo.Name;
-            string uri = repo.HtmlUrl;
-            string fileName = name + ".zip";
-            string exePath = System.Windows.Forms.Application.StartupPath;
-            string oPath = exePath + "\\" + name;
-            string tPath = LOC_INPUT.Text + "\\" + name;
-            string zPath = LOC_INPUT.Text ;
-            // Build the fkng time
-            string FU = "" + DateTime.Now;
-            char[] delimiterChars = { '/', ':'};
-            string[] words = FU.Split(delimiterChars);
-            string timestamp = "";
-            foreach (string s in words){timestamp = timestamp + s;}
-            // Download and save it into the current exe folder.
-            CONSOLE_DATA.Rows.Add("- Downloading: " + name);
-            WebClient myWebClient = new WebClient();
-            myWebClient.DownloadFile(uri + "/archive/master.zip", fileName);
-            //Create a backup
-            if (Directory.Exists(tPath)) {
-                // create the backup folder if dosent exist
-                if (!Directory.Exists(exePath+"\\Backups"))
+                // Progress bar
+                IProgress<int> progress = new Progress<int>(value => { progressBar1.Value = value; });
+                await Task.Run(() =>
                 {
-                    Directory.CreateDirectory(exePath + "\\Backups");
+                    for (int i = 0; i <= 100; i++)
+                        progress.Report(i);
+                });
+                // get the github info
+                var client = new GitHubClient(new ProductHeaderValue(_repo));
+                var repo = await client.Repository.Get(owner, _repo);
+                string name = repo.Name;
+                string uri = repo.HtmlUrl;
+                string fileName = name + ".zip";
+                string exePath = System.Windows.Forms.Application.StartupPath;
+                string oPath = exePath + "\\" + name;
+                string tPath = LOC_INPUT.Text + "\\" + name;
+                string zPath = LOC_INPUT.Text;
+                string timestamp = "";
+
+                {// Build the fkng time
+                    string FU = "" + DateTime.Now;
+                    char[] delimiterChars = { '/', ':' };
+                    string[] words = FU.Split(delimiterChars);
+                    foreach (string s in words) { timestamp = timestamp + s; }
                 }
-                CONSOLE_DATA.Rows.Add("-- Creating a backup ...");
-                ZipFile.CreateFromDirectory(tPath, exePath + "\\Backups\\"+ name + " - " + timestamp + ".zip");
-                Directory.Delete(tPath, true);
+
+                {// Download and save it into the current exe folder.
+                    CONSOLE_DATA.Rows.Add("- Downloading: " + name);
+                    WebClient myWebClient = new WebClient();
+                    myWebClient.DownloadFile(uri + "/archive/master.zip", fileName);
+                }
+
+                { //Create a backup
+                    if (Directory.Exists(tPath))
+                    {
+                        // create the backup folder if dosent exist
+                        if (!Directory.Exists(exePath + "\\Backups"))
+                        {
+                            Directory.CreateDirectory(exePath + "\\Backups");
+                        }
+                        CONSOLE_DATA.Rows.Add("-- Creating a backup ...");
+                        ZipFile.CreateFromDirectory(tPath, exePath + "\\Backups\\" + name + " - " + timestamp + ".zip");
+                        Directory.Delete(tPath, true);
+                    }
+                }
+
+
+                {// Extract the zip
+                    CONSOLE_DATA.Rows.Add("-- Extracting ...");
+                    ZipFile.ExtractToDirectory(oPath + ".zip", zPath);
+                }
+
+                {// rename the folder (remove -master)
+                    CONSOLE_DATA.Rows.Add("-- Moving to: " + tPath);
+                    Directory.Move(tPath + "-master", tPath);
+                }
+
+                {// delete the temp zip
+                    CONSOLE_DATA.Rows.Add("-- Deleting temp. zip");
+                    File.Delete(exePath + "\\" + fileName);
+                }
+
+                { // add a version file
+                    CONSOLE_DATA.Rows.Add("-- Adding a version file...");
+                    if (!File.Exists(tPath + "//Version.txt"))
+                    {
+                        using (StreamWriter file = new StreamWriter(tPath + "//Version.txt", true))
+                        {
+                            file.WriteLine(repo.PushedAt);
+                        }
+                    }
+                }
             }
-            // Extract the zip
-            CONSOLE_DATA.Rows.Add("-- Extracting ...");
-            ZipFile.ExtractToDirectory(oPath + ".zip", zPath);
-            // rename the folder (remove -master)
-            CONSOLE_DATA.Rows.Add("-- Moving to: "+ tPath);
-            Directory.Move(tPath + "-master", tPath);
-            // delete the temp zip
-            CONSOLE_DATA.Rows.Add("-- Deleting temp. zip");
-            File.Delete(exePath + "\\" + fileName);
-            // add a version file
-            CONSOLE_DATA.Rows.Add("-- Adding a version file...");
-            if (!File.Exists(tPath + "//Version.txt"))
+            catch
             {
-                using (StreamWriter file = new StreamWriter(tPath + "//Version.txt", true))
-                {
-                    file.WriteLine(repo.PushedAt);
-                }
+                MessageBox.Show("Something has Gone Wrong with the download");
             }
         }
 
