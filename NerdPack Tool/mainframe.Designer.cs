@@ -71,6 +71,9 @@
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.INSTALL_BT = new System.Windows.Forms.Button();
             this.REFRESH_BT = new System.Windows.Forms.Button();
+            this.SETTINGS_TAB = new System.Windows.Forms.TabPage();
+            this.BACKUPS_CHECK = new System.Windows.Forms.CheckBox();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.tabControl1.SuspendLayout();
             this.CORE_TAB.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -83,6 +86,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.MOD_DATA)).BeginInit();
             this.CONSOLE_Tab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CONSOLE_DATA)).BeginInit();
+            this.SETTINGS_TAB.SuspendLayout();
+            this.groupBox5.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -91,6 +96,7 @@
             this.tabControl1.Controls.Add(this.CR_Tab);
             this.tabControl1.Controls.Add(this.MODULES_TAB);
             this.tabControl1.Controls.Add(this.CONSOLE_Tab);
+            this.tabControl1.Controls.Add(this.SETTINGS_TAB);
             this.tabControl1.Location = new System.Drawing.Point(0, 3);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -495,6 +501,36 @@
             this.REFRESH_BT.UseVisualStyleBackColor = true;
             this.REFRESH_BT.Click += new System.EventHandler(this.REFRESH_BT_Click);
             // 
+            // SETTINGS_TAB
+            // 
+            this.SETTINGS_TAB.Controls.Add(this.groupBox5);
+            this.SETTINGS_TAB.Location = new System.Drawing.Point(4, 22);
+            this.SETTINGS_TAB.Name = "SETTINGS_TAB";
+            this.SETTINGS_TAB.Size = new System.Drawing.Size(792, 335);
+            this.SETTINGS_TAB.TabIndex = 4;
+            this.SETTINGS_TAB.Text = "Settings";
+            this.SETTINGS_TAB.UseVisualStyleBackColor = true;
+            // 
+            // BACKUPS_CHECK
+            // 
+            this.BACKUPS_CHECK.AutoSize = true;
+            this.BACKUPS_CHECK.Location = new System.Drawing.Point(6, 19);
+            this.BACKUPS_CHECK.Name = "BACKUPS_CHECK";
+            this.BACKUPS_CHECK.Size = new System.Drawing.Size(102, 17);
+            this.BACKUPS_CHECK.TabIndex = 0;
+            this.BACKUPS_CHECK.Text = "Create Backups";
+            this.BACKUPS_CHECK.UseVisualStyleBackColor = true;
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.BACKUPS_CHECK);
+            this.groupBox5.Location = new System.Drawing.Point(530, 4);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(259, 328);
+            this.groupBox5.TabIndex = 1;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Client Settings";
+            // 
             // mainframe
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -522,6 +558,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.MOD_DATA)).EndInit();
             this.CONSOLE_Tab.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.CONSOLE_DATA)).EndInit();
+            this.SETTINGS_TAB.ResumeLayout(false);
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -568,6 +607,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+        private System.Windows.Forms.TabPage SETTINGS_TAB;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.CheckBox BACKUPS_CHECK;
     }
 }
 

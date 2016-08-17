@@ -39,6 +39,7 @@ namespace WindowsFormsApplication1
             CORE_R_COMBO.Enabled = false;
         }
 
+        // Updates the core and protected
         public void UpdateCore()
         {
             CheckForUpDate("MrTheSoulz", "NerdPack");
@@ -114,7 +115,6 @@ namespace WindowsFormsApplication1
                     for (int i = 0; i <= 100; i++)
                         progress.Report(i);
                 });
-
                 var repo = await client.Repository.Get(owner, _repo);
                 string name = repo.Name;
                 string uri = repo.HtmlUrl;
@@ -123,68 +123,80 @@ namespace WindowsFormsApplication1
                 string oPath = exePath + "\\" + name;
                 string tPath = LOC_INPUT.Text + "\\" + name;
                 string zPath = LOC_INPUT.Text;
-                string timestamp = "";
-
-                {// Build the fkng time
-                    string FU = "" + DateTime.Now;
-                    char[] delimiterChars = { '/', ':' };
-                    string[] words = FU.Split(delimiterChars);
-                    foreach (string s in words) { timestamp = timestamp + s; }
+                // Download file
+                DownloadFile(uri + "/archive/master.zip", fileName);
+                //Create a backup
+                if (BACKUPS_CHECK.Checked && Directory.Exists(tPath))
+                {
+                    BackupFile(tPath, name);
                 }
-
-                {// Download and save it into the current exe folder.
-                    CONSOLE_DATA.Rows.Add("- Downloading: " + name);
-                    WebClient myWebClient = new WebClient();
-                    myWebClient.DownloadFile(uri + "/archive/master.zip", fileName);
+                // Extract the zip
+                UnZipFile(oPath + ".zip", zPath);
+                // rename the folder (remove -master)
+                if (Directory.Exists(tPath + "-master"))
+                {
+                    CONSOLE_DATA.Rows.Add("-- Found: \" -master\" in the folder name, Remaming");
+                    Directory.Move(tPath + "-master", tPath);
                 }
-
-                { //Create a backup
-                    if (Directory.Exists(tPath))
-                    {
-                        // create the backup folder if dosent exist
-                        if (!Directory.Exists(exePath + "\\Backups"))
-                        {
-                            Directory.CreateDirectory(exePath + "\\Backups");
-                        }
-                        CONSOLE_DATA.Rows.Add("-- Creating a backup ...");
-                        ZipFile.CreateFromDirectory(tPath, exePath + "\\Backups\\" + name + " - " + timestamp + ".zip");
-                        Directory.Delete(tPath, true);
-                    }
-                }
-
-                {// Extract the zip
-                    CONSOLE_DATA.Rows.Add("-- Extracting ...");
-                    ZipFile.ExtractToDirectory(oPath + ".zip", zPath);
-                }
-
-                {// rename the folder (remove -master)
-                    if (Directory.Exists(tPath + "-master"))
-                    {
-                        CONSOLE_DATA.Rows.Add("-- Found: \" -master\" in the folder name, Remaming");
-                        Directory.Move(tPath + "-master", tPath);
-                    }
-                    
-                }
-
-                {// delete the temp zip
-                    CONSOLE_DATA.Rows.Add("-- Deleting temp. zip");
-                    File.Delete(exePath + "\\" + fileName);
-                }
-
-                { // add a version file
-                    CONSOLE_DATA.Rows.Add("-- Adding a version file...");
-                    // if the file Exists (user has one) remove it.
-                    if (File.Exists(tPath + "//Version.txt"))
-                    {
-                        File.Delete(tPath + "//Version.txt");
-                    }
-                    using (StreamWriter file = new StreamWriter(tPath + "//Version.txt", true))
-                    {
-                        file.WriteLine(repo.PushedAt);
-                    }
-                }
+                // delete the temp zip
+                CONSOLE_DATA.Rows.Add("-- Deleting temp. zip file");
+                File.Delete(exePath + "\\" + fileName);
+                // add a version file
+                WriteToFile(tPath + "//Version.txt", repo.UpdatedAt.ToString());
             }
             catch{}
+        }
+
+        // Download File
+        private void DownloadFile(string URL, string Name)
+        {
+            // Download and save it into the current exe folder.
+            CONSOLE_DATA.Rows.Add("- Downloading: " + Name);
+            WebClient myWebClient = new WebClient();
+            myWebClient.DownloadFile(URL, Name);
+        }
+
+        // UnZip a Zile
+        private void UnZipFile(string start, string end)
+        {
+            CONSOLE_DATA.Rows.Add("-- Extracting from :"+start, " to:"+end);
+            ZipFile.ExtractToDirectory(start, end);
+        }
+
+        // Zip a Zile
+        private void BackupFile(string start, string name)
+        {
+            string exePath = System.Windows.Forms.Application.StartupPath;
+            string timestamp = "";
+            {// Build the fkng time
+                string FU = "" + DateTime.Now;
+                char[] delimiterChars = { '/', ':' };
+                string[] words = FU.Split(delimiterChars);
+                foreach (string s in words) { timestamp = timestamp + s; }
+            }
+            // create the backup folder if dosent exist
+            if (!Directory.Exists(exePath + "\\Backups"))
+            {
+                Directory.CreateDirectory(exePath + "\\Backups");
+            }
+            CONSOLE_DATA.Rows.Add("-- Creating a backup of: " + start);
+            ZipFile.CreateFromDirectory(start, exePath + "\\Backups\\" + name + " - " + timestamp + ".zip");
+            Directory.Delete(start, true);
+        }
+
+        // Write to file
+        private void WriteToFile(string fileLoc, string toWrite)
+        {
+            CONSOLE_DATA.Rows.Add("-- Adding a version file to:"+ fileLoc);
+            // if the file Exists (user has one) remove it.
+            if (File.Exists(fileLoc))
+            {
+                File.Delete(fileLoc);
+            }
+            using (StreamWriter file = new StreamWriter(fileLoc, true))
+            {
+                file.WriteLine(toWrite);
+            }
         }
 
         // Check if should be updated
