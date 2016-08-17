@@ -93,7 +93,7 @@ namespace WindowsFormsApplication1
         private void INSTALL_BT_Click(object sender, EventArgs e)
         {
             UpdateCore();
-
+            UpdateCrs();
         }
 
         // Download
@@ -186,6 +186,7 @@ namespace WindowsFormsApplication1
                 MessageBox.Show("Sorry but the servers are unavailable right now, try again later...");
             }
         }
+
         private async void BuildCombatRoutines()
         {
             try
@@ -209,13 +210,35 @@ namespace WindowsFormsApplication1
                         {
                             installed = true;
                         }
-                        CR_DATA.Rows.Add(installed, repo.Name, repo.Description, repo.StargazersCount);
+                        CR_DATA.Rows.Add(installed, repo.Name, repo.Description, repo.StargazersCount, Owner, Repo);
                     }
-                    catch { }
+                    catch {
+                        CR_DATA.Rows.Add(false, "UNAVAILABLE", "Something is wrong...", 0, "", "");
+                        CR_DATA.Enabled = false;
+                    }
                 }
             }
-            catch { }
+            catch {
+                CR_DATA.Rows.Add(false, "UNAVAILABLE", "THE XML IS BROKEN!!!", 0, "", "");
+                CR_DATA.Enabled = false;
+            }
         }
-    }
 
+        // Updates the Selected CRs
+        private void UpdateCrs()
+        {
+            foreach (DataGridViewRow row in CR_DATA.Rows)
+            {
+                var oCell = row.Cells["CheckBox"] as DataGridViewCheckBoxCell;
+                bool bChecked = (null != oCell && null != oCell.Value && true == (bool)oCell.Value);
+                if (true == bChecked)
+                {
+                    var owner = row.Cells["OWNER"].Value as DataGridViewTextBoxCell;
+                    var repo = row.Cells["REPO"].Value as DataGridViewTextBoxCell;
+                    MessageBox.Show(""+owner, ""+repo);
+                }
+            }
+        }
+
+    }
 }

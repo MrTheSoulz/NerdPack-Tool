@@ -60,6 +60,8 @@
             this.Addon = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Description = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Starts = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.OWNER = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.REPO = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.CORE_TAB.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -352,7 +354,9 @@
             this.CheckBox,
             this.Addon,
             this.Description,
-            this.Starts});
+            this.Starts,
+            this.OWNER,
+            this.REPO});
             this.CR_DATA.Dock = System.Windows.Forms.DockStyle.Fill;
             this.CR_DATA.Location = new System.Drawing.Point(3, 3);
             this.CR_DATA.Name = "CR_DATA";
@@ -385,6 +389,20 @@
             this.Starts.HeaderText = "Stars";
             this.Starts.Name = "Starts";
             this.Starts.Width = 50;
+            // 
+            // OWNER
+            // 
+            this.OWNER.HeaderText = "OWNER";
+            this.OWNER.Name = "OWNER";
+            this.OWNER.ReadOnly = true;
+            this.OWNER.Visible = false;
+            // 
+            // REPO
+            // 
+            this.REPO.HeaderText = "REPO";
+            this.REPO.Name = "REPO";
+            this.REPO.ReadOnly = true;
+            this.REPO.Visible = false;
             // 
             // mainframe
             // 
@@ -445,6 +463,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Addon;
         private System.Windows.Forms.DataGridViewTextBoxColumn Description;
         private System.Windows.Forms.DataGridViewTextBoxColumn Starts;
+        private System.Windows.Forms.DataGridViewTextBoxColumn OWNER;
+        private System.Windows.Forms.DataGridViewTextBoxColumn REPO;
     }
 }
 
