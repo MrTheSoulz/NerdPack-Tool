@@ -95,6 +95,7 @@ namespace WindowsFormsApplication1
         {
             UpdateCore();
             UpdateCrs();
+            UpdateMods();
         }
 
         // Download
@@ -220,6 +221,7 @@ namespace WindowsFormsApplication1
         {
             CR_DATA.Rows.Clear();
             CR_DATA.Refresh();
+            CR_DATA.Enabled = true;
             try
             {
                 XmlDocument xdcDocument = new XmlDocument();
@@ -260,6 +262,7 @@ namespace WindowsFormsApplication1
         {
             MOD_DATA.Rows.Clear();
             MOD_DATA.Refresh();
+            MOD_DATA.Enabled = true;
             try
             {
                 XmlDocument xdcDocument = new XmlDocument();
@@ -298,17 +301,31 @@ namespace WindowsFormsApplication1
         }
 
         // Updates the Selected CRs
-        private void UpdateCrs()
+        public void UpdateCrs()
         {
+            List<String> selected = new List<String>();
             foreach (DataGridViewRow row in CR_DATA.Rows)
             {
-                var oCell = row.Cells["CheckBox"] as DataGridViewCheckBoxCell;
-                bool bChecked = (null != oCell && null != oCell.Value && true == (bool)oCell.Value);
-                if (true == bChecked)
+                if ((Boolean)row.Cells["CheckBox"].Value == true)
                 {
-                    var owner = row.Cells["OWNER"].Value as DataGridViewTextBoxCell;
-                    var repo = row.Cells["REPO"].Value as DataGridViewTextBoxCell;
-                    MessageBox.Show(""+owner, ""+repo);
+                    string owner = (string)row.Cells["OWNER"].Value;
+                    string repo = (string)row.Cells["REPO"].Value;
+                    Download(owner, repo);
+                }
+            }
+        }
+
+        // Updates the Selected Modules
+        public void UpdateMods()
+        {
+            List<String> selected = new List<String>();
+            foreach (DataGridViewRow row in MOD_DATA.Rows)
+            {
+                if ((Boolean)row.Cells["dataGridViewCheckBoxColumn1"].Value == true)
+                {
+                    string owner = (string)row.Cells["dataGridViewTextBoxColumn4"].Value;
+                    string repo = (string)row.Cells["dataGridViewTextBoxColumn5"].Value;
+                    Download(owner, repo);
                 }
             }
         }
