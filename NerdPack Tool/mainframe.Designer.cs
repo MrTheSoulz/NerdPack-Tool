@@ -63,6 +63,14 @@
             this.PROTECTED_CHECK = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.CORE_R_COMBO = new System.Windows.Forms.ComboBox();
+            this.MODULES_TAB = new System.Windows.Forms.TabPage();
+            this.MOD_DATA = new System.Windows.Forms.DataGridView();
+            this.dataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.CR_Tab.SuspendLayout();
             this.CONSOLE_Tab.SuspendLayout();
@@ -73,12 +81,15 @@
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            this.MODULES_TAB.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.MOD_DATA)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.CORE_TAB);
             this.tabControl1.Controls.Add(this.CR_Tab);
+            this.tabControl1.Controls.Add(this.MODULES_TAB);
             this.tabControl1.Controls.Add(this.CONSOLE_Tab);
             this.tabControl1.Location = new System.Drawing.Point(0, 3);
             this.tabControl1.Name = "tabControl1";
@@ -175,6 +186,7 @@
             this.CR_DATA.AllowUserToDeleteRows = false;
             this.CR_DATA.AllowUserToResizeColumns = false;
             this.CR_DATA.AllowUserToResizeRows = false;
+            this.CR_DATA.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             this.CR_DATA.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.CR_DATA.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.CheckBox,
@@ -186,6 +198,7 @@
             this.CR_DATA.Dock = System.Windows.Forms.DockStyle.Fill;
             this.CR_DATA.Location = new System.Drawing.Point(3, 3);
             this.CR_DATA.Name = "CR_DATA";
+            this.CR_DATA.ReadOnly = true;
             this.CR_DATA.RowHeadersVisible = false;
             this.CR_DATA.Size = new System.Drawing.Size(786, 329);
             this.CR_DATA.TabIndex = 0;
@@ -194,12 +207,14 @@
             // 
             this.CheckBox.HeaderText = "X";
             this.CheckBox.Name = "CheckBox";
+            this.CheckBox.ReadOnly = true;
             this.CheckBox.Width = 25;
             // 
             // Addon
             // 
             this.Addon.HeaderText = "Addon";
             this.Addon.Name = "Addon";
+            this.Addon.ReadOnly = true;
             this.Addon.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.Addon.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.Addon.Width = 200;
@@ -209,11 +224,13 @@
             this.Description.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Description.HeaderText = "Description";
             this.Description.Name = "Description";
+            this.Description.ReadOnly = true;
             // 
             // Starts
             // 
             this.Starts.HeaderText = "Stars";
             this.Starts.Name = "Starts";
+            this.Starts.ReadOnly = true;
             this.Starts.Width = 50;
             // 
             // OWNER
@@ -416,6 +433,83 @@
             this.CORE_R_COMBO.Size = new System.Drawing.Size(132, 21);
             this.CORE_R_COMBO.TabIndex = 0;
             // 
+            // MODULES_TAB
+            // 
+            this.MODULES_TAB.Controls.Add(this.MOD_DATA);
+            this.MODULES_TAB.Location = new System.Drawing.Point(4, 22);
+            this.MODULES_TAB.Name = "MODULES_TAB";
+            this.MODULES_TAB.Size = new System.Drawing.Size(792, 335);
+            this.MODULES_TAB.TabIndex = 3;
+            this.MODULES_TAB.Text = "Modules";
+            this.MODULES_TAB.UseVisualStyleBackColor = true;
+            // 
+            // MOD_DATA
+            // 
+            this.MOD_DATA.AllowUserToAddRows = false;
+            this.MOD_DATA.AllowUserToDeleteRows = false;
+            this.MOD_DATA.AllowUserToResizeColumns = false;
+            this.MOD_DATA.AllowUserToResizeRows = false;
+            this.MOD_DATA.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.MOD_DATA.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.MOD_DATA.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewCheckBoxColumn1,
+            this.dataGridViewTextBoxColumn1,
+            this.dataGridViewTextBoxColumn2,
+            this.dataGridViewTextBoxColumn3,
+            this.dataGridViewTextBoxColumn4,
+            this.dataGridViewTextBoxColumn5});
+            this.MOD_DATA.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.MOD_DATA.Location = new System.Drawing.Point(0, 0);
+            this.MOD_DATA.Name = "MOD_DATA";
+            this.MOD_DATA.ReadOnly = true;
+            this.MOD_DATA.RowHeadersVisible = false;
+            this.MOD_DATA.Size = new System.Drawing.Size(792, 335);
+            this.MOD_DATA.TabIndex = 1;
+            // 
+            // dataGridViewCheckBoxColumn1
+            // 
+            this.dataGridViewCheckBoxColumn1.HeaderText = "X";
+            this.dataGridViewCheckBoxColumn1.Name = "dataGridViewCheckBoxColumn1";
+            this.dataGridViewCheckBoxColumn1.ReadOnly = true;
+            this.dataGridViewCheckBoxColumn1.Width = 25;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.HeaderText = "Addon";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dataGridViewTextBoxColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dataGridViewTextBoxColumn1.Width = 200;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dataGridViewTextBoxColumn2.HeaderText = "Description";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.HeaderText = "Stars";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.ReadOnly = true;
+            this.dataGridViewTextBoxColumn3.Width = 50;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.HeaderText = "OWNER";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.ReadOnly = true;
+            this.dataGridViewTextBoxColumn4.Visible = false;
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            this.dataGridViewTextBoxColumn5.HeaderText = "REPO";
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            this.dataGridViewTextBoxColumn5.ReadOnly = true;
+            this.dataGridViewTextBoxColumn5.Visible = false;
+            // 
             // mainframe
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -441,6 +535,8 @@
             this.groupBox1.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
+            this.MODULES_TAB.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.MOD_DATA)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -479,6 +575,14 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn OWNER;
         private System.Windows.Forms.DataGridViewTextBoxColumn REPO;
         private System.Windows.Forms.Button REFRESH_BT;
+        private System.Windows.Forms.TabPage MODULES_TAB;
+        private System.Windows.Forms.DataGridView MOD_DATA;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn dataGridViewCheckBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
     }
 }
 

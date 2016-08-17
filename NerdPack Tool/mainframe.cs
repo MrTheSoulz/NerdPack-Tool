@@ -28,6 +28,7 @@ namespace WindowsFormsApplication1
             PROTECTED_CHECK.Checked = true;
             GetCoreInfo();
             BuildCombatRoutines();
+            BuildModules();
             //TEMP DISABLED
             CORE_R_COMBO.Enabled = false;
         }
@@ -214,6 +215,7 @@ namespace WindowsFormsApplication1
             }
         }
 
+        // Build the CR list
         private async void BuildCombatRoutines()
         {
             CR_DATA.Rows.Clear();
@@ -221,7 +223,7 @@ namespace WindowsFormsApplication1
             try
             {
                 XmlDocument xdcDocument = new XmlDocument();
-                xdcDocument.Load("https://dl.dropboxusercontent.com/u/101560647/NerdPack/NeP_Updater_Data.xml");
+                xdcDocument.Load("https://dl.dropboxusercontent.com/u/101560647/NerdPack/NeP_Updater_CRData.xml");
                 XmlElement xelRoot = xdcDocument.DocumentElement;
                 XmlNodeList xnlNodes = xelRoot.SelectNodes("/ArrayOfButtons/Button");
 
@@ -253,6 +255,48 @@ namespace WindowsFormsApplication1
             }
         }
 
+        //Build the modules list
+        private async void BuildModules()
+        {
+            MOD_DATA.Rows.Clear();
+            MOD_DATA.Refresh();
+            try
+            {
+                XmlDocument xdcDocument = new XmlDocument();
+                xdcDocument.Load("https://dl.dropboxusercontent.com/u/101560647/NerdPack/NeP_Updater_MODData.xml");
+                XmlElement xelRoot = xdcDocument.DocumentElement;
+                XmlNodeList xnlNodes = xelRoot.SelectNodes("/ArrayOfButtons/Button");
+
+                foreach (XmlNode xndNode in xnlNodes)
+                {
+                    string Owner = xndNode["Owner"].InnerText;
+                    string Repo = xndNode["Repo"].InnerText;
+                    try
+                    {
+                        var client = new GitHubClient(new ProductHeaderValue(Owner));
+                        var repo = await client.Repository.Get(Owner, Repo);
+                        var installed = false;
+                        // Check if we have it installed
+                        if (File.Exists(LOC_INPUT.Text + "\\" + repo.Name + "\\Version.txt"))
+                        {
+                            installed = true;
+                        }
+                        MOD_DATA.Rows.Add(installed, repo.Name, repo.Description, repo.StargazersCount, Owner, Repo);
+                    }
+                    catch
+                    {
+                        MOD_DATA.Rows.Add(false, "UNAVAILABLE", "Something is wrong...", 0, "", "");
+                        MOD_DATA.Enabled = false;
+                    }
+                }
+            }
+            catch
+            {
+                MOD_DATA.Rows.Add(false, "UNAVAILABLE", "THE XML IS BROKEN!!!", 0, "", "");
+                MOD_DATA.Enabled = false;
+            }
+        }
+
         // Updates the Selected CRs
         private void UpdateCrs()
         {
@@ -274,6 +318,7 @@ namespace WindowsFormsApplication1
         {
             GetCoreInfo();
             BuildCombatRoutines();
+            BuildModules();
         }
     }
 }
