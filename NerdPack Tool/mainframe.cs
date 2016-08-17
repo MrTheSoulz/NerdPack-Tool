@@ -69,6 +69,11 @@ namespace WindowsFormsApplication1
             try
             {
                 var client = new GitHubClient(new ProductHeaderValue("NerdPack"));
+                if (GIT_CHECK.Enabled)
+                {
+                    var basicAuth = new Credentials(GIT_USERNAME.Text, GIT_PW.Text); // NOTE: not real credentials
+                    client.Credentials = basicAuth;
+                }
                 var repo = await client.Repository.Get("MrTheSoulz", "NerdPack");
                 UPDATED_TEXT.Text = "" + repo.PushedAt;
                 STARS_TEXT.Text = "" + repo.StargazersCount;
@@ -310,6 +315,7 @@ namespace WindowsFormsApplication1
                 {
                     string owner = (string)row.Cells["OWNER"].Value;
                     string repo = (string)row.Cells["REPO"].Value;
+                    MessageBox.Show(owner + " - " + repo);
                     Download(owner, repo);
                 }
             }
@@ -325,6 +331,7 @@ namespace WindowsFormsApplication1
                 {
                     string owner = (string)row.Cells["dataGridViewTextBoxColumn4"].Value;
                     string repo = (string)row.Cells["dataGridViewTextBoxColumn5"].Value;
+                    MessageBox.Show(owner + " - " + repo);
                     Download(owner, repo);
                 }
             }

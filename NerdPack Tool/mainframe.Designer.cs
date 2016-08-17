@@ -71,6 +71,12 @@
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.GIT_USERNAME = new System.Windows.Forms.TextBox();
+            this.GIT_PW = new System.Windows.Forms.TextBox();
+            this.GIT_CHECK = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.CR_Tab.SuspendLayout();
             this.CONSOLE_Tab.SuspendLayout();
@@ -83,6 +89,7 @@
             this.groupBox4.SuspendLayout();
             this.MODULES_TAB.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MOD_DATA)).BeginInit();
+            this.groupBox5.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -263,6 +270,7 @@
             this.CORE_TAB.BackColor = System.Drawing.Color.White;
             this.CORE_TAB.BackgroundImage = global::NerdPackToolBox.Properties.Resources.NEPlogo;
             this.CORE_TAB.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.CORE_TAB.Controls.Add(this.groupBox5);
             this.CORE_TAB.Controls.Add(this.groupBox3);
             this.CORE_TAB.Controls.Add(this.groupBox2);
             this.CORE_TAB.Controls.Add(this.groupBox1);
@@ -276,16 +284,16 @@
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.LAUNCH_BT);
-            this.groupBox3.Location = new System.Drawing.Point(585, 4);
+            this.groupBox3.Location = new System.Drawing.Point(586, 89);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(200, 280);
+            this.groupBox3.Size = new System.Drawing.Size(200, 50);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "World of Warcraft Info";
             // 
             // LAUNCH_BT
             // 
-            this.LAUNCH_BT.Location = new System.Drawing.Point(6, 251);
+            this.LAUNCH_BT.Location = new System.Drawing.Point(6, 17);
             this.LAUNCH_BT.Name = "LAUNCH_BT";
             this.LAUNCH_BT.Size = new System.Drawing.Size(188, 23);
             this.LAUNCH_BT.TabIndex = 0;
@@ -510,6 +518,62 @@
             this.dataGridViewTextBoxColumn5.ReadOnly = true;
             this.dataGridViewTextBoxColumn5.Visible = false;
             // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.GIT_CHECK);
+            this.groupBox5.Controls.Add(this.GIT_PW);
+            this.groupBox5.Controls.Add(this.GIT_USERNAME);
+            this.groupBox5.Controls.Add(this.label6);
+            this.groupBox5.Controls.Add(this.label5);
+            this.groupBox5.Location = new System.Drawing.Point(586, 3);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(200, 80);
+            this.groupBox5.TabIndex = 3;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "GubHub Login";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(7, 20);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(58, 13);
+            this.label5.TabIndex = 0;
+            this.label5.Text = "Username:";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(7, 40);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(56, 13);
+            this.label6.TabIndex = 1;
+            this.label6.Text = "Password:";
+            // 
+            // GIT_USERNAME
+            // 
+            this.GIT_USERNAME.Location = new System.Drawing.Point(71, 13);
+            this.GIT_USERNAME.Name = "GIT_USERNAME";
+            this.GIT_USERNAME.Size = new System.Drawing.Size(126, 20);
+            this.GIT_USERNAME.TabIndex = 2;
+            // 
+            // GIT_PW
+            // 
+            this.GIT_PW.Location = new System.Drawing.Point(71, 33);
+            this.GIT_PW.Name = "GIT_PW";
+            this.GIT_PW.Size = new System.Drawing.Size(126, 20);
+            this.GIT_PW.TabIndex = 3;
+            // 
+            // GIT_CHECK
+            // 
+            this.GIT_CHECK.AutoSize = true;
+            this.GIT_CHECK.Location = new System.Drawing.Point(10, 57);
+            this.GIT_CHECK.Name = "GIT_CHECK";
+            this.GIT_CHECK.Size = new System.Drawing.Size(90, 17);
+            this.GIT_CHECK.TabIndex = 4;
+            this.GIT_CHECK.Text = "Use Git Login";
+            this.GIT_CHECK.UseVisualStyleBackColor = true;
+            // 
             // mainframe
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -537,6 +601,8 @@
             this.groupBox4.PerformLayout();
             this.MODULES_TAB.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.MOD_DATA)).EndInit();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -583,6 +649,12 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.CheckBox GIT_CHECK;
+        private System.Windows.Forms.TextBox GIT_PW;
+        private System.Windows.Forms.TextBox GIT_USERNAME;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label5;
     }
 }
 
