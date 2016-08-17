@@ -189,6 +189,8 @@ namespace WindowsFormsApplication1
 
         private async void BuildCombatRoutines()
         {
+            CR_DATA.Rows.Clear();
+            CR_DATA.Refresh();
             try
             {
                 XmlDocument xdcDocument = new XmlDocument();
@@ -240,5 +242,11 @@ namespace WindowsFormsApplication1
             }
         }
 
+        //Refresh Button (Refresh data)
+        private void REFRESH_BT_Click(object sender, EventArgs e)
+        {
+            GetCoreInfo();
+            BuildCombatRoutines();
+        }
     }
 }
