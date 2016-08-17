@@ -156,14 +156,14 @@
             // 
             this.progressBar1.Location = new System.Drawing.Point(0, 370);
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(613, 23);
+            this.progressBar1.Size = new System.Drawing.Size(610, 23);
             this.progressBar1.TabIndex = 1;
             // 
             // INSTALL_BT
             // 
-            this.INSTALL_BT.Location = new System.Drawing.Point(612, 369);
+            this.INSTALL_BT.Location = new System.Drawing.Point(609, 369);
             this.INSTALL_BT.Name = "INSTALL_BT";
-            this.INSTALL_BT.Size = new System.Drawing.Size(184, 24);
+            this.INSTALL_BT.Size = new System.Drawing.Size(165, 25);
             this.INSTALL_BT.TabIndex = 2;
             this.INSTALL_BT.Text = "INSTALL/UPDATE";
             this.INSTALL_BT.UseVisualStyleBackColor = true;
@@ -234,9 +234,9 @@
             // 
             this.REFRESH_BT.BackgroundImage = global::NerdPackToolBox.Properties.Resources.refresh;
             this.REFRESH_BT.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.REFRESH_BT.Location = new System.Drawing.Point(780, -1);
+            this.REFRESH_BT.Location = new System.Drawing.Point(773, 369);
             this.REFRESH_BT.Name = "REFRESH_BT";
-            this.REFRESH_BT.Size = new System.Drawing.Size(20, 20);
+            this.REFRESH_BT.Size = new System.Drawing.Size(25, 25);
             this.REFRESH_BT.TabIndex = 3;
             this.REFRESH_BT.UseVisualStyleBackColor = true;
             this.REFRESH_BT.Click += new System.EventHandler(this.REFRESH_BT_Click);
