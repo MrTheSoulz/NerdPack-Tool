@@ -29,9 +29,15 @@ namespace WindowsFormsApplication1
         public mainframe()
         {
             InitializeComponent();
+
+            // These need to be saved and then loaded on launch
+            // Maybe save to a xml file?
+            PROTECTED_CHECK.Checked = true;
+            BACKUPS_CHECK.Checked = true;
             CORE_R_COMBO.SelectedItem = "Beta";
             LOC_INPUT.Text = GetWoWLoc()+"\\Interface\\AddOns";
-            PROTECTED_CHECK.Checked = true;
+            
+            // Run our init stuff
             GetCoreInfo();
             BuildCombatRoutines();
             BuildModules();
