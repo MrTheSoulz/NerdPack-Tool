@@ -169,7 +169,7 @@ namespace WindowsFormsApplication1
             ZipFile.ExtractToDirectory(start, end);
         }
 
-        // Zip a Zile
+        // Zip a File
         private void BackupFile(string start, string name)
         {
             string exePath = System.Windows.Forms.Application.StartupPath;
