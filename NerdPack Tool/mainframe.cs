@@ -147,15 +147,18 @@ namespace WindowsFormsApplication1
                     }
                 }
 
-
                 {// Extract the zip
                     CONSOLE_DATA.Rows.Add("-- Extracting ...");
                     ZipFile.ExtractToDirectory(oPath + ".zip", zPath);
                 }
 
                 {// rename the folder (remove -master)
-                    CONSOLE_DATA.Rows.Add("-- Moving to: " + tPath);
-                    Directory.Move(tPath + "-master", tPath);
+                    if (Directory.Exists(tPath + "-master"))
+                    {
+                        CONSOLE_DATA.Rows.Add("-- Found: \" -master\" in the folder name, Remaming");
+                        Directory.Move(tPath + "-master", tPath);
+                    }
+                    
                 }
 
                 {// delete the temp zip
