@@ -3,21 +3,12 @@ using Octokit;
 using System;
 using System.Collections.Generic;
 using System.Security.Principal;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Net;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using System.IO.Compression;
-using System.Threading;
 using System.Xml;
-using Octokit.Reactive;
 using Octokit.Internal;
-using LibGit2Sharp;
 
 namespace WindowsFormsApplication1
 {
@@ -138,7 +129,9 @@ namespace WindowsFormsApplication1
                     BackupFile(tPath, name);
                 }
                 // Download file
+                CONSOLE_DATA.Rows.Add("-- Downloading:" + repo.Name.ToString());
                 LibGit2Sharp.Repository.Clone(repo.CloneUrl, tPath);
+                
                 // add a version file
                 WriteToFile(tPath + "//Version.txt", repo.PushedAt.ToString());
             }
@@ -338,11 +331,11 @@ namespace WindowsFormsApplication1
                 WindowsPrincipal principal = new WindowsPrincipal(user);
                 isAdmin = principal.IsInRole(WindowsBuiltInRole.Administrator);
             }
-            catch (UnauthorizedAccessException ex)
+            catch (UnauthorizedAccessException)
             {
                 isAdmin = false;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 isAdmin = false;
             }
