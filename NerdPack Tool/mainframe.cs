@@ -2,6 +2,7 @@
 using Octokit;
 using System;
 using System.Collections.Generic;
+using System.Security.Principal;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
@@ -29,6 +30,9 @@ namespace WindowsFormsApplication1
         // START
         public mainframe()
         {
+            // check if running as admin
+            IsUserAdministrator();
+            //starting....
             InitializeComponent();
             // These need to be saved and then loaded on launch
             // Maybe save to a xml file?
@@ -323,6 +327,27 @@ namespace WindowsFormsApplication1
             GetCoreInfo();
             BuildCombatRoutines();
             BuildModules();
+        }
+
+        //check if admin
+        public bool IsUserAdministrator()
+        {
+            bool isAdmin;
+            try
+            {
+                WindowsIdentity user = WindowsIdentity.GetCurrent();
+                WindowsPrincipal principal = new WindowsPrincipal(user);
+                isAdmin = principal.IsInRole(WindowsBuiltInRole.Administrator);
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                isAdmin = false;
+            }
+            catch (Exception ex)
+            {
+                isAdmin = false;
+            }
+            return isAdmin;
         }
     }
 }
