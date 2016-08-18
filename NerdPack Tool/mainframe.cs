@@ -172,7 +172,7 @@ namespace WindowsFormsApplication1
             CONSOLE_DATA.Rows.Add("-- Creating a backup ...");
             ZipFile.CreateFromDirectory(start, exePath + "\\Backups\\" + name + " - " + timestamp + ".zip");
             //delete shit
-            string[] allFileNames = System.IO.Directory.GetFiles(start, "*.*", System.IO.SearchOption.AllDirectories);
+            string[] allFileNames = Directory.GetFiles(start, "*.*", SearchOption.AllDirectories);
             foreach (string filename in allFileNames)
             {
                 FileAttributes attr = File.GetAttributes(filename);
@@ -209,11 +209,14 @@ namespace WindowsFormsApplication1
                 {
                     text = File.ReadAllText(tPath + "\\Version.txt");
                 }
-                MessageBox.Show(text+ " - "+ repo.PushedAt.ToString());
                 if (!text.Contains(repo.PushedAt.ToString()))
                 {
                     CONSOLE_DATA.Rows.Add("Found update for :" + repo.Name);
                     Download(owner, _repo);
+                }
+                else
+                {
+                    CONSOLE_DATA.Rows.Add(repo.Name + " is already updated");
                 }
             }
             catch{}
