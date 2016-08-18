@@ -153,13 +153,32 @@ namespace WindowsFormsApplication1
                 foreach (string s in words) { timestamp = timestamp + s; }
             }
             // create the backup folder if dosent exist
+            //if (!Directory.Exists(exePath + "\\Backups"))
+            //  {
+            //        Directory.CreateDirectory(exePath + "\\Backups");
+            //      }
+            //        CONSOLE_DATA.Rows.Add("-- Creating a backup of: " + start);
+            //          ZipFile.CreateFromDirectory(start, exePath + "\\Backups\\" + name + " - " + timestamp + ".zip");
+            //            Directory.Delete(start, true);
+            // Keeping this here for now.....
             if (!Directory.Exists(exePath + "\\Backups"))
             {
-                Directory.CreateDirectory(exePath + "\\Backups");
+                // create the backup folder if dosent exist
+                if (!Directory.Exists(exePath + "\\Backups"))
+                {
+                    Directory.CreateDirectory(exePath + "\\Backups");
+                }
+                CONSOLE_DATA.Rows.Add("-- Creating a backup ...");
+                ZipFile.CreateFromDirectory(start, exePath + "\\Backups\\" + name + " - " + timestamp + ".zip");
+                //delete shit
+                string[] allFileNames = System.IO.Directory.GetFiles(start, "*.*", System.IO.SearchOption.AllDirectories);
+                foreach (string filename in allFileNames)
+                {
+                    FileAttributes attr = File.GetAttributes(filename);
+                    File.SetAttributes(filename, attr & ~FileAttributes.ReadOnly);
+                }
+                Directory.Delete(start, true);
             }
-            CONSOLE_DATA.Rows.Add("-- Creating a backup of: " + start);
-            ZipFile.CreateFromDirectory(start, exePath + "\\Backups\\" + name + " - " + timestamp + ".zip");
-            Directory.Delete(start, true);
         }
 
         // Write to file
