@@ -1,4 +1,4 @@
-﻿namespace NerdPackToolBox
+﻿namespace WindowsFormsApplication1
 {
     partial class updater
     {

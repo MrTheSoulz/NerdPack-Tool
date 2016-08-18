@@ -127,6 +127,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="tools.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="updater.cs">
       <SubType>Form</SubType>
     </Compile>

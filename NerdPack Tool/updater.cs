@@ -1,11 +1,8 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Net;
-using System.Threading;
 using System.Windows.Forms;
-using WindowsFormsApplication1;
 
-namespace NerdPackToolBox
+namespace WindowsFormsApplication1
 {
     public partial class updater : Form
     {
