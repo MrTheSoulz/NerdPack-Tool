@@ -16,27 +16,26 @@ using System.Threading;
 using System.Xml;
 using Octokit.Reactive;
 using Octokit.Internal;
+using LibGit2Sharp;
 
 namespace WindowsFormsApplication1
 {
     public partial class mainframe : Form
     {
 
-        static InMemoryCredentialStore credentials = new InMemoryCredentialStore(new Credentials("30056b2d3c0ae1b13319d6aa8d997e5ffc9cfcec"));
+        static InMemoryCredentialStore credentials = new InMemoryCredentialStore(new Octokit.Credentials("30056b2d3c0ae1b13319d6aa8d997e5ffc9cfcec"));
         static GitHubClient client = new GitHubClient(new ProductHeaderValue("NerdPack-Tool"), credentials);
 
         // START
         public mainframe()
         {
             InitializeComponent();
-
             // These need to be saved and then loaded on launch
             // Maybe save to a xml file?
             PROTECTED_CHECK.Checked = true;
             BACKUPS_CHECK.Checked = true;
             CORE_R_COMBO.SelectedItem = "Beta";
             LOC_INPUT.Text = GetWoWLoc()+"\\Interface\\AddOns";
-            
             // Run our init stuff
             GetCoreInfo();
             BuildCombatRoutines();
@@ -129,44 +128,17 @@ namespace WindowsFormsApplication1
                 string oPath = exePath + "\\" + name;
                 string tPath = LOC_INPUT.Text + "\\" + name;
                 string zPath = LOC_INPUT.Text;
-                // Download file
-                DownloadFile(uri + "/archive/master.zip", fileName);
                 //Create a backup
                 if (BACKUPS_CHECK.Checked && Directory.Exists(tPath))
                 {
                     BackupFile(tPath, name);
                 }
-                // Extract the zip
-                UnZipFile(oPath + ".zip", zPath);
-                // rename the folder (remove -master)
-                if (Directory.Exists(tPath + "-master"))
-                {
-                    CONSOLE_DATA.Rows.Add("-- Found: \" -master\" in the folder name, Renaming");
-                    Directory.Move(tPath + "-master", tPath);
-                }
-                // delete the temp zip
-                CONSOLE_DATA.Rows.Add("-- Deleting temp. zip file");
-                File.Delete(exePath + "\\" + fileName);
+                // Download file
+                LibGit2Sharp.Repository.Clone(repo.CloneUrl, tPath);
                 // add a version file
-                WriteToFile(tPath + "//Version.txt", repo.UpdatedAt.ToString());
+                WriteToFile(tPath + "//Version.txt", repo.PushedAt.ToString());
             }
             catch{}
-        }
-
-        // Download File
-        private void DownloadFile(string URL, string Name)
-        {
-            // Download and save it into the current exe folder.
-            CONSOLE_DATA.Rows.Add("- Downloading: " + Name);
-            WebClient myWebClient = new WebClient();
-            myWebClient.DownloadFile(URL, Name);
-        }
-
-        // UnZip a Zile
-        private void UnZipFile(string start, string end)
-        {
-            CONSOLE_DATA.Rows.Add("-- Extracting from :"+start, " to:"+end);
-            ZipFile.ExtractToDirectory(start, end);
         }
 
         // Zip a File
@@ -212,21 +184,17 @@ namespace WindowsFormsApplication1
             {
                 // get the github info
                 var repo = await client.Repository.Get(owner, _repo);
-                string name = repo.Name;
-                string tPath = LOC_INPUT.Text + "\\" + name;
+                string tPath = LOC_INPUT.Text + "\\" + repo.Name;
                 string text = "0.0";
                 if (File.Exists(tPath + "\\Version.txt"))
                 {
                     text = File.ReadAllText(tPath + "\\Version.txt");
                 }
-                if (!text.Contains("" + repo.PushedAt))
+                MessageBox.Show(text+ " - "+ repo.PushedAt.ToString());
+                if (!text.Contains(repo.PushedAt.ToString()))
                 {
                     CONSOLE_DATA.Rows.Add("Found update for :" + repo.Name);
                     Download(owner, _repo);
-                }
-                else
-                {
-                    CONSOLE_DATA.Rows.Add(repo.Name + " is already updated");
                 }
             }
             catch{}
