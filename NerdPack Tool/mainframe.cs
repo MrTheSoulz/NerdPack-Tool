@@ -130,8 +130,7 @@ namespace WindowsFormsApplication1
                     {
                         BackupFile(tPath, name);
                     }
-                    // Download file
-                    CONSOLE_DATA.Rows.Add("-- Downloading:" + repo.Name.ToString());
+                    
                     LibGit2Sharp.Repository.Clone(repo.CloneUrl, tPath);
                     // add a version file
                     WriteToFile(tPath + "//Version.txt", repo.PushedAt.ToString());
@@ -165,7 +164,7 @@ namespace WindowsFormsApplication1
             {
                 Directory.CreateDirectory(exePath + "\\Backups");
             }
-            CONSOLE_DATA.Rows.Add("-- Creating a backup ...");
+            //CONSOLE_DATA.Rows.Add("-- Creating a backup ...");
             ZipFile.CreateFromDirectory(start, exePath + "\\Backups\\" + name + " - " + timestamp + ".zip");
             //delete shit
             string[] allFileNames = Directory.GetFiles(start, "*.*", SearchOption.AllDirectories);
@@ -180,7 +179,7 @@ namespace WindowsFormsApplication1
         // Write to file
         private void WriteToFile(string fileLoc, string toWrite)
         {
-            CONSOLE_DATA.Rows.Add("-- Adding a version file to:"+ fileLoc);
+            //CONSOLE_DATA.Rows.Add("-- Adding a version file to:"+ fileLoc);
             // if the file Exists (user has one) remove it.
             if (File.Exists(fileLoc))
             {
@@ -207,12 +206,12 @@ namespace WindowsFormsApplication1
                 }
                 if (!text.Contains(repo.PushedAt.ToString()))
                 {
-                    CONSOLE_DATA.Rows.Add("Found update for :" + repo.Name);
+                    //CONSOLE_DATA.Rows.Add("Found update for :" + repo.Name);
                     Download(owner, _repo);
                 }
                 else
                 {
-                    CONSOLE_DATA.Rows.Add(repo.Name + " is already updated");
+                    //CONSOLE_DATA.Rows.Add(repo.Name + " is already updated");
                 }
             }
             catch{}
