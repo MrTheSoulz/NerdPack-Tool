@@ -9,6 +9,7 @@ using System.IO;
 using System.IO.Compression;
 using System.Xml;
 using Octokit.Internal;
+using System.Threading;
 
 namespace WindowsFormsApplication1
 {
@@ -106,34 +107,36 @@ namespace WindowsFormsApplication1
         // Download
         private async void Download(string owner, string _repo)
         {
-            try
-            {
-                // Progress bar
+            // Progress bar
                 IProgress<int> progress = new Progress<int>(value => { progressBar1.Value = value; });
                 await Task.Run(() =>
                 {
                     for (int i = 0; i <= 100; i++)
                         progress.Report(i);
                 });
-                var repo = await client.Repository.Get(owner, _repo);
-                string name = repo.Name;
-                string uri = repo.HtmlUrl;
-                string fileName = name + ".zip";
-                string exePath = System.Windows.Forms.Application.StartupPath;
-                string oPath = exePath + "\\" + name;
-                string tPath = LOC_INPUT.Text + "\\" + name;
-                string zPath = LOC_INPUT.Text;
-                //Create a backup
-                if (BACKUPS_CHECK.Checked && Directory.Exists(tPath))
-                {
-                    BackupFile(tPath, name);
-                }
-                // Download file
-                CONSOLE_DATA.Rows.Add("-- Downloading:" + repo.Name.ToString());
-                LibGit2Sharp.Repository.Clone(repo.CloneUrl, tPath);
+            try
+            {
+                ThreadPool.QueueUserWorkItem(async delegate {
+                    var repo = await client.Repository.Get(owner, _repo);
+                    string name = repo.Name;
+                    string uri = repo.HtmlUrl;
+                    string fileName = name + ".zip";
+                    string exePath = System.Windows.Forms.Application.StartupPath;
+                    string oPath = exePath + "\\" + name;
+                    string tPath = LOC_INPUT.Text + "\\" + name;
+                    string zPath = LOC_INPUT.Text;
+                    //Create a backup
+                    if (BACKUPS_CHECK.Checked && Directory.Exists(tPath))
+                    {
+                        BackupFile(tPath, name);
+                    }
+                    // Download file
+                    CONSOLE_DATA.Rows.Add("-- Downloading:" + repo.Name.ToString());
+                    LibGit2Sharp.Repository.Clone(repo.CloneUrl, tPath);
+                    // add a version file
+                    WriteToFile(tPath + "//Version.txt", repo.PushedAt.ToString());
+                }, null);
                 
-                // add a version file
-                WriteToFile(tPath + "//Version.txt", repo.PushedAt.ToString());
             }
             catch{}
         }
