@@ -32,7 +32,7 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.CORE_TAB = new System.Windows.Forms.TabPage();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.LAUNCH_BT = new System.Windows.Forms.Button();
+            this.LAUNCH_WOW32 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.LOC_INPUT = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -55,20 +55,24 @@
             this.Starts = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.OWNER = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.REPO = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MODULES_TAB = new System.Windows.Forms.TabPage();
+            this.MOD_DATA = new System.Windows.Forms.DataGridView();
+            this.dataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SETTINGS_TAB = new System.Windows.Forms.TabPage();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.BACKUPS_CHECK = new System.Windows.Forms.CheckBox();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.INSTALL_BT = new System.Windows.Forms.Button();
             this.REFRESH_BT = new System.Windows.Forms.Button();
-            this.MODULES_TAB = new System.Windows.Forms.TabPage();
-            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.MOD_DATA = new System.Windows.Forms.DataGridView();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.WoW_Launch_Combo = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.CORE_TAB.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -77,10 +81,11 @@
             this.groupBox4.SuspendLayout();
             this.CR_Tab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CR_DATA)).BeginInit();
-            this.SETTINGS_TAB.SuspendLayout();
-            this.groupBox5.SuspendLayout();
             this.MODULES_TAB.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MOD_DATA)).BeginInit();
+            this.SETTINGS_TAB.SuspendLayout();
+            this.groupBox5.SuspendLayout();
+            this.groupBox7.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -112,23 +117,23 @@
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.LAUNCH_BT);
+            this.groupBox3.Controls.Add(this.LAUNCH_WOW32);
             this.groupBox3.Location = new System.Drawing.Point(589, 4);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(200, 50);
+            this.groupBox3.Size = new System.Drawing.Size(200, 47);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "World of Warcraft Info";
+            this.groupBox3.Text = "World of Warcraft";
             // 
-            // LAUNCH_BT
+            // LAUNCH_WOW32
             // 
-            this.LAUNCH_BT.Location = new System.Drawing.Point(6, 17);
-            this.LAUNCH_BT.Name = "LAUNCH_BT";
-            this.LAUNCH_BT.Size = new System.Drawing.Size(188, 23);
-            this.LAUNCH_BT.TabIndex = 0;
-            this.LAUNCH_BT.Text = "Launch Word of Warcraft";
-            this.LAUNCH_BT.UseVisualStyleBackColor = true;
-            this.LAUNCH_BT.Click += new System.EventHandler(this.LAUNCH_BT_Click);
+            this.LAUNCH_WOW32.Location = new System.Drawing.Point(6, 19);
+            this.LAUNCH_WOW32.Name = "LAUNCH_WOW32";
+            this.LAUNCH_WOW32.Size = new System.Drawing.Size(188, 23);
+            this.LAUNCH_WOW32.TabIndex = 0;
+            this.LAUNCH_WOW32.Text = "Launch Word of Warcraft";
+            this.LAUNCH_WOW32.UseVisualStyleBackColor = true;
+            this.LAUNCH_WOW32.Click += new System.EventHandler(this.LAUNCH_BT_Click);
             // 
             // groupBox2
             // 
@@ -341,8 +346,80 @@
             this.REPO.Name = "REPO";
             this.REPO.Visible = false;
             // 
+            // MODULES_TAB
+            // 
+            this.MODULES_TAB.Controls.Add(this.MOD_DATA);
+            this.MODULES_TAB.Location = new System.Drawing.Point(4, 22);
+            this.MODULES_TAB.Name = "MODULES_TAB";
+            this.MODULES_TAB.Size = new System.Drawing.Size(792, 335);
+            this.MODULES_TAB.TabIndex = 3;
+            this.MODULES_TAB.Text = "Modules";
+            this.MODULES_TAB.UseVisualStyleBackColor = true;
+            // 
+            // MOD_DATA
+            // 
+            this.MOD_DATA.AllowUserToAddRows = false;
+            this.MOD_DATA.AllowUserToDeleteRows = false;
+            this.MOD_DATA.AllowUserToResizeColumns = false;
+            this.MOD_DATA.AllowUserToResizeRows = false;
+            this.MOD_DATA.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.MOD_DATA.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.MOD_DATA.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewCheckBoxColumn1,
+            this.dataGridViewTextBoxColumn1,
+            this.dataGridViewTextBoxColumn2,
+            this.dataGridViewTextBoxColumn3,
+            this.dataGridViewTextBoxColumn4,
+            this.dataGridViewTextBoxColumn5});
+            this.MOD_DATA.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.MOD_DATA.Location = new System.Drawing.Point(0, 0);
+            this.MOD_DATA.Name = "MOD_DATA";
+            this.MOD_DATA.RowHeadersVisible = false;
+            this.MOD_DATA.Size = new System.Drawing.Size(792, 335);
+            this.MOD_DATA.TabIndex = 1;
+            // 
+            // dataGridViewCheckBoxColumn1
+            // 
+            this.dataGridViewCheckBoxColumn1.HeaderText = "X";
+            this.dataGridViewCheckBoxColumn1.Name = "dataGridViewCheckBoxColumn1";
+            this.dataGridViewCheckBoxColumn1.Width = 25;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.HeaderText = "Addon";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dataGridViewTextBoxColumn1.Width = 200;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dataGridViewTextBoxColumn2.HeaderText = "Description";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.HeaderText = "Stars";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.Width = 50;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.HeaderText = "OWNER";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.Visible = false;
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            this.dataGridViewTextBoxColumn5.HeaderText = "REPO";
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            this.dataGridViewTextBoxColumn5.Visible = false;
+            // 
             // SETTINGS_TAB
             // 
+            this.SETTINGS_TAB.Controls.Add(this.groupBox7);
+            this.SETTINGS_TAB.Controls.Add(this.groupBox6);
             this.SETTINGS_TAB.Controls.Add(this.groupBox5);
             this.SETTINGS_TAB.Location = new System.Drawing.Point(4, 22);
             this.SETTINGS_TAB.Name = "SETTINGS_TAB";
@@ -400,75 +477,45 @@
             this.REFRESH_BT.UseVisualStyleBackColor = true;
             this.REFRESH_BT.Click += new System.EventHandler(this.REFRESH_BT_Click);
             // 
-            // MODULES_TAB
+            // groupBox6
             // 
-            this.MODULES_TAB.Controls.Add(this.MOD_DATA);
-            this.MODULES_TAB.Location = new System.Drawing.Point(4, 22);
-            this.MODULES_TAB.Name = "MODULES_TAB";
-            this.MODULES_TAB.Size = new System.Drawing.Size(792, 335);
-            this.MODULES_TAB.TabIndex = 3;
-            this.MODULES_TAB.Text = "Modules";
-            this.MODULES_TAB.UseVisualStyleBackColor = true;
+            this.groupBox6.Location = new System.Drawing.Point(9, 4);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(515, 133);
+            this.groupBox6.TabIndex = 2;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "Unlocker";
             // 
-            // dataGridViewTextBoxColumn5
+            // groupBox7
             // 
-            this.dataGridViewTextBoxColumn5.HeaderText = "REPO";
-            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            this.dataGridViewTextBoxColumn5.Visible = false;
+            this.groupBox7.Controls.Add(this.label5);
+            this.groupBox7.Controls.Add(this.WoW_Launch_Combo);
+            this.groupBox7.Location = new System.Drawing.Point(323, 144);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(200, 188);
+            this.groupBox7.TabIndex = 3;
+            this.groupBox7.TabStop = false;
+            this.groupBox7.Text = "World of Warcraft";
             // 
-            // dataGridViewTextBoxColumn4
+            // WoW_Launch_Combo
             // 
-            this.dataGridViewTextBoxColumn4.HeaderText = "OWNER";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            this.dataGridViewTextBoxColumn4.Visible = false;
+            this.WoW_Launch_Combo.FormattingEnabled = true;
+            this.WoW_Launch_Combo.Items.AddRange(new object[] {
+            "wow.exe",
+            "wow-64.exe"});
+            this.WoW_Launch_Combo.Location = new System.Drawing.Point(58, 19);
+            this.WoW_Launch_Combo.Name = "WoW_Launch_Combo";
+            this.WoW_Launch_Combo.Size = new System.Drawing.Size(136, 21);
+            this.WoW_Launch_Combo.TabIndex = 0;
             // 
-            // dataGridViewTextBoxColumn3
+            // label5
             // 
-            this.dataGridViewTextBoxColumn3.HeaderText = "Stars";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            this.dataGridViewTextBoxColumn3.Width = 50;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.dataGridViewTextBoxColumn2.HeaderText = "Description";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.HeaderText = "Addon";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.dataGridViewTextBoxColumn1.Width = 200;
-            // 
-            // dataGridViewCheckBoxColumn1
-            // 
-            this.dataGridViewCheckBoxColumn1.HeaderText = "X";
-            this.dataGridViewCheckBoxColumn1.Name = "dataGridViewCheckBoxColumn1";
-            this.dataGridViewCheckBoxColumn1.Width = 25;
-            // 
-            // MOD_DATA
-            // 
-            this.MOD_DATA.AllowUserToAddRows = false;
-            this.MOD_DATA.AllowUserToDeleteRows = false;
-            this.MOD_DATA.AllowUserToResizeColumns = false;
-            this.MOD_DATA.AllowUserToResizeRows = false;
-            this.MOD_DATA.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            this.MOD_DATA.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.MOD_DATA.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewCheckBoxColumn1,
-            this.dataGridViewTextBoxColumn1,
-            this.dataGridViewTextBoxColumn2,
-            this.dataGridViewTextBoxColumn3,
-            this.dataGridViewTextBoxColumn4,
-            this.dataGridViewTextBoxColumn5});
-            this.MOD_DATA.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.MOD_DATA.Location = new System.Drawing.Point(0, 0);
-            this.MOD_DATA.Name = "MOD_DATA";
-            this.MOD_DATA.RowHeadersVisible = false;
-            this.MOD_DATA.Size = new System.Drawing.Size(792, 335);
-            this.MOD_DATA.TabIndex = 1;
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(6, 22);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(46, 13);
+            this.label5.TabIndex = 1;
+            this.label5.Text = "Launch:";
             // 
             // mainframe
             // 
@@ -495,11 +542,13 @@
             this.groupBox4.PerformLayout();
             this.CR_Tab.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.CR_DATA)).EndInit();
+            this.MODULES_TAB.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.MOD_DATA)).EndInit();
             this.SETTINGS_TAB.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
-            this.MODULES_TAB.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.MOD_DATA)).EndInit();
+            this.groupBox7.ResumeLayout(false);
+            this.groupBox7.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -518,7 +567,7 @@
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Button INSTALL_BT;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.Button LAUNCH_BT;
+        private System.Windows.Forms.Button LAUNCH_WOW32;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
@@ -546,6 +595,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+        private System.Windows.Forms.GroupBox groupBox7;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ComboBox WoW_Launch_Combo;
+        private System.Windows.Forms.GroupBox groupBox6;
     }
 }
 
