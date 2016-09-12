@@ -47,14 +47,6 @@
             this.PROTECTED_CHECK = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.CORE_R_COMBO = new System.Windows.Forms.ComboBox();
-            this.CR_Tab = new System.Windows.Forms.TabPage();
-            this.CR_DATA = new System.Windows.Forms.DataGridView();
-            this.CheckBox = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.Addon = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Description = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Starts = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.OWNER = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.REPO = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MODULES_TAB = new System.Windows.Forms.TabPage();
             this.MOD_DATA = new System.Windows.Forms.DataGridView();
             this.dataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
@@ -64,28 +56,36 @@
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SETTINGS_TAB = new System.Windows.Forms.TabPage();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.WoW_Launch_Combo = new System.Windows.Forms.ComboBox();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.BACKUPS_CHECK = new System.Windows.Forms.CheckBox();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.INSTALL_BT = new System.Windows.Forms.Button();
             this.REFRESH_BT = new System.Windows.Forms.Button();
-            this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.groupBox7 = new System.Windows.Forms.GroupBox();
-            this.WoW_Launch_Combo = new System.Windows.Forms.ComboBox();
-            this.label5 = new System.Windows.Forms.Label();
+            this.CR_Tab = new System.Windows.Forms.TabPage();
+            this.REPO = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.OWNER = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Starts = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Description = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Addon = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CheckBox = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.CR_DATA = new System.Windows.Forms.DataGridView();
             this.tabControl1.SuspendLayout();
             this.CORE_TAB.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox4.SuspendLayout();
-            this.CR_Tab.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.CR_DATA)).BeginInit();
             this.MODULES_TAB.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MOD_DATA)).BeginInit();
             this.SETTINGS_TAB.SuspendLayout();
-            this.groupBox5.SuspendLayout();
             this.groupBox7.SuspendLayout();
+            this.groupBox5.SuspendLayout();
+            this.CR_Tab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.CR_DATA)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -95,6 +95,7 @@
             this.tabControl1.Controls.Add(this.MODULES_TAB);
             this.tabControl1.Controls.Add(this.SETTINGS_TAB);
             this.tabControl1.Location = new System.Drawing.Point(0, 3);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(800, 361);
@@ -275,77 +276,6 @@
             this.CORE_R_COMBO.Size = new System.Drawing.Size(128, 21);
             this.CORE_R_COMBO.TabIndex = 0;
             // 
-            // CR_Tab
-            // 
-            this.CR_Tab.Controls.Add(this.CR_DATA);
-            this.CR_Tab.Location = new System.Drawing.Point(4, 22);
-            this.CR_Tab.Name = "CR_Tab";
-            this.CR_Tab.Padding = new System.Windows.Forms.Padding(3);
-            this.CR_Tab.Size = new System.Drawing.Size(792, 335);
-            this.CR_Tab.TabIndex = 1;
-            this.CR_Tab.Text = "Combat Routines";
-            this.CR_Tab.UseVisualStyleBackColor = true;
-            // 
-            // CR_DATA
-            // 
-            this.CR_DATA.AllowUserToAddRows = false;
-            this.CR_DATA.AllowUserToDeleteRows = false;
-            this.CR_DATA.AllowUserToResizeColumns = false;
-            this.CR_DATA.AllowUserToResizeRows = false;
-            this.CR_DATA.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            this.CR_DATA.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.CR_DATA.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.CheckBox,
-            this.Addon,
-            this.Description,
-            this.Starts,
-            this.OWNER,
-            this.REPO});
-            this.CR_DATA.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.CR_DATA.Location = new System.Drawing.Point(3, 3);
-            this.CR_DATA.Name = "CR_DATA";
-            this.CR_DATA.RowHeadersVisible = false;
-            this.CR_DATA.Size = new System.Drawing.Size(786, 329);
-            this.CR_DATA.TabIndex = 0;
-            // 
-            // CheckBox
-            // 
-            this.CheckBox.HeaderText = "X";
-            this.CheckBox.Name = "CheckBox";
-            this.CheckBox.Width = 25;
-            // 
-            // Addon
-            // 
-            this.Addon.HeaderText = "Addon";
-            this.Addon.Name = "Addon";
-            this.Addon.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Addon.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Addon.Width = 200;
-            // 
-            // Description
-            // 
-            this.Description.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Description.HeaderText = "Description";
-            this.Description.Name = "Description";
-            // 
-            // Starts
-            // 
-            this.Starts.HeaderText = "Stars";
-            this.Starts.Name = "Starts";
-            this.Starts.Width = 50;
-            // 
-            // OWNER
-            // 
-            this.OWNER.HeaderText = "OWNER";
-            this.OWNER.Name = "OWNER";
-            this.OWNER.Visible = false;
-            // 
-            // REPO
-            // 
-            this.REPO.HeaderText = "REPO";
-            this.REPO.Name = "REPO";
-            this.REPO.Visible = false;
-            // 
             // MODULES_TAB
             // 
             this.MODULES_TAB.Controls.Add(this.MOD_DATA);
@@ -428,6 +358,46 @@
             this.SETTINGS_TAB.Text = "Settings";
             this.SETTINGS_TAB.UseVisualStyleBackColor = true;
             // 
+            // groupBox7
+            // 
+            this.groupBox7.Controls.Add(this.label5);
+            this.groupBox7.Controls.Add(this.WoW_Launch_Combo);
+            this.groupBox7.Location = new System.Drawing.Point(323, 144);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(200, 188);
+            this.groupBox7.TabIndex = 3;
+            this.groupBox7.TabStop = false;
+            this.groupBox7.Text = "World of Warcraft";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(6, 22);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(46, 13);
+            this.label5.TabIndex = 1;
+            this.label5.Text = "Launch:";
+            // 
+            // WoW_Launch_Combo
+            // 
+            this.WoW_Launch_Combo.FormattingEnabled = true;
+            this.WoW_Launch_Combo.Items.AddRange(new object[] {
+            "wow.exe",
+            "wow-64.exe"});
+            this.WoW_Launch_Combo.Location = new System.Drawing.Point(58, 19);
+            this.WoW_Launch_Combo.Name = "WoW_Launch_Combo";
+            this.WoW_Launch_Combo.Size = new System.Drawing.Size(136, 21);
+            this.WoW_Launch_Combo.TabIndex = 0;
+            // 
+            // groupBox6
+            // 
+            this.groupBox6.Location = new System.Drawing.Point(9, 4);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(515, 133);
+            this.groupBox6.TabIndex = 2;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "Unlocker";
+            // 
             // groupBox5
             // 
             this.groupBox5.Controls.Add(this.BACKUPS_CHECK);
@@ -477,45 +447,76 @@
             this.REFRESH_BT.UseVisualStyleBackColor = true;
             this.REFRESH_BT.Click += new System.EventHandler(this.REFRESH_BT_Click);
             // 
-            // groupBox6
+            // CR_Tab
             // 
-            this.groupBox6.Location = new System.Drawing.Point(9, 4);
-            this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(515, 133);
-            this.groupBox6.TabIndex = 2;
-            this.groupBox6.TabStop = false;
-            this.groupBox6.Text = "Unlocker";
+            this.CR_Tab.Controls.Add(this.CR_DATA);
+            this.CR_Tab.Location = new System.Drawing.Point(4, 22);
+            this.CR_Tab.Margin = new System.Windows.Forms.Padding(0, 0, 0, 0);
+            this.CR_Tab.Name = "CR_Tab";
+            this.CR_Tab.Size = new System.Drawing.Size(792, 335);
+            this.CR_Tab.TabIndex = 1;
+            this.CR_Tab.Text = "Combat Routines";
+            this.CR_Tab.UseVisualStyleBackColor = true;
             // 
-            // groupBox7
+            // REPO
             // 
-            this.groupBox7.Controls.Add(this.label5);
-            this.groupBox7.Controls.Add(this.WoW_Launch_Combo);
-            this.groupBox7.Location = new System.Drawing.Point(323, 144);
-            this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(200, 188);
-            this.groupBox7.TabIndex = 3;
-            this.groupBox7.TabStop = false;
-            this.groupBox7.Text = "World of Warcraft";
+            this.REPO.HeaderText = "REPO";
+            this.REPO.Name = "REPO";
+            this.REPO.Visible = false;
             // 
-            // WoW_Launch_Combo
+            // OWNER
             // 
-            this.WoW_Launch_Combo.FormattingEnabled = true;
-            this.WoW_Launch_Combo.Items.AddRange(new object[] {
-            "wow.exe",
-            "wow-64.exe"});
-            this.WoW_Launch_Combo.Location = new System.Drawing.Point(58, 19);
-            this.WoW_Launch_Combo.Name = "WoW_Launch_Combo";
-            this.WoW_Launch_Combo.Size = new System.Drawing.Size(136, 21);
-            this.WoW_Launch_Combo.TabIndex = 0;
+            this.OWNER.HeaderText = "OWNER";
+            this.OWNER.Name = "OWNER";
+            this.OWNER.Visible = false;
             // 
-            // label5
+            // Starts
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(6, 22);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(46, 13);
-            this.label5.TabIndex = 1;
-            this.label5.Text = "Launch:";
+            this.Starts.HeaderText = "Stars";
+            this.Starts.Name = "Starts";
+            this.Starts.Width = 50;
+            // 
+            // Description
+            // 
+            this.Description.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Description.HeaderText = "Description";
+            this.Description.Name = "Description";
+            // 
+            // Addon
+            // 
+            this.Addon.HeaderText = "Addon";
+            this.Addon.Name = "Addon";
+            this.Addon.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Addon.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Addon.Width = 200;
+            // 
+            // CheckBox
+            // 
+            this.CheckBox.HeaderText = "X";
+            this.CheckBox.Name = "CheckBox";
+            this.CheckBox.Width = 25;
+            // 
+            // CR_DATA
+            // 
+            this.CR_DATA.AllowUserToAddRows = false;
+            this.CR_DATA.AllowUserToDeleteRows = false;
+            this.CR_DATA.AllowUserToResizeColumns = false;
+            this.CR_DATA.AllowUserToResizeRows = false;
+            this.CR_DATA.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.CR_DATA.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.CR_DATA.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.CheckBox,
+            this.Addon,
+            this.Description,
+            this.Starts,
+            this.OWNER,
+            this.REPO});
+            this.CR_DATA.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.CR_DATA.Location = new System.Drawing.Point(0, 0);
+            this.CR_DATA.Name = "CR_DATA";
+            this.CR_DATA.RowHeadersVisible = false;
+            this.CR_DATA.Size = new System.Drawing.Size(792, 335);
+            this.CR_DATA.TabIndex = 0;
             // 
             // mainframe
             // 
@@ -540,15 +541,15 @@
             this.groupBox1.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
-            this.CR_Tab.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.CR_DATA)).EndInit();
             this.MODULES_TAB.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.MOD_DATA)).EndInit();
             this.SETTINGS_TAB.ResumeLayout(false);
-            this.groupBox5.ResumeLayout(false);
-            this.groupBox5.PerformLayout();
             this.groupBox7.ResumeLayout(false);
             this.groupBox7.PerformLayout();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
+            this.CR_Tab.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.CR_DATA)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -563,7 +564,6 @@
         private System.Windows.Forms.CheckBox PROTECTED_CHECK;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox CORE_R_COMBO;
-        private System.Windows.Forms.TabPage CR_Tab;
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Button INSTALL_BT;
         private System.Windows.Forms.GroupBox groupBox3;
@@ -576,13 +576,6 @@
         private System.Windows.Forms.TextBox UPDATED_TEXT;
         private System.Windows.Forms.TextBox STARS_TEXT;
         private System.Windows.Forms.Button GIT_BT;
-        private System.Windows.Forms.DataGridView CR_DATA;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn CheckBox;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Addon;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Description;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Starts;
-        private System.Windows.Forms.DataGridViewTextBoxColumn OWNER;
-        private System.Windows.Forms.DataGridViewTextBoxColumn REPO;
         private System.Windows.Forms.Button REFRESH_BT;
         private System.Windows.Forms.TabPage SETTINGS_TAB;
         private System.Windows.Forms.GroupBox groupBox5;
@@ -599,6 +592,14 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox WoW_Launch_Combo;
         private System.Windows.Forms.GroupBox groupBox6;
+        private System.Windows.Forms.TabPage CR_Tab;
+        private System.Windows.Forms.DataGridView CR_DATA;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn CheckBox;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Addon;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Description;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Starts;
+        private System.Windows.Forms.DataGridViewTextBoxColumn OWNER;
+        private System.Windows.Forms.DataGridViewTextBoxColumn REPO;
     }
 }
 

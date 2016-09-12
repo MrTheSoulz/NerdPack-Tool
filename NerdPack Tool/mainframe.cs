@@ -50,8 +50,7 @@ namespace WindowsFormsApplication1
             FindWoW();
             // Run our init stuff
             GetCoreInfo();
-            BuildCombatRoutines();
-            BuildModules();
+            BuildToolData();
             //TEMP DISABLED
             CORE_R_COMBO.Enabled = false;
         }
@@ -129,16 +128,6 @@ namespace WindowsFormsApplication1
             }
         }
 
-        // Updates the core and protected
-        public void UpdateCore()
-        {
-            DownloadAddon("MrTheSoulz", "NerdPack");
-            if (PROTECTED_CHECK.Checked)
-            {
-                DownloadAddon("MrTheSoulz", "NerdPack-Protected");
-            }
-        }
-
         //Build Core Info
         private async void GetCoreInfo()
         {
@@ -177,17 +166,40 @@ namespace WindowsFormsApplication1
         // Install / Update Button
         private void INSTALL_BT_Click(object sender, EventArgs e)
         {
-            UpdateCore();
-            UpdateCrs();
-            UpdateMods();
+            // Core
+            DownloadAddon("MrTheSoulz", "NerdPack");
+            // Protected
+            if (PROTECTED_CHECK.Checked)
+            {
+                DownloadAddon("MrTheSoulz", "NerdPack-Protected");
+            }
+            // Combat Routines
+            foreach (DataGridViewRow row in CR_DATA.Rows)
+            {
+                if ((Boolean)row.Cells["CheckBox"].Value == true)
+                {
+                    string owner = (string)row.Cells["OWNER"].Value;
+                    string repo = (string)row.Cells["REPO"].Value;
+                    DownloadAddon(owner, repo);
+                }
+            }
+            // Modules
+            foreach (DataGridViewRow row in MOD_DATA.Rows)
+            {
+                if ((Boolean)row.Cells["dataGridViewCheckBoxColumn1"].Value == true)
+                {
+                    string owner = (string)row.Cells["dataGridViewTextBoxColumn4"].Value;
+                    string repo = (string)row.Cells["dataGridViewTextBoxColumn5"].Value;
+                    DownloadAddon(owner, repo);
+                }
+            }
         }
 
         //Refresh Button (Refresh data)
         private void REFRESH_BT_Click(object sender, EventArgs e)
         {
             GetCoreInfo();
-            BuildCombatRoutines();
-            BuildModules();
+            BuildToolData();
         }
 
         //check if admin
@@ -315,12 +327,14 @@ namespace WindowsFormsApplication1
             ZipFile.CreateFromDirectory(pFolderPath, exePath + "\\Backups\\" + name + " - " + timestamp + ".zip");
         }
 
-        // Build the CR list
-        private async void BuildCombatRoutines()
+        private async void BuildToolData()
         {
             CR_DATA.Rows.Clear();
             CR_DATA.Refresh();
             CR_DATA.Enabled = true;
+            MOD_DATA.Rows.Clear();
+            MOD_DATA.Refresh();
+            MOD_DATA.Enabled = true;
             try
             {
                 XmlDocument xdcDocument = new XmlDocument();
@@ -331,83 +345,33 @@ namespace WindowsFormsApplication1
                 {
                     string Owner = xndNode["Owner"].InnerText;
                     string Repo = xndNode["Repo"].InnerText;
-                    try
-                    {
-                        var repo = await client.Repository.Get(Owner, Repo);
-                        var installed = false;
-                        // Check if we have it installed
-                        if (File.Exists(LOC_INPUT.Text + "\\Interface\\AddOns\\" + repo.Name + "\\Version.txt"))
-                        {
-                            installed = true;
-                        }
-                        CR_DATA.Rows.Add(installed, repo.Name, repo.Description, repo.StargazersCount, Owner, Repo);
-                    }
-                    catch { }
-                }
-            }
-            catch { }
-        }
 
-        //Build the modules list
-        private async void BuildModules()
-        {
-            MOD_DATA.Rows.Clear();
-            MOD_DATA.Refresh();
-            MOD_DATA.Enabled = true;
-            try
-            {
-                XmlDocument xdcDocument = new XmlDocument();
-                xdcDocument.Load("https://dl.dropboxusercontent.com/u/101560647/NerdPack/NeP_Toolbox.xml");
-                XmlElement xelRoot = xdcDocument.DocumentElement;
-                XmlNodeList xnlNodes = xelRoot.SelectNodes("/ToolboxData/Plugins/Button");
-                foreach (XmlNode xndNode in xnlNodes)
+                    var repo = await client.Repository.Get(Owner, Repo);
+                    var installed = false;
+                    // Check if we have it installed
+                    if (File.Exists(LOC_INPUT.Text + "\\Interface\\AddOns\\" + repo.Name + "\\Version.txt"))
+                    {
+                        installed = true;
+                    }
+                    CR_DATA.Rows.Add(installed, repo.Name, repo.Description, repo.StargazersCount, Owner, Repo);
+                }
+                XmlElement xelRoot2 = xdcDocument.DocumentElement;
+                XmlNodeList xnlNodes2 = xelRoot2.SelectNodes("/ToolboxData/Plugins/Button");
+                foreach (XmlNode xndNode in xnlNodes2)
                 {
                     string Owner = xndNode["Owner"].InnerText;
                     string Repo = xndNode["Repo"].InnerText;
-                    try
+                    var repo = await client.Repository.Get(Owner, Repo);
+                    var installed = false;
+                    // Check if we have it installed
+                    if (File.Exists(LOC_INPUT.Text + "\\Interface\\AddOns\\" + repo.Name + "\\Version.txt"))
                     {
-                        var repo = await client.Repository.Get(Owner, Repo);
-                        var installed = false;
-                        // Check if we have it installed
-                        if (File.Exists(LOC_INPUT.Text + "\\Interface\\AddOns\\" + repo.Name + "\\Version.txt"))
-                        {
-                            installed = true;
-                        }
-                        MOD_DATA.Rows.Add(installed, repo.Name, repo.Description, repo.StargazersCount, Owner, Repo);
+                        installed = true;
                     }
-                    catch { }
+                    MOD_DATA.Rows.Add(installed, repo.Name, repo.Description, repo.StargazersCount, Owner, Repo);
                 }
             }
             catch { }
         }
-
-        // Updates the Selected CRs
-        public void UpdateCrs()
-        {
-            foreach (DataGridViewRow row in CR_DATA.Rows)
-            {
-                if ((Boolean)row.Cells["CheckBox"].Value == true)
-                {
-                    string owner = (string)row.Cells["OWNER"].Value;
-                    string repo = (string)row.Cells["REPO"].Value;
-                    DownloadAddon(owner, repo);
-                }
-            }
-        }
-
-        // Updates the Selected Modules
-        public void UpdateMods()
-        {
-            foreach (DataGridViewRow row in MOD_DATA.Rows)
-            {
-                if ((Boolean)row.Cells["dataGridViewCheckBoxColumn1"].Value == true)
-                {
-                    string owner = (string)row.Cells["dataGridViewTextBoxColumn4"].Value;
-                    string repo = (string)row.Cells["dataGridViewTextBoxColumn5"].Value;
-                    DownloadAddon(owner, repo);
-                }
-            }
-        }
-
     }
 }
