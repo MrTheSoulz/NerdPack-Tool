@@ -252,7 +252,7 @@ namespace WindowsFormsApplication1
                         // make a backup
                         if (BACKUPS_CHECK.Checked)
                         {
-                            BackUpFoler(tPath, name);
+                            BackUpFolder(tPath, name);
                         }
                         DeleteRecursiveFolder(tPath); ;
                         WriteToConsole("Done Deleting.");
@@ -309,7 +309,7 @@ namespace WindowsFormsApplication1
             Directory.Delete(pFolderPath);
         }
 
-        private void BackUpFoler(string pFolderPath, string name)
+        private void BackUpFolder(string pFolderPath, string name)
         {
             WriteToConsole("Creating a backup");
             string timestamp = "";
