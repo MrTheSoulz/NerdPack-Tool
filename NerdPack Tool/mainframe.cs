@@ -106,13 +106,27 @@ namespace WindowsFormsApplication1
                     WebClient Client = new WebClient();
                     Client.DownloadFile(remoteZip, exePath + "\\NerdPack_ToolBox_Update.zip");
                 }
-                Close();
+                ExitTool();
             }
             else
             {
                 WriteToConsole("No Update found...");
             }
 
+        }
+
+        public void ExitTool()
+        {
+            if (System.Windows.Forms.Application.MessageLoop)
+            {
+                // WinForms app
+                System.Windows.Forms.Application.Exit();
+            }
+            else
+            {
+                // Console app
+                Environment.Exit(1);
+            }
         }
 
         // Updates the core and protected
