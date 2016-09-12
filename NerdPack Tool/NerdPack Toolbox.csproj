@@ -129,12 +129,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="updater.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="updater.Designer.cs">
-      <DependentUpon>updater.cs</DependentUpon>
-    </Compile>
     <Compile Include="mainframe.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -156,9 +150,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="updater.resx">
-      <DependentUpon>updater.cs</DependentUpon>
-    </EmbeddedResource>
     <None Include="app.manifest">
       <SubType>Designer</SubType>
     </None>

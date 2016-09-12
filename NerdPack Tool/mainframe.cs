@@ -5,13 +5,12 @@ using System.Security.Principal;
 using System.Windows.Forms;
 using Octokit.Internal;
 using System.Threading.Tasks;
-using System.Threading;
 using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
 using System.Xml;
-using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using System.Net;
 
 namespace WindowsFormsApplication1
 {
@@ -20,27 +19,12 @@ namespace WindowsFormsApplication1
 
         static InMemoryCredentialStore credentials = new InMemoryCredentialStore(new Credentials("30056b2d3c0ae1b13319d6aa8d997e5ffc9cfcec"));
         static GitHubClient client = new GitHubClient(new ProductHeaderValue("NerdPack-Tool"), credentials);
-        string exePath = System.Windows.Forms.Application.StartupPath;
 
-        // GET WoW Location
-        private string GetWoWLoc()
-        {
-            var pKey = Registry.LocalMachine.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Uninstall");
-            string[] nameList = pKey.GetSubKeyNames();
-            for (int i = 0; i < nameList.Length; i++)
-            {
-                RegistryKey regKey = pKey.OpenSubKey(nameList[i]);
-                try
-                {
-                    if (regKey.GetValue("DisplayName").ToString() == "World of Warcraft")
-                    {
-                        return regKey.GetValue("InstallLocation").ToString();
-                    }
-                }
-                catch { }
-            }
-            return "NOT FOUND!";
-        }
+        string exePath = System.Windows.Forms.Application.StartupPath;
+        int cVersion = 0;
+        int rVersion = 0;
+        string remoteVer = "https://dl.dropboxusercontent.com/u/101560647/NerdPack/Version.txt";
+        string remoteZip = "https://dl.dropboxusercontent.com/u/101560647/NerdPack/NerdPack_ToolBox.zip";
 
         // console stuff
         [DllImport("kernel32.dll")]
@@ -51,8 +35,11 @@ namespace WindowsFormsApplication1
         // START
         public mainframe()
         {
+            AllocConsole();
             // check if running as admin
             IsUserAdministrator();
+            //Check for updates
+            CheckSelfUpdates();
             //starting....
             InitializeComponent();
             // These need to be saved and then loaded on launch
@@ -61,13 +48,70 @@ namespace WindowsFormsApplication1
             BACKUPS_CHECK.Checked = true;
             CORE_R_COMBO.SelectedItem = "Beta";
             WoW_Launch_Combo.SelectedItem = "wow-64.exe";
-            LOC_INPUT.Text = GetWoWLoc() + "\\Interface\\AddOns";
+            // Find WoW
+            var pKey = Registry.LocalMachine.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Uninstall");
+            string[] nameList = pKey.GetSubKeyNames();
+            for (int i = 0; i < nameList.Length; i++)
+            {
+                RegistryKey regKey = pKey.OpenSubKey(nameList[i]);
+                try
+                {
+                    if (regKey.GetValue("DisplayName").ToString() == "World of Warcraft")
+                    {
+                        LOC_INPUT.Text = regKey.GetValue("InstallLocation").ToString();
+                    }
+                }
+                catch { }
+            }
             // Run our init stuff
             GetCoreInfo();
             BuildCombatRoutines();
             BuildModules();
             //TEMP DISABLED
             CORE_R_COMBO.Enabled = false;
+        }
+
+        private void CheckSelfUpdates()
+        {
+            // Read remove version
+            try
+            {
+                WebClient client = new WebClient();
+                Stream stream = client.OpenRead(remoteVer);
+                StreamReader reader = new StreamReader(stream);
+                string output = reader.ReadLine();
+                rVersion = int.Parse(output);
+            }
+            catch { }
+            // Read local version
+            try
+            {
+                if (File.Exists(exePath + "\\Version.txt"))
+                {
+                    string ouput = File.ReadAllText(exePath + "\\Version.txt");
+                    cVersion = int.Parse(ouput);
+                }
+            }
+            catch { }
+            // Are we updated?
+            if (cVersion < rVersion && !Debugger.IsAttached)
+            {
+                WriteToConsole("Found Update");
+            }
+            else
+            {
+                WriteToConsole("No Update found...");
+            }
+
+        }
+
+        private new void Update()
+        {
+            {
+                WebClient Client = new WebClient();
+                Client.DownloadFile(remoteZip, exePath + "\\NerdPack_ToolBox_Update.zip");
+            }
+
         }
 
         // Updates the core and protected
@@ -103,9 +147,16 @@ namespace WindowsFormsApplication1
         }
 
         // Launch WoW button
+        private void WriteToConsole(string text)
+        {
+            Console.Write(text + "\r\n");
+            Console.ResetColor();
+        }
+
+        // Launch WoW button
         private void LAUNCH_BT_Click(object sender, EventArgs e)
         {
-            Process.Start(GetWoWLoc() + "\\" + WoW_Launch_Combo.Text);
+            Process.Start(LOC_INPUT.Text + "\\" + WoW_Launch_Combo.Text);
         }
 
         // Install / Update Button
@@ -127,28 +178,21 @@ namespace WindowsFormsApplication1
         //check if admin
         public bool IsUserAdministrator()
         {
-            bool isAdmin;
+            bool isAdmin = false;
             try
             {
                 WindowsIdentity user = WindowsIdentity.GetCurrent();
                 WindowsPrincipal principal = new WindowsPrincipal(user);
                 isAdmin = principal.IsInRole(WindowsBuiltInRole.Administrator);
             }
-            catch (UnauthorizedAccessException)
-            {
-                isAdmin = false;
-            }
-            catch (Exception)
-            {
-                isAdmin = false;
-            }
+            catch { }
+            WriteToConsole("Admin Status: " + isAdmin);
             return isAdmin;
         }
 
         // Download
         private async void DownloadAddon(string owner, string _repo)
         {
-            AllocConsole();
             // Progress bar
             IProgress<int> progress = new Progress<int>(value => { progressBar1.Value = value; });
             await Task.Run(() =>
@@ -161,7 +205,7 @@ namespace WindowsFormsApplication1
             string name = repo.Name;
             string uri = repo.HtmlUrl;
             string fileName = name + ".zip";
-            string tPath = LOC_INPUT.Text + "\\" + name;
+            string tPath = LOC_INPUT.Text + "\\Interface\\AddOns\\" + name;
             string text = "0.0";
             try
             {
@@ -174,8 +218,7 @@ namespace WindowsFormsApplication1
                 if (!text.Contains(repo.PushedAt.ToString()))
                 {
                     Console.ForegroundColor = ConsoleColor.Blue;
-                    Console.Write("Found update for: " + name + ".\r\n");
-                    Console.ForegroundColor = ConsoleColor.White;
+                    WriteToConsole("Found update for: " + name);
                     //delete the old folder if any
                     if (Directory.Exists(tPath))
                     {
@@ -185,25 +228,24 @@ namespace WindowsFormsApplication1
                             BackUpFoler(tPath, name);
                         }
                         DeleteRecursiveFolder(tPath); ;
-                        Console.Write("Done Deleting.\r\n");
+                        WriteToConsole("Done Deleting.");
                     }
                     // Download using lib2Sharp
-                    Console.Write("Downloading\r\n");
+                    WriteToConsole("Downloading");
                     LibGit2Sharp.Repository.Clone(repo.CloneUrl, tPath);
                     // Add or version file
                     AddVersionFile(tPath, repo.PushedAt.ToString());
-                    Console.Write("Done with:" + name + "\r\n");
+                    WriteToConsole("Done with:" + name);
                 }
                 else
                 {
-                    Console.Write(name + " is already updated, skipping.\r\n");
+                    WriteToConsole(name + " is already updated, skipping.");
                 }
             }
             catch
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.Write("FAILED TO INSTALL: " + name + "\r\n");
-                Console.ForegroundColor = ConsoleColor.White;
+                WriteToConsole("FAILED TO INSTALL: " + name);
             }
         }
 
@@ -212,13 +254,13 @@ namespace WindowsFormsApplication1
             // if the version file Exists (user has one) remove it.
             if (File.Exists(pFolderPath + "//Version.txt"))
             {
-                Console.Write("Found a unwanted version file, removing it.\r\n");
+                WriteToConsole("Found a unwanted version file, removing it.");
                 File.Delete(pFolderPath + "//Version.txt");
             }
             // add a version file
             using (StreamWriter file = new StreamWriter(pFolderPath + "//Version.txt", true))
             {
-                Console.Write("Creating our version file.\r\n");
+                WriteToConsole("Creating our version file.");
                 file.WriteLine(toWrite);
             }
         }
@@ -242,7 +284,7 @@ namespace WindowsFormsApplication1
 
         private void BackUpFoler(string pFolderPath, string name)
         {
-            Console.Write("Creating a backup\r\n");
+            WriteToConsole("Creating a backup");
             string timestamp = "";
             // Build the time
             string FU = "" + DateTime.Now;
@@ -252,7 +294,7 @@ namespace WindowsFormsApplication1
             // create the backup folder if dosent exist
             if (!Directory.Exists(exePath + "\\Backups"))
             {
-                Console.Write("Didn't find a backup folder, creating one.\r\n");
+                WriteToConsole("Didn't find a backup folder, creating one.");
                 Directory.CreateDirectory(exePath + "\\Backups");
             }
             ZipFile.CreateFromDirectory(pFolderPath, exePath + "\\Backups\\" + name + " - " + timestamp + ".zip");
@@ -279,7 +321,7 @@ namespace WindowsFormsApplication1
                         var repo = await client.Repository.Get(Owner, Repo);
                         var installed = false;
                         // Check if we have it installed
-                        if (File.Exists(LOC_INPUT.Text + "\\" + repo.Name + "\\Version.txt"))
+                        if (File.Exists(LOC_INPUT.Text + "\\Interface\\AddOns\\" + repo.Name + "\\Version.txt"))
                         {
                             installed = true;
                         }
@@ -312,7 +354,7 @@ namespace WindowsFormsApplication1
                         var repo = await client.Repository.Get(Owner, Repo);
                         var installed = false;
                         // Check if we have it installed
-                        if (File.Exists(LOC_INPUT.Text + "\\" + repo.Name + "\\Version.txt"))
+                        if (File.Exists(LOC_INPUT.Text + "\\Interface\\AddOns\\" + repo.Name + "\\Version.txt"))
                         {
                             installed = true;
                         }
