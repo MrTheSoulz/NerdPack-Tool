@@ -267,9 +267,9 @@ namespace WindowsFormsApplication1
             try
             {
                 XmlDocument xdcDocument = new XmlDocument();
-                xdcDocument.Load("https://dl.dropboxusercontent.com/u/101560647/NerdPack/NeP_Updater_CRData.xml");
+                xdcDocument.Load("https://dl.dropboxusercontent.com/u/101560647/NerdPack/NeP_Toolbox.xml");
                 XmlElement xelRoot = xdcDocument.DocumentElement;
-                XmlNodeList xnlNodes = xelRoot.SelectNodes("/ArrayOfButtons/Button");
+                XmlNodeList xnlNodes = xelRoot.SelectNodes("/ToolboxData/CombatRoutines/Button");
                 foreach (XmlNode xndNode in xnlNodes)
                 {
                     string Owner = xndNode["Owner"].InnerText;
@@ -300,9 +300,9 @@ namespace WindowsFormsApplication1
             try
             {
                 XmlDocument xdcDocument = new XmlDocument();
-                xdcDocument.Load("https://dl.dropboxusercontent.com/u/101560647/NerdPack/NeP_Updater_MODData.xml");
+                xdcDocument.Load("https://dl.dropboxusercontent.com/u/101560647/NerdPack/NeP_Toolbox.xml");
                 XmlElement xelRoot = xdcDocument.DocumentElement;
-                XmlNodeList xnlNodes = xelRoot.SelectNodes("/ArrayOfButtons/Button");
+                XmlNodeList xnlNodes = xelRoot.SelectNodes("/ToolboxData/Plugins/Button");
                 foreach (XmlNode xndNode in xnlNodes)
                 {
                     string Owner = xndNode["Owner"].InnerText;
