@@ -21,8 +21,6 @@ namespace WindowsFormsApplication1
         static GitHubClient client = new GitHubClient(new ProductHeaderValue("NerdPack-Tool"), credentials);
 
         string exePath = System.Windows.Forms.Application.StartupPath;
-        int cVersion = 0;
-        int rVersion = 0;
         string remoteVer = "https://dl.dropboxusercontent.com/u/101560647/NerdPack/Version.txt";
         string remoteZip = "https://dl.dropboxusercontent.com/u/101560647/NerdPack/NerdPack_ToolBox.zip";
 
@@ -49,6 +47,17 @@ namespace WindowsFormsApplication1
             CORE_R_COMBO.SelectedItem = "Beta";
             WoW_Launch_Combo.SelectedItem = "wow-64.exe";
             // Find WoW
+            FindWoW();
+            // Run our init stuff
+            GetCoreInfo();
+            BuildCombatRoutines();
+            BuildModules();
+            //TEMP DISABLED
+            CORE_R_COMBO.Enabled = false;
+        }
+
+        private void FindWoW()
+        {
             var pKey = Registry.LocalMachine.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Uninstall");
             string[] nameList = pKey.GetSubKeyNames();
             for (int i = 0; i < nameList.Length; i++)
@@ -63,16 +72,12 @@ namespace WindowsFormsApplication1
                 }
                 catch { }
             }
-            // Run our init stuff
-            GetCoreInfo();
-            BuildCombatRoutines();
-            BuildModules();
-            //TEMP DISABLED
-            CORE_R_COMBO.Enabled = false;
         }
 
         private void CheckSelfUpdates()
         {
+            int cVersion = 0;
+            int rVersion = 0;
             // Read remove version
             try
             {
@@ -96,20 +101,16 @@ namespace WindowsFormsApplication1
             // Are we updated?
             if (cVersion < rVersion && !Debugger.IsAttached)
             {
-                WriteToConsole("Found Update");
+                WriteToConsole("Found Update, downloadig:");
+                {
+                    WebClient Client = new WebClient();
+                    Client.DownloadFile(remoteZip, exePath + "\\NerdPack_ToolBox_Update.zip");
+                }
+                Close();
             }
             else
             {
                 WriteToConsole("No Update found...");
-            }
-
-        }
-
-        private new void Update()
-        {
-            {
-                WebClient Client = new WebClient();
-                Client.DownloadFile(remoteZip, exePath + "\\NerdPack_ToolBox_Update.zip");
             }
 
         }
@@ -186,7 +187,7 @@ namespace WindowsFormsApplication1
                 isAdmin = principal.IsInRole(WindowsBuiltInRole.Administrator);
             }
             catch { }
-            WriteToConsole("Admin Status: " + isAdmin);
+            WriteToConsole("Running as Admin: " + isAdmin);
             return isAdmin;
         }
 
