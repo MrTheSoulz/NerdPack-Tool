@@ -1,9 +1,9 @@
 ﻿using System;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace NerdPackToolBox
 {
-
     static class Program
     {
         /// <summary>
@@ -16,5 +16,12 @@ namespace NerdPackToolBox
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new mainframe());
         }
+
+        // console stuff
+        [DllImport("kernel32.dll")]
+        public static extern bool AllocConsole();
+
+        [DllImport("kernel32.dll")]
+        public static extern bool FreeConsole();
     }
 }

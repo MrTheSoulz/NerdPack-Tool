@@ -65,7 +65,7 @@ namespace NerdPackToolBox
 
         public void CheckSelfUpdates()
         {
-            AllocConsole();
+            Program.AllocConsole();
             bool weAdmin = IsUserAdministrator();
             WriteToConsole("Running as Admin: " + weAdmin);
             int cVersion = 0;
@@ -106,7 +106,7 @@ namespace NerdPackToolBox
                 WriteToConsole("No Update found...");
             }
             System.Threading.Thread.Sleep(2000);
-            //FreeConsole();
+            //Program.FreeConsole();
         }
 
         // Write to console

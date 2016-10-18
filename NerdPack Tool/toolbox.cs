@@ -1,18 +1,11 @@
 ﻿using System;
 using System.Windows.Forms;
 using System.Diagnostics;
-using System.Runtime.InteropServices;
 
 namespace NerdPackToolBox
 {
     public partial class mainframe : Form
     {
-
-        // console stuff
-        [DllImport("kernel32.dll")]
-        public static extern bool AllocConsole();
-        [DllImport("kernel32.dll")]
-        public static extern bool FreeConsole();
 
         // START
         public mainframe()

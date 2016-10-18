@@ -55,7 +55,7 @@ namespace NerdPackToolBox
             async delegate (object o, DoWorkEventArgs args)
             {
                 BackgroundWorker b = o as BackgroundWorker;
-                b.ReportProgress(100);
+                b.ReportProgress(0);
                 // get repo info
                 var repo = await client.Repository.Get(owner, _repo);
                 string name = repo.Name;
@@ -91,18 +91,13 @@ namespace NerdPackToolBox
                         WriteToFile(tPath + "//Version.txt", repo.PushedAt.ToString());
                         WriteToConsole("Done with:" + name);
                     }
-                }
-                catch
-                {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    WriteToConsole("FAILED TO INSTALL: " + name);
-                }
-            });
+                    else
+                    {
+                        WriteToConsole(name + " Is Up-to-date!");
+                    }
 
-            bw.ProgressChanged += new ProgressChangedEventHandler(
-            delegate (object o, ProgressChangedEventArgs args)
-            {
-                progressBar1.Value = args.ProgressPercentage;
+                }
+                catch { }
             });
             bw.RunWorkerAsync();
         }
