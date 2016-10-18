@@ -47,6 +47,14 @@
             this.PROTECTED_CHECK = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.CORE_R_COMBO = new System.Windows.Forms.ComboBox();
+            this.CR_Tab = new System.Windows.Forms.TabPage();
+            this.CR_DATA = new System.Windows.Forms.DataGridView();
+            this.CheckBox = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.Addon = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Description = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Starts = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.OWNER = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.REPO = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MODULES_TAB = new System.Windows.Forms.TabPage();
             this.MOD_DATA = new System.Windows.Forms.DataGridView();
             this.dataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
@@ -65,27 +73,19 @@
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.INSTALL_BT = new System.Windows.Forms.Button();
             this.REFRESH_BT = new System.Windows.Forms.Button();
-            this.CR_Tab = new System.Windows.Forms.TabPage();
-            this.REPO = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.OWNER = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Starts = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Description = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Addon = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CheckBox = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.CR_DATA = new System.Windows.Forms.DataGridView();
             this.tabControl1.SuspendLayout();
             this.CORE_TAB.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            this.CR_Tab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.CR_DATA)).BeginInit();
             this.MODULES_TAB.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MOD_DATA)).BeginInit();
             this.SETTINGS_TAB.SuspendLayout();
             this.groupBox7.SuspendLayout();
             this.groupBox5.SuspendLayout();
-            this.CR_Tab.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.CR_DATA)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -276,6 +276,77 @@
             this.CORE_R_COMBO.Size = new System.Drawing.Size(128, 21);
             this.CORE_R_COMBO.TabIndex = 0;
             // 
+            // CR_Tab
+            // 
+            this.CR_Tab.Controls.Add(this.CR_DATA);
+            this.CR_Tab.Location = new System.Drawing.Point(4, 22);
+            this.CR_Tab.Margin = new System.Windows.Forms.Padding(0);
+            this.CR_Tab.Name = "CR_Tab";
+            this.CR_Tab.Size = new System.Drawing.Size(792, 335);
+            this.CR_Tab.TabIndex = 1;
+            this.CR_Tab.Text = "Combat Routines";
+            this.CR_Tab.UseVisualStyleBackColor = true;
+            // 
+            // CR_DATA
+            // 
+            this.CR_DATA.AllowUserToAddRows = false;
+            this.CR_DATA.AllowUserToDeleteRows = false;
+            this.CR_DATA.AllowUserToResizeColumns = false;
+            this.CR_DATA.AllowUserToResizeRows = false;
+            this.CR_DATA.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.CR_DATA.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.CR_DATA.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.CheckBox,
+            this.Addon,
+            this.Description,
+            this.Starts,
+            this.OWNER,
+            this.REPO});
+            this.CR_DATA.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.CR_DATA.Location = new System.Drawing.Point(0, 0);
+            this.CR_DATA.Name = "CR_DATA";
+            this.CR_DATA.RowHeadersVisible = false;
+            this.CR_DATA.Size = new System.Drawing.Size(792, 335);
+            this.CR_DATA.TabIndex = 0;
+            // 
+            // CheckBox
+            // 
+            this.CheckBox.HeaderText = "X";
+            this.CheckBox.Name = "CheckBox";
+            this.CheckBox.Width = 25;
+            // 
+            // Addon
+            // 
+            this.Addon.HeaderText = "Addon";
+            this.Addon.Name = "Addon";
+            this.Addon.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Addon.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Addon.Width = 200;
+            // 
+            // Description
+            // 
+            this.Description.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Description.HeaderText = "Description";
+            this.Description.Name = "Description";
+            // 
+            // Starts
+            // 
+            this.Starts.HeaderText = "Stars";
+            this.Starts.Name = "Starts";
+            this.Starts.Width = 50;
+            // 
+            // OWNER
+            // 
+            this.OWNER.HeaderText = "OWNER";
+            this.OWNER.Name = "OWNER";
+            this.OWNER.Visible = false;
+            // 
+            // REPO
+            // 
+            this.REPO.HeaderText = "REPO";
+            this.REPO.Name = "REPO";
+            this.REPO.Visible = false;
+            // 
             // MODULES_TAB
             // 
             this.MODULES_TAB.Controls.Add(this.MOD_DATA);
@@ -447,77 +518,6 @@
             this.REFRESH_BT.UseVisualStyleBackColor = true;
             this.REFRESH_BT.Click += new System.EventHandler(this.REFRESH_BT_Click);
             // 
-            // CR_Tab
-            // 
-            this.CR_Tab.Controls.Add(this.CR_DATA);
-            this.CR_Tab.Location = new System.Drawing.Point(4, 22);
-            this.CR_Tab.Margin = new System.Windows.Forms.Padding(0, 0, 0, 0);
-            this.CR_Tab.Name = "CR_Tab";
-            this.CR_Tab.Size = new System.Drawing.Size(792, 335);
-            this.CR_Tab.TabIndex = 1;
-            this.CR_Tab.Text = "Combat Routines";
-            this.CR_Tab.UseVisualStyleBackColor = true;
-            // 
-            // REPO
-            // 
-            this.REPO.HeaderText = "REPO";
-            this.REPO.Name = "REPO";
-            this.REPO.Visible = false;
-            // 
-            // OWNER
-            // 
-            this.OWNER.HeaderText = "OWNER";
-            this.OWNER.Name = "OWNER";
-            this.OWNER.Visible = false;
-            // 
-            // Starts
-            // 
-            this.Starts.HeaderText = "Stars";
-            this.Starts.Name = "Starts";
-            this.Starts.Width = 50;
-            // 
-            // Description
-            // 
-            this.Description.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Description.HeaderText = "Description";
-            this.Description.Name = "Description";
-            // 
-            // Addon
-            // 
-            this.Addon.HeaderText = "Addon";
-            this.Addon.Name = "Addon";
-            this.Addon.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Addon.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Addon.Width = 200;
-            // 
-            // CheckBox
-            // 
-            this.CheckBox.HeaderText = "X";
-            this.CheckBox.Name = "CheckBox";
-            this.CheckBox.Width = 25;
-            // 
-            // CR_DATA
-            // 
-            this.CR_DATA.AllowUserToAddRows = false;
-            this.CR_DATA.AllowUserToDeleteRows = false;
-            this.CR_DATA.AllowUserToResizeColumns = false;
-            this.CR_DATA.AllowUserToResizeRows = false;
-            this.CR_DATA.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            this.CR_DATA.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.CR_DATA.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.CheckBox,
-            this.Addon,
-            this.Description,
-            this.Starts,
-            this.OWNER,
-            this.REPO});
-            this.CR_DATA.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.CR_DATA.Location = new System.Drawing.Point(0, 0);
-            this.CR_DATA.Name = "CR_DATA";
-            this.CR_DATA.RowHeadersVisible = false;
-            this.CR_DATA.Size = new System.Drawing.Size(792, 335);
-            this.CR_DATA.TabIndex = 0;
-            // 
             // mainframe
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -541,6 +541,8 @@
             this.groupBox1.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
+            this.CR_Tab.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.CR_DATA)).EndInit();
             this.MODULES_TAB.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.MOD_DATA)).EndInit();
             this.SETTINGS_TAB.ResumeLayout(false);
@@ -548,8 +550,6 @@
             this.groupBox7.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
-            this.CR_Tab.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.CR_DATA)).EndInit();
             this.ResumeLayout(false);
 
         }

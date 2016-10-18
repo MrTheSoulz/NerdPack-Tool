@@ -11,6 +11,8 @@ using System.IO.Compression;
 using System.Xml;
 using System.Runtime.InteropServices;
 using System.Net;
+using System.ComponentModel;
+using System.Threading;
 
 namespace WindowsFormsApplication1
 {
@@ -57,7 +59,7 @@ namespace WindowsFormsApplication1
 
         private void FindWoW()
         {
-            var pKey = Registry.LocalMachine.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Uninstall");
+            var pKey = Registry.LocalMachine.OpenSubKey(@"Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall");
             string[] nameList = pKey.GetSubKeyNames();
             for (int i = 0; i < nameList.Length; i++)
             {
@@ -166,6 +168,7 @@ namespace WindowsFormsApplication1
         // Install / Update Button
         private void INSTALL_BT_Click(object sender, EventArgs e)
         {
+
             // Core
             DownloadAddon("MrTheSoulz", "NerdPack");
             // Protected
@@ -193,6 +196,7 @@ namespace WindowsFormsApplication1
                     DownloadAddon(owner, repo);
                 }
             }
+
         }
 
         //Refresh Button (Refresh data)
@@ -218,62 +222,64 @@ namespace WindowsFormsApplication1
         }
 
         // Download
-        private async void DownloadAddon(string owner, string _repo)
+        private void DownloadAddon(string owner, string _repo)
         {
-            // Progress bar
-            IProgress<int> progress = new Progress<int>(value => { progressBar1.Value = value; });
-            await Task.Run(() =>
+            BackgroundWorker bw = new BackgroundWorker();
+            bw.WorkerReportsProgress = true;
+            bw.DoWork += new DoWorkEventHandler(
+            async delegate (object o, DoWorkEventArgs args)
             {
-                for (int i = 0; i <= 100; i++)
-                    progress.Report(i);
-            });
-            // get repo info
-            var repo = await client.Repository.Get(owner, _repo);
-            string name = repo.Name;
-            string uri = repo.HtmlUrl;
-            string fileName = name + ".zip";
-            string tPath = LOC_INPUT.Text + "\\Interface\\AddOns\\" + name;
-            string text = "0.0";
-            try
-            {
-                // check if we need to update
-                if (File.Exists(tPath + "\\Version.txt"))
+                BackgroundWorker b = o as BackgroundWorker;
+                b.ReportProgress(100);
+                // get repo info
+                var repo = await client.Repository.Get(owner, _repo);
+                string name = repo.Name;
+                string uri = repo.HtmlUrl;
+                string fileName = name + ".zip";
+                string tPath = LOC_INPUT.Text + "\\Interface\\AddOns\\" + name;
+                string text = "0.0";
+                try
                 {
-                    text = File.ReadAllText(tPath + "\\Version.txt");
-                }
-                // Update IF needed
-                if (!text.Contains(repo.PushedAt.ToString()))
-                {
-                    Console.ForegroundColor = ConsoleColor.Blue;
-                    WriteToConsole("Found update for: " + name);
-                    //delete the old folder if any
-                    if (Directory.Exists(tPath))
+                    // check if we need to update
+                    if (File.Exists(tPath + "\\Version.txt"))
                     {
-                        // make a backup
-                        if (BACKUPS_CHECK.Checked)
-                        {
-                            BackUpFolder(tPath, name);
-                        }
-                        DeleteRecursiveFolder(tPath); ;
-                        WriteToConsole("Done Deleting.");
+                        text = File.ReadAllText(tPath + "\\Version.txt");
                     }
-                    // Download using lib2Sharp
-                    WriteToConsole("Downloading");
-                    LibGit2Sharp.Repository.Clone(repo.CloneUrl, tPath);
-                    // Add or version file
-                    AddVersionFile(tPath, repo.PushedAt.ToString());
-                    WriteToConsole("Done with:" + name);
+                    // Update IF needed
+                    if (!text.Contains(repo.PushedAt.ToString()))
+                    {
+                        Console.ForegroundColor = ConsoleColor.Blue;
+                        WriteToConsole("Found update for: " + name);
+                        //delete the old folder if any
+                        if (Directory.Exists(tPath))
+                        {
+                            // make a backup
+                            if (BACKUPS_CHECK.Checked)
+                            {
+                                BackUpFolder(tPath, name);
+                            }
+                            DeleteRecursiveFolder(tPath); ;
+                        }
+                        // Download using lib2Sharp
+                        LibGit2Sharp.Repository.Clone(repo.CloneUrl, tPath);
+                        // Add or version file
+                        AddVersionFile(tPath, repo.PushedAt.ToString());
+                        WriteToConsole("Done with:" + name);
+                    }
                 }
-                else
+                catch
                 {
-                    WriteToConsole(name + " is already updated, skipping.");
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    WriteToConsole("FAILED TO INSTALL: " + name);
                 }
-            }
-            catch
+            });
+
+            bw.ProgressChanged += new ProgressChangedEventHandler(
+            delegate (object o, ProgressChangedEventArgs args)
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                WriteToConsole("FAILED TO INSTALL: " + name);
-            }
+                progressBar1.Value = args.ProgressPercentage;
+            });
+            bw.RunWorkerAsync();
         }
 
         private void AddVersionFile(string pFolderPath, string toWrite)
@@ -281,13 +287,11 @@ namespace WindowsFormsApplication1
             // if the version file Exists (user has one) remove it.
             if (File.Exists(pFolderPath + "//Version.txt"))
             {
-                WriteToConsole("Found a unwanted version file, removing it.");
                 File.Delete(pFolderPath + "//Version.txt");
             }
             // add a version file
             using (StreamWriter file = new StreamWriter(pFolderPath + "//Version.txt", true))
             {
-                WriteToConsole("Creating our version file.");
                 file.WriteLine(toWrite);
             }
         }
@@ -311,7 +315,6 @@ namespace WindowsFormsApplication1
 
         private void BackUpFolder(string pFolderPath, string name)
         {
-            WriteToConsole("Creating a backup");
             string timestamp = "";
             // Build the time
             string FU = "" + DateTime.Now;
@@ -321,7 +324,6 @@ namespace WindowsFormsApplication1
             // create the backup folder if dosent exist
             if (!Directory.Exists(exePath + "\\Backups"))
             {
-                WriteToConsole("Didn't find a backup folder, creating one.");
                 Directory.CreateDirectory(exePath + "\\Backups");
             }
             ZipFile.CreateFromDirectory(pFolderPath, exePath + "\\Backups\\" + name + " - " + timestamp + ".zip");
