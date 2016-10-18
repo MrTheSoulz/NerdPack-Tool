@@ -136,16 +136,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="mainframe.cs">
+    <Compile Include="AddonUpdater.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="mainframe.Designer.cs">
-      <DependentUpon>mainframe.cs</DependentUpon>
+    <Compile Include="tools.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="toolbox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="toolbox.Designer.cs">
+      <DependentUpon>toolbox.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="mainframe.resx">
-      <DependentUpon>mainframe.cs</DependentUpon>
+    <EmbeddedResource Include="toolbox.resx">
+      <DependentUpon>toolbox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

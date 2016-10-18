@@ -1,6 +1,6 @@
-﻿namespace WindowsFormsApplication1
+﻿namespace NerdPackToolBox
 {
-    partial class mainframe
+    public partial class mainframe
     {
         /// <summary>
         /// Required designer variable.
@@ -556,50 +556,50 @@
 
         #endregion
 
-        private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage CORE_TAB;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.TextBox LOC_INPUT;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.CheckBox PROTECTED_CHECK;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox CORE_R_COMBO;
-        private System.Windows.Forms.ProgressBar progressBar1;
-        private System.Windows.Forms.Button INSTALL_BT;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.Button LAUNCH_WOW32;
-        private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox FORKS_TEXT;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox UPDATED_TEXT;
-        private System.Windows.Forms.TextBox STARS_TEXT;
-        private System.Windows.Forms.Button GIT_BT;
-        private System.Windows.Forms.Button REFRESH_BT;
-        private System.Windows.Forms.TabPage SETTINGS_TAB;
-        private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.CheckBox BACKUPS_CHECK;
-        private System.Windows.Forms.TabPage MODULES_TAB;
-        private System.Windows.Forms.DataGridView MOD_DATA;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn dataGridViewCheckBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
-        private System.Windows.Forms.GroupBox groupBox7;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.ComboBox WoW_Launch_Combo;
-        private System.Windows.Forms.GroupBox groupBox6;
-        private System.Windows.Forms.TabPage CR_Tab;
-        private System.Windows.Forms.DataGridView CR_DATA;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn CheckBox;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Addon;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Description;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Starts;
-        private System.Windows.Forms.DataGridViewTextBoxColumn OWNER;
-        private System.Windows.Forms.DataGridViewTextBoxColumn REPO;
+        public System.Windows.Forms.TabControl tabControl1;
+        public System.Windows.Forms.TabPage CORE_TAB;
+        public System.Windows.Forms.GroupBox groupBox2;
+        public System.Windows.Forms.TextBox LOC_INPUT;
+        public System.Windows.Forms.GroupBox groupBox1;
+        public System.Windows.Forms.CheckBox PROTECTED_CHECK;
+        public System.Windows.Forms.Label label1;
+        public System.Windows.Forms.ComboBox CORE_R_COMBO;
+        public System.Windows.Forms.ProgressBar progressBar1;
+        public System.Windows.Forms.Button INSTALL_BT;
+        public System.Windows.Forms.GroupBox groupBox3;
+        public System.Windows.Forms.Button LAUNCH_WOW32;
+        public System.Windows.Forms.GroupBox groupBox4;
+        public System.Windows.Forms.Label label4;
+        public System.Windows.Forms.Label label3;
+        public System.Windows.Forms.TextBox FORKS_TEXT;
+        public System.Windows.Forms.Label label2;
+        public System.Windows.Forms.TextBox UPDATED_TEXT;
+        public System.Windows.Forms.TextBox STARS_TEXT;
+        public System.Windows.Forms.Button GIT_BT;
+        public System.Windows.Forms.Button REFRESH_BT;
+        public System.Windows.Forms.TabPage SETTINGS_TAB;
+        public System.Windows.Forms.GroupBox groupBox5;
+        public System.Windows.Forms.CheckBox BACKUPS_CHECK;
+        public System.Windows.Forms.TabPage MODULES_TAB;
+        public System.Windows.Forms.DataGridView MOD_DATA;
+        public System.Windows.Forms.DataGridViewCheckBoxColumn dataGridViewCheckBoxColumn1;
+        public System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        public System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        public System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        public System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        public System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+        public System.Windows.Forms.GroupBox groupBox7;
+        public System.Windows.Forms.Label label5;
+        public System.Windows.Forms.ComboBox WoW_Launch_Combo;
+        public System.Windows.Forms.GroupBox groupBox6;
+        public System.Windows.Forms.TabPage CR_Tab;
+        public System.Windows.Forms.DataGridView CR_DATA;
+        public System.Windows.Forms.DataGridViewCheckBoxColumn CheckBox;
+        public System.Windows.Forms.DataGridViewTextBoxColumn Addon;
+        public System.Windows.Forms.DataGridViewTextBoxColumn Description;
+        public System.Windows.Forms.DataGridViewTextBoxColumn Starts;
+        public System.Windows.Forms.DataGridViewTextBoxColumn OWNER;
+        public System.Windows.Forms.DataGridViewTextBoxColumn REPO;
     }
 }
 
