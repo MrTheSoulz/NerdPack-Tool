@@ -135,7 +135,8 @@ namespace NerdPackToolBox
             try
             {
                 XmlDocument xdcDocument = new XmlDocument();
-                xdcDocument.Load("https://dl.dropboxusercontent.com/u/101560647/NerdPack/NeP_Toolbox.xml");
+                xdcDocument.Load(RemoteData); //found in tools.cs
+                //Routines
                 XmlElement xelRoot = xdcDocument.DocumentElement;
                 XmlNodeList xnlNodes = xelRoot.SelectNodes("/ToolboxData/CombatRoutines/Button");
                 foreach (XmlNode xndNode in xnlNodes)
@@ -152,6 +153,7 @@ namespace NerdPackToolBox
                     }
                     CR_DATA.Rows.Add(installed, repo.Name, repo.Description, repo.StargazersCount, Owner, Repo);
                 }
+                // Modules
                 XmlElement xelRoot2 = xdcDocument.DocumentElement;
                 XmlNodeList xnlNodes2 = xelRoot2.SelectNodes("/ToolboxData/Plugins/Button");
                 foreach (XmlNode xndNode in xnlNodes2)
