@@ -16,6 +16,7 @@ namespace NerdPackToolBox
         string remoteVer = "http://nerdpackaddon.site/MTS/Version.txt";
         string remoteZip = "http://nerdpackaddon.site/MTS/NerdPack_ToolBox.zip";
         string RemoteData = "http://nerdpackaddon.site/MTS/NeP_Toolbox.xml";
+        int CurrentVersion = 16;
 
         public void WriteToFile(string pFolderPath, string toWrite)
         {
@@ -69,7 +70,8 @@ namespace NerdPackToolBox
             Program.AllocConsole();
             bool weAdmin = IsUserAdministrator();
             WriteToConsole("Running as Admin: " + weAdmin);
-            int cVersion = 0;
+            bool debugger = Debugger.IsAttached;
+            WriteToConsole("Attached debugger: " + debugger);
             int rVersion = 0;
             // Read remove version
             try
@@ -81,24 +83,17 @@ namespace NerdPackToolBox
                 rVersion = int.Parse(output);
             }
             catch { }
-            // Read local version
-            try
-            {
-                if (File.Exists(exePath + "\\Version.txt"))
-                {
-                    string ouput = File.ReadAllText(exePath + "\\Version.txt");
-                    cVersion = int.Parse(ouput);
-                }
-            }
-            catch { }
             // Are we updated?
-            if (cVersion < rVersion && !Debugger.IsAttached)
+            if (CurrentVersion < rVersion && !debugger)
             {
-                WriteToConsole("Found Update, downloadig:");
+                WriteToConsole("Found Update (" + rVersion + "), downloadig:");
                 {
                     WebClient Client = new WebClient();
                     Client.DownloadFile(remoteZip, exePath + "\\NerdPack_ToolBox_Update.zip");
                 }
+                WriteToConsole("This will now close, extras:");
+                WriteToConsole(exePath + "\\NerdPack_ToolBox_Update.zip");
+                WriteToConsole("Closing in 5 seconds...");
                 System.Threading.Thread.Sleep(5000);
                 ExitTool();
             }
@@ -107,7 +102,7 @@ namespace NerdPackToolBox
                 WriteToConsole("No Update found...");
             }
             System.Threading.Thread.Sleep(2000);
-            //Program.FreeConsole();
+            Program.FreeConsole();
         }
 
         // Write to console
@@ -115,6 +110,13 @@ namespace NerdPackToolBox
         {
             Console.Write(text + "\r\n");
             Console.ResetColor();
+        }
+
+        // Write to console
+        public void WriteToLog(string text)
+        {
+            LOG_DATA.Rows.Add(text);
+            LOG_DATA.Refresh();
         }
 
         //check if admin

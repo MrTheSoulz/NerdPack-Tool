@@ -49,6 +49,12 @@
             this.CORE_R_COMBO = new System.Windows.Forms.ComboBox();
             this.CR_Tab = new System.Windows.Forms.TabPage();
             this.CR_DATA = new System.Windows.Forms.DataGridView();
+            this.CheckBox = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.Addon = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Description = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Starts = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.OWNER = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.REPO = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MODULES_TAB = new System.Windows.Forms.TabPage();
             this.MOD_DATA = new System.Windows.Forms.DataGridView();
             this.dataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
@@ -64,15 +70,12 @@
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.BACKUPS_CHECK = new System.Windows.Forms.CheckBox();
+            this.LOGTAB = new System.Windows.Forms.TabPage();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.INSTALL_BT = new System.Windows.Forms.Button();
             this.REFRESH_BT = new System.Windows.Forms.Button();
-            this.CheckBox = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.Addon = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Description = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Starts = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.OWNER = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.REPO = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LOG_DATA = new System.Windows.Forms.DataGridView();
+            this.DATA = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.CORE_TAB.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -86,6 +89,8 @@
             this.SETTINGS_TAB.SuspendLayout();
             this.groupBox7.SuspendLayout();
             this.groupBox5.SuspendLayout();
+            this.LOGTAB.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.LOG_DATA)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -94,6 +99,7 @@
             this.tabControl1.Controls.Add(this.CR_Tab);
             this.tabControl1.Controls.Add(this.MODULES_TAB);
             this.tabControl1.Controls.Add(this.SETTINGS_TAB);
+            this.tabControl1.Controls.Add(this.LOGTAB);
             this.tabControl1.Location = new System.Drawing.Point(0, 3);
             this.tabControl1.Margin = new System.Windows.Forms.Padding(0);
             this.tabControl1.Name = "tabControl1";
@@ -309,6 +315,44 @@
             this.CR_DATA.Size = new System.Drawing.Size(792, 335);
             this.CR_DATA.TabIndex = 0;
             // 
+            // CheckBox
+            // 
+            this.CheckBox.HeaderText = "X";
+            this.CheckBox.Name = "CheckBox";
+            this.CheckBox.Width = 25;
+            // 
+            // Addon
+            // 
+            this.Addon.HeaderText = "Addon";
+            this.Addon.Name = "Addon";
+            this.Addon.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Addon.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Addon.Width = 200;
+            // 
+            // Description
+            // 
+            this.Description.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Description.HeaderText = "Description";
+            this.Description.Name = "Description";
+            // 
+            // Starts
+            // 
+            this.Starts.HeaderText = "Stars";
+            this.Starts.Name = "Starts";
+            this.Starts.Width = 50;
+            // 
+            // OWNER
+            // 
+            this.OWNER.HeaderText = "OWNER";
+            this.OWNER.Name = "OWNER";
+            this.OWNER.Visible = false;
+            // 
+            // REPO
+            // 
+            this.REPO.HeaderText = "REPO";
+            this.REPO.Name = "REPO";
+            this.REPO.Visible = false;
+            // 
             // MODULES_TAB
             // 
             this.MODULES_TAB.Controls.Add(this.MOD_DATA);
@@ -451,11 +495,22 @@
             this.BACKUPS_CHECK.Text = "Create Backups";
             this.BACKUPS_CHECK.UseVisualStyleBackColor = true;
             // 
+            // LOGTAB
+            // 
+            this.LOGTAB.Controls.Add(this.LOG_DATA);
+            this.LOGTAB.Location = new System.Drawing.Point(4, 22);
+            this.LOGTAB.Name = "LOGTAB";
+            this.LOGTAB.Size = new System.Drawing.Size(792, 335);
+            this.LOGTAB.TabIndex = 5;
+            this.LOGTAB.Text = "Log";
+            this.LOGTAB.UseVisualStyleBackColor = true;
+            // 
             // progressBar1
             // 
+            this.progressBar1.ForeColor = System.Drawing.Color.RoyalBlue;
             this.progressBar1.Location = new System.Drawing.Point(0, 370);
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(610, 23);
+            this.progressBar1.Size = new System.Drawing.Size(609, 25);
             this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
             this.progressBar1.TabIndex = 1;
             // 
@@ -480,43 +535,40 @@
             this.REFRESH_BT.UseVisualStyleBackColor = true;
             this.REFRESH_BT.Click += new System.EventHandler(this.REFRESH_BT_Click);
             // 
-            // CheckBox
+            // LOG_DATA
             // 
-            this.CheckBox.HeaderText = "X";
-            this.CheckBox.Name = "CheckBox";
-            this.CheckBox.Width = 25;
+            this.LOG_DATA.AllowUserToAddRows = false;
+            this.LOG_DATA.AllowUserToDeleteRows = false;
+            this.LOG_DATA.AllowUserToResizeColumns = false;
+            this.LOG_DATA.AllowUserToResizeRows = false;
+            this.LOG_DATA.BackgroundColor = System.Drawing.Color.Black;
+            this.LOG_DATA.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.LOG_DATA.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.LOG_DATA.ColumnHeadersVisible = false;
+            this.LOG_DATA.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.DATA});
+            this.LOG_DATA.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LOG_DATA.EnableHeadersVisualStyles = false;
+            this.LOG_DATA.GridColor = System.Drawing.Color.Black;
+            this.LOG_DATA.Location = new System.Drawing.Point(0, 0);
+            this.LOG_DATA.MultiSelect = false;
+            this.LOG_DATA.Name = "LOG_DATA";
+            this.LOG_DATA.ReadOnly = true;
+            this.LOG_DATA.RowHeadersVisible = false;
+            this.LOG_DATA.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.LOG_DATA.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.LOG_DATA.ShowCellToolTips = false;
+            this.LOG_DATA.ShowEditingIcon = false;
+            this.LOG_DATA.Size = new System.Drawing.Size(792, 335);
+            this.LOG_DATA.TabIndex = 1;
+            this.LOG_DATA.TabStop = false;
             // 
-            // Addon
+            // DATA
             // 
-            this.Addon.HeaderText = "Addon";
-            this.Addon.Name = "Addon";
-            this.Addon.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Addon.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Addon.Width = 200;
-            // 
-            // Description
-            // 
-            this.Description.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Description.HeaderText = "Description";
-            this.Description.Name = "Description";
-            // 
-            // Starts
-            // 
-            this.Starts.HeaderText = "Stars";
-            this.Starts.Name = "Starts";
-            this.Starts.Width = 50;
-            // 
-            // OWNER
-            // 
-            this.OWNER.HeaderText = "OWNER";
-            this.OWNER.Name = "OWNER";
-            this.OWNER.Visible = false;
-            // 
-            // REPO
-            // 
-            this.REPO.HeaderText = "REPO";
-            this.REPO.Name = "REPO";
-            this.REPO.Visible = false;
+            this.DATA.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.DATA.HeaderText = "Description";
+            this.DATA.Name = "DATA";
+            this.DATA.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
             // mainframe
             // 
@@ -550,6 +602,8 @@
             this.groupBox7.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
+            this.LOGTAB.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.LOG_DATA)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -600,6 +654,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Starts;
         private System.Windows.Forms.DataGridViewTextBoxColumn OWNER;
         private System.Windows.Forms.DataGridViewTextBoxColumn REPO;
+        private System.Windows.Forms.TabPage LOGTAB;
+        public System.Windows.Forms.DataGridView LOG_DATA;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DATA;
     }
 }
 

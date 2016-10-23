@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using System.Diagnostics;
+using System.Drawing;
 
 namespace NerdPackToolBox
 {
@@ -27,6 +28,9 @@ namespace NerdPackToolBox
             BuildToolData();
             //TEMP DISABLED
             CORE_R_COMBO.Enabled = false;
+
+            LOG_DATA.Columns["DATA"].DefaultCellStyle.ForeColor = Color.WhiteSmoke;
+            LOG_DATA.Columns["DATA"].DefaultCellStyle.BackColor = Color.Black;
         }
 
         // Launch WoW button
@@ -38,7 +42,10 @@ namespace NerdPackToolBox
         // Install / Update Button
         private void INSTALL_BT_Click(object sender, EventArgs e)
         {
-            
+            tabControl1.SelectTab("LOGTAB");
+            LOG_DATA.Rows.Clear();
+            LOG_DATA.Refresh();
+            LOG_DATA.Enabled = true;
             UpdateAddons();
         }
 
