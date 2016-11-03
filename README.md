@@ -1,2 +1,0 @@
-# NerdPack-Tool
-FUCK THIS, I DO IT LATER
