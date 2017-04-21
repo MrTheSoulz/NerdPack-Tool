@@ -13,6 +13,18 @@
       <Owner>X-Xeer-X</Owner>
       <Repo>NerdPack-Xeer</Repo>
     </Button>
+    <Button>
+      <Owner>modhunter</Owner>
+      <Repo>NerdPack-NoC</Repo>
+    </Button>
+    <Button>
+      <Owner>DarkNemie</Owner>
+      <Repo>NerdPack-DarkN-CR</Repo>
+    </Button>
+    <Button>
+      <Owner>TripRoutines</Owner>
+      <Repo>NerdPack-Trip</Repo>
+    </Button>
   </CombatRoutines>
   <Plugins>
     <Button>
