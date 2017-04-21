@@ -25,6 +25,10 @@
       <Owner>DarkNemie</Owner>
       <Repo>NerdPack-DarkN-CR</Repo>
     </Button>
+    <Button>
+      <Owner>GabbzGit</Owner>
+      <Repo>Gabbz-Combat-Rotation</Repo>
+    </Button>
   </CombatRoutines>
   <Plugins>
     <Button>
@@ -37,11 +41,15 @@
     </Button>
     <Button>
       <Owner>MrTheSoulz</Owner>
-      <Repo>NerdPack-CombarHelper</Repo>
+      <Repo>NerdPack-CombatHelper</Repo>
     </Button>
     <Button>
       <Owner>MrTheSoulz</Owner>
       <Repo>NerdPack-LocaleSpells</Repo>
+    </Button>
+    <Button>
+      <Owner>MrTheSoulz</Owner>
+      <Repo>NerdPack-PB</Repo>
     </Button>
   </Plugins>
 </ToolboxData>
