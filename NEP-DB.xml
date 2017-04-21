@@ -29,6 +29,22 @@
       <Owner>GabbzGit</Owner>
       <Repo>Gabbz-Combat-Rotation</Repo>
     </Button>
+    <Button>
+      <Owner>Rabalaba</Owner>
+      <Repo>NerdPack-Rabbs</Repo>
+    </Button>
+    <Button>
+      <Owner>Yobleed</Owner>
+      <Repo>NerdPack-Yobleed</Repo>
+    </Button>
+    <Button>
+      <Owner>silver9172</Owner>
+      <Repo>NerdPack-Silver</Repo>
+    </Button>
+    <Button>
+      <Owner>adde88</Owner>
+      <Repo>NerdPack-Zylla</Repo>
+    </Button>
   </CombatRoutines>
   <Plugins>
     <Button>
