@@ -1,3 +1,4 @@
+
 <?xml version="1.0" encoding="UTF-8"?>
 <ToolboxData>
   <CombatRoutines>
@@ -16,6 +17,10 @@
     <Button>
       <Owner>TripRoutines</Owner>
       <Repo>NerdPack-Trip</Repo>
+    </Button>
+    <Button>
+      <Owner>DarkNemie</Owner>
+      <Repo>NerdPack-DarkN-CR</Repo>
     </Button>
   </CombatRoutines>
   <Plugins>
