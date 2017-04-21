@@ -1,4 +1,3 @@
-
 <?xml version="1.0" encoding="UTF-8"?>
 <ToolboxData>
   <CombatRoutines>
@@ -13,6 +12,10 @@
     <Button>
       <Owner>X-Xeer-X</Owner>
       <Repo>NerdPack-Xeer</Repo>
+    </Button>
+    <Button>
+      <Owner>modhunter</Owner>
+      <Repo>NerdPack-NoC</Repo>
     </Button>
     <Button>
       <Owner>TripRoutines</Owner>
