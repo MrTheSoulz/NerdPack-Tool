@@ -53,53 +53,41 @@ namespace NerdPackToolBox
         public async void DownloadAddon(string owner, string _repo)
         {
             tcount = tcount + 1;
-            IProgress<int> progress = new Progress<int>(value => { progressBar1.Increment(value/tcount); });
-            await Task.Run(async () =>
-            {
-                for (int i = 0; i <= 100; i++)
-                    progress.Report(i);
-
-                // get repo info
                 var repo = await client.Repository.Get(owner, _repo);
                 string name = repo.Name;
                 string uri = repo.HtmlUrl;
                 string fileName = name + ".zip";
                 string tPath = LOC_INPUT.Text + "\\Interface\\AddOns\\" + name;
                 string text = "0.0";
-                //try
-                // {
-                // check if we need to update
-                if (File.Exists(tPath + "\\Version.txt"))
-                {
-                    text = File.ReadAllText(tPath + "\\Version.txt");
-                }
-                // Update IF needed
-                //if (!text.Contains(repo.PushedAt.ToString()))
-                // {
-                //WriteToLog("Found update for: " + name);
-                //delete the old folder if any
-                if (Directory.Exists(tPath))
-                {
-                    // make a backup
-                    if (BACKUPS_CHECK.Checked)
+                try
+                     {
+                    // check if we need to update
+                    if (File.Exists(tPath + "\\Version.txt"))
                     {
-                        BackUpFolder(tPath, name);
+                        text = File.ReadAllText(tPath + "\\Version.txt");
                     }
-                    DeleteRecursiveFolder(tPath); ;
-                }
-                // Download using lib2Sharp
-                LibGit2Sharp.Repository.Clone(repo.CloneUrl, tPath);
-                // Add or version file
-                WriteToFile(tPath + "//Version.txt", repo.PushedAt.ToString());
-                //WriteToLog("Done with:" + name);
-                //}
-                //else
-                //{
-                //WriteToLog(name + " Is Up-to-date!");
-                //}
-                //}
-                //catch { WriteToLog("Error while " + name); }
-            });
+                    // Update IF needed
+                    if (!text.Contains(repo.PushedAt.ToString())) {
+                        WriteToLog("Found update for: " + name);
+                        //delete the old folder if any
+                        if (Directory.Exists(tPath))
+                        {
+                            // make a backup
+                            if (BACKUPS_CHECK.Checked)
+                            {
+                                BackUpFolder(tPath, name);
+                            }
+                            DeleteRecursiveFolder(tPath); ;
+                        }
+                        // Download using lib2Sharp
+                        LibGit2Sharp.Repository.Clone(repo.CloneUrl, tPath);
+                        // Add or version file
+                        WriteToFile(tPath + "//Version.txt", repo.PushedAt.ToString());
+                        WriteToLog("Done with:" + name);
+                } else {
+                        WriteToLog(name + " Is Up-to-date!");
+                    }
+                } catch { WriteToLog("Error while " + name); }
         }
 
         //Build Core Info

@@ -13,9 +13,9 @@ namespace NerdPackToolBox
     {
 
         string exePath = Application.StartupPath;
-        string remoteVer = "http://nerdpackaddon.site/MTS/Version.txt";
-        string remoteZip = "http://nerdpackaddon.site/MTS/NerdPack_ToolBox.zip";
-        string RemoteData = "http://nerdpackaddon.site/MTS/NeP_Toolbox.xml";
+        string remoteVer = "https://raw.githubusercontent.com/MrTheSoulz/NerdPack-Tool/master/Version.txt";
+        string remoteZip = "https://github.com/MrTheSoulz/NerdPack-Tool/raw/master/NeP-ToolBox_Release.zip";
+        string RemoteData = "https://raw.githubusercontent.com/MrTheSoulz/NerdPack-Tool/master/NEP-DB.xml";
         int CurrentVersion = 16;
 
         public void WriteToFile(string pFolderPath, string toWrite)
