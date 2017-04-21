@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ToolboxData>
+  <CombatRoutines>
+    <Button>
+      <Owner>damuY</Owner>
+      <Repo>NerdPack-Yumad</Repo>
+    </Button>
+  </CombatRoutines>
+  <Plugins>
+    <Button>
+      <Owner>MrTheSoulz</Owner>
+      <Repo>NerdPack-FSH</Repo>
+    </Button>
+  </Plugins>
+</ToolboxData>
