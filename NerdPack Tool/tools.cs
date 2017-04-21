@@ -16,7 +16,7 @@ namespace NerdPackToolBox
         string remoteVer = "https://raw.githubusercontent.com/MrTheSoulz/NerdPack-Tool/master/Version.txt";
         string remoteZip = "https://github.com/MrTheSoulz/NerdPack-Tool/raw/master/NeP-ToolBox_Release.zip";
         string RemoteData = "https://raw.githubusercontent.com/MrTheSoulz/NerdPack-Tool/master/NEP-DB.xml";
-        int CurrentVersion = 16;
+        float CurrentVersion;
 
         public void WriteToFile(string pFolderPath, string toWrite)
         {
@@ -72,15 +72,20 @@ namespace NerdPackToolBox
             WriteToConsole("Running as Admin: " + weAdmin);
             bool debugger = Debugger.IsAttached;
             WriteToConsole("Attached debugger: " + debugger);
-            int rVersion = 0;
-            // Read remove version
+            float rVersion = 0;
+            // Read remote version
             try
             {
                 WebClient client = new WebClient();
                 Stream stream = client.OpenRead(remoteVer);
                 StreamReader reader = new StreamReader(stream);
-                string output = reader.ReadLine();
-                rVersion = int.Parse(output);
+                rVersion = int.Parse(reader.ReadLine());
+            }
+            catch { }
+            //read local version
+            try
+            {
+                CurrentVersion = int.Parse(File.ReadAllText(exePath + "\\Version.txt"));
             }
             catch { }
             // Are we updated?
