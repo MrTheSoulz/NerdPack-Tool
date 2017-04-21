@@ -5,11 +5,31 @@
       <Owner>damuY</Owner>
       <Repo>NerdPack-Yumad</Repo>
     </Button>
+    <Button>
+      <Owner>jrubimf</Owner>
+      <Repo>NerdPack-WinnerRubim</Repo>
+    </Button>
+    <Button>
+      <Owner>X-Xeer-X</Owner>
+      <Repo>NerdPack-Xeer</Repo>
+    </Button>
   </CombatRoutines>
   <Plugins>
     <Button>
       <Owner>MrTheSoulz</Owner>
       <Repo>NerdPack-FSH</Repo>
+    </Button>
+    <Button>
+      <Owner>MrTheSoulz</Owner>
+      <Repo>NerdPack-Overlays</Repo>
+    </Button>
+    <Button>
+      <Owner>MrTheSoulz</Owner>
+      <Repo>NerdPack-CombarHelper</Repo>
+    </Button>
+    <Button>
+      <Owner>MrTheSoulz</Owner>
+      <Repo>NerdPack-LocaleSpells</Repo>
     </Button>
   </Plugins>
 </ToolboxData>
