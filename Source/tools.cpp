@@ -10,10 +10,17 @@ void Tools::MsgBox(QString txt) {
     msgBox->exec();
 }
 
+inline const char * const BoolToString(bool b)
+{
+  return b ? "true" : "false";
+}
+
 void Tools::launchApp(QString folder, QString file) {
-    QProcess *process = new QProcess(0);
     QString str = QDir::toNativeSeparators(folder + "/" + file);
-    process->start(str);
+    bool rsl = QProcess::startDetached(str);
+    if (!rsl) {
+        this->MsgBox("Failed to open:\n"+str);
+    }
 }
 
 QString Tools::OpenExplorer(QString path) {
