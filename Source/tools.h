@@ -2,13 +2,18 @@
 #define TOOLS_H
 
 #include <QMainWindow>
+#include <string>
+
+using namespace std;
 
 class Tools
 {
 public:
-    void MsgBox();
-    void launchApp();
-    QString OpenExplorer();
+    void MsgBox(QString);
+    void launchApp(QString, QString);
+    QString OpenExplorer(QString);
+private:
+
 };
 
-#endif // TOOLS_H
+#endif

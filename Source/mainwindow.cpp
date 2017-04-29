@@ -4,6 +4,8 @@
 #include <QFileDialog>
 #include <tools.h>
 
+Tools tools;
+
 //Define bools
 #define true 1
 #define false 0
@@ -16,7 +18,7 @@
     #define OsName "Linux"
     #define IsLinux true
     #define WoWLoc "/.Wine/."
-#elif Q_OS_WIN32
+#elif _WIN32 || _WIN64
     #define OsName "Windows"
     #define IsWin true
     #define WoWLoc "C:/"
@@ -55,26 +57,26 @@ MainWindow::~MainWindow() {
 }
 
 void MainWindow::on_browse_bt_clicked() {
-   //QString dirLoc = Tools::OpenExplorer(WoWLoc);
-    //ui->wow_loc->setText(QDir::toNativeSeparators(dirLoc));
+   QString dirLoc = tools.OpenExplorer(WoWLoc);
+    ui->wow_loc->setText(dirLoc);
 }
 
 void MainWindow::on_install_bt_clicked() {
-    //Tools::MsgBox("Dummy Button");
+    tools.MsgBox("Dummy Button");
 }
 
 void MainWindow::on_refresh_bt_clicked() {
-    //Tools::MsgBox("Dummy Button");
+    tools.MsgBox("Dummy Button");
 }
 
 void MainWindow::on_wow86_bt_clicked() {
-    //Tools::launchApp(WoWLoc, "WoW.exe");
+    tools.launchApp(WoWLoc, "WoW.exe");
 }
 
 void MainWindow::on_wow64_bt_clicked(){
-    //Tools::launchApp(WoWLoc, "WoW-64.exe");
+    tools.launchApp(WoWLoc, "WoW-64.exe");
 }
 
 void MainWindow::on_wow_mac_bt_clicked() {
-    //Tools::MsgBox("Dummy Button");
+    tools.MsgBox("Dummy Button");
 }
