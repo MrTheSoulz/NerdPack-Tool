@@ -12,8 +12,8 @@ void Tools::MsgBox(QString txt) {
 
 void Tools::launchApp(QString folder, QString file) {
     QProcess *process = new QProcess(0);
-    QString str = folder + "/" + file;
-    process->start(QDir::toNativeSeparators(str));
+    QString str = QDir::toNativeSeparators(folder + "/" + file);
+    process->start(str);
 }
 
 QString Tools::OpenExplorer(QString path) {

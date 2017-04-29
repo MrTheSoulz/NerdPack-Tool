@@ -9,23 +9,26 @@ Tools tools;
 //Define bools
 #define true 1
 #define false 0
-#define IsLinux false
-#define IsWin false
-#define IsMac false
 
 //OS specific
 #ifdef Q_OS_LINUX
-    #define OsName "Linux"
-    #define IsLinux true
-    #define WoWLoc "/.Wine/."
+    QString OsName = "Linux";
+    bool IsWin = false;
+    bool IsLinux = true;
+    bool IsMac = false;
+    QString WoWLoc = "/.Wine/C:/Program Files (x86)/World of Warcraft"
 #elif _WIN32 || _WIN64
-    #define OsName "Windows"
-    #define IsWin true
-    #define WoWLoc "C:/"
+    QString OsName = "Windows";
+    bool IsWin = true;
+    bool IsLinux = false;
+    bool IsMac = false;
+    QString WoWLoc = "C:\\Program Files (x86)\\World of Warcraft";
 #elif Q_OS_DARWIN
-    #define OsName "Mac"
-    #define IsMac true
-    #define WoWLoc "/"
+    QString OsName = "MacOS";
+    bool IsWin = false;
+    bool IsLinux = false;
+    bool IsMac = true;
+    QString WoWLoc = "/Applications"
 #endif
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
@@ -59,6 +62,7 @@ MainWindow::~MainWindow() {
 void MainWindow::on_browse_bt_clicked() {
    QString dirLoc = tools.OpenExplorer(WoWLoc);
     ui->wow_loc->setText(dirLoc);
+    WoWLoc = dirLoc;
 }
 
 void MainWindow::on_install_bt_clicked() {
@@ -70,13 +74,13 @@ void MainWindow::on_refresh_bt_clicked() {
 }
 
 void MainWindow::on_wow86_bt_clicked() {
-    tools.launchApp(WoWLoc, "WoW.exe");
+    tools.launchApp(WoWLoc, "Wow.exe");
 }
 
 void MainWindow::on_wow64_bt_clicked(){
-    tools.launchApp(WoWLoc, "WoW-64.exe");
+    tools.launchApp(WoWLoc, "Wow-64.exe");
 }
 
 void MainWindow::on_wow_mac_bt_clicked() {
-    tools.MsgBox("Dummy Button");
+    tools.launchApp(WoWLoc, "World of Warcraft.app");
 }
