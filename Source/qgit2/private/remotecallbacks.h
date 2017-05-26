@@ -19,7 +19,7 @@
 #ifndef LIBQGIT2_REMOTECALLBACKS_H
 #define LIBQGIT2_REMOTECALLBACKS_H
 
-#include "qgitcredentials.h"
+#include "qgit2/qgitcredentials.h"
 #include "git2.h"
 
 namespace LibQGit2

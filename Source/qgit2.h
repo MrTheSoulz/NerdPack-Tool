@@ -58,5 +58,6 @@
 #include "qgit2/qgittag.h"
 #include "qgit2/qgittree.h"
 #include "qgit2/qgittreeentry.h"
+#include "qgit2/qgitexception.h"
 
 #endif

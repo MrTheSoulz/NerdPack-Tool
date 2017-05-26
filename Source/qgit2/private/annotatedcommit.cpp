@@ -18,7 +18,7 @@
 
 #include "annotatedcommit.h"
 #include "git2.h"
-#include "qgitexception.h"
+#include "qgit2/qgitexception.h"
 
 namespace LibQGit2
 {

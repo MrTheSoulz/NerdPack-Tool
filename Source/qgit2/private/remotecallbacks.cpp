@@ -17,9 +17,9 @@
  */
 
 #include "remotecallbacks.h"
-#include "qgitcredentials.h"
-#include "credentials_p.h"
-#include "qgitexception.h"
+#include "qgit2/qgitcredentials.h"
+#include "qgit2/credentials_p.h"
+#include "qgit2/qgitexception.h"
 
 namespace LibQGit2
 {

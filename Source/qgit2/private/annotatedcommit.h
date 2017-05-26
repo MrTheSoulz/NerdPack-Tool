@@ -19,8 +19,8 @@
 #ifndef LIBQGIT2_ANNOTATEDCOMMIT_H
 #define LIBQGIT2_ANNOTATEDCOMMIT_H
 
-#include "qgitref.h"
-#include "qgitrepository.h"
+#include "qgit2/qgitref.h"
+#include "qgit2/qgitrepository.h"
 #include "git2.h"
 #include <QSharedPointer>
 

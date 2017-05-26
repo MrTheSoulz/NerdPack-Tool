@@ -18,7 +18,7 @@
 
 #include "buffer.h"
 
-#include "private/pathcodec.h"
+#include "qgit2/private/pathcodec.h"
 
 namespace LibQGit2 {
 namespace internal {
