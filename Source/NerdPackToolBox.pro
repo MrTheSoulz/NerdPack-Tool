@@ -24,9 +24,6 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += \
-    main.cpp \
-    mainwindow.cpp \
-    tools.cpp \
     qgit2/private/annotatedcommit.cpp \
     qgit2/private/buffer.cpp \
     qgit2/private/pathcodec.cpp \
@@ -64,7 +61,11 @@ SOURCES += \
     qgit2/qgitstatusoptions.cpp \
     qgit2/qgittag.cpp \
     qgit2/qgittree.cpp \
-    qgit2/qgittreeentry.cpp
+    qgit2/qgittreeentry.cpp \
+    main.cpp \
+    mainwindow.cpp \
+    tools.cpp
+
 
 HEADERS  += \
     git2/sys/commit.h \
@@ -146,9 +147,6 @@ HEADERS  += \
     git2/types.h \
     git2/version.h \
     git2/worktree.h \
-    git2.h \
-    mainwindow.h \
-    tools.h \
     qgit2/private/annotatedcommit.h \
     qgit2/private/buffer.h \
     qgit2/private/pathcodec.h \
@@ -189,9 +187,14 @@ HEADERS  += \
     qgit2/qgittag.h \
     qgit2/qgittree.h \
     qgit2/qgittreeentry.h \
-    qgit2.h
+    git2.h \
+    mainwindow.h \
+    qgit2.h \
+    tools.h
 
-FORMS    += mainwindow.ui
+
+FORMS +=
+    mainwindow.ui
 
 RESOURCES += \
     resources.qrc
