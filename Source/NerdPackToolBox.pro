@@ -28,13 +28,11 @@ SOURCES += \
     mainwindow.cpp \
     tools.cpp
 
-
 HEADERS  += \
     mainwindow.h \
     tools.h
 
-
-FORMS +=
+FORMS += \
     mainwindow.ui
 
 RESOURCES += \
