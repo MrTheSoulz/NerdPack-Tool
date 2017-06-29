@@ -1,10 +1,11 @@
-//Libs
 #include <mainwindow.h>
-#include <ui_mainwindow.h>
-#include <QFileDialog>
+#include <downloader.h>
 #include <tools.h>
 
+using namespace std;
+
 Tools tools;
+Downloader dwl;
 
 //Define bools
 #define true 1
@@ -17,7 +18,13 @@ Tools tools;
     bool IsLinux = true;
     bool IsMac = false;
     QString WoWLoc = "/.Wine/C:/Program Files (x86)/World of Warcraft"
-#elif _WIN32 || _WIN64
+#elif _WIN32
+    QString OsName = "Windows";
+    bool IsWin = true;
+    bool IsLinux = false;
+    bool IsMac = false;
+    QString WoWLoc = "C:\\Program Files\\World of Warcraft";
+#elif _WIN64
     QString OsName = "Windows";
     bool IsWin = true;
     bool IsLinux = false;
@@ -66,7 +73,9 @@ void MainWindow::on_browse_bt_clicked() {
 }
 
 void MainWindow::on_install_bt_clicked() {
-    tools.MsgBox("Dummy Button");
+    QString Url = "https://github.com/MrTheSoulz/NerdPack-Tool/raw/master/NeP-ToolBox_Release.zip";
+    QString path = "c:\\test.zip";
+    dwl.doDownload(Url);
 }
 
 void MainWindow::on_refresh_bt_clicked() {

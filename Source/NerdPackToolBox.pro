@@ -4,7 +4,11 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT += \
+    core gui\
+    network
+
+DEFINES  += QT_NO_SSL
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -26,11 +30,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     main.cpp \
     mainwindow.cpp \
-    tools.cpp
+    tools.cpp \
+    downloader.cpp
 
 HEADERS  += \
     mainwindow.h \
-    tools.h
+    tools.h \
+    downloader.h
 
 FORMS += \
     mainwindow.ui
