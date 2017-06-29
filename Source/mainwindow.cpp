@@ -20,19 +20,22 @@ Downloader dwl;
     QString WoWLoc = "/.Wine/C:/Program Files (x86)/World of Warcraft"
 #elif _WIN32
     QString OsName = "Windows";
-    bool IsWin = true;
+    bool IsWin_64 = false;
+    bool IsWin_32 = true;
     bool IsLinux = false;
     bool IsMac = false;
     QString WoWLoc = "C:\\Program Files\\World of Warcraft";
 #elif _WIN64
     QString OsName = "Windows";
-    bool IsWin = true;
+    bool IsWin_64 = true;
+    bool IsWin_32 = true;
     bool IsLinux = false;
     bool IsMac = false;
     QString WoWLoc = "C:\\Program Files (x86)\\World of Warcraft";
 #elif Q_OS_DARWIN
     QString OsName = "MacOS";
-    bool IsWin = false;
+    bool IsWin_64 = false;
+    bool IsWin_32 = false;
     bool IsLinux = false;
     bool IsMac = true;
     QString WoWLoc = "/Applications"
@@ -47,12 +50,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     ui->wow_loc->setText(WoWLoc);
 
     //Launch Buttons
-    if (IsLinux||IsWin) {
-        ui->wow64_bt->setEnabled(true);
-        ui->wow86_bt->setEnabled(true);
-    } else if (IsMac) {
-        ui->wow_mac_bt->setEnabled(true);
-    }
+    ui->wow86_bt->setEnabled(IsWin_32);
+    ui->wow64_bt->setEnabled(IsWin_64);
+    ui->wow_mac_bt->setEnabled(IsMac);
 
     //Set BackGround
     QPixmap nep_bg(":/MyFiles/Resources/logo.png");
