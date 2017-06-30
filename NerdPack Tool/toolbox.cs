@@ -19,6 +19,7 @@ namespace NerdPackToolBox
             // Maybe save to a xml file?
             PROTECTED_CHECK.Checked = true;
             BACKUPS_CHECK.Checked = true;
+            LAUNCH_WOW64.Enabled = Environment.Is64BitOperatingSystem;
             CORE_R_COMBO.SelectedItem = "Beta";
             WoW_Launch_Combo.SelectedItem = "wow-64.exe";
             // Find WoW
@@ -33,10 +34,16 @@ namespace NerdPackToolBox
             LOG_DATA.Columns["DATA"].DefaultCellStyle.BackColor = Color.Black;
         }
 
-        // Launch WoW button
-        private void LAUNCH_BT_Click(object sender, EventArgs e)
+        // Launch WoW32 button
+        private void LAUNCH_WOW32_Click(object sender, EventArgs e)
         {
-            Process.Start(LOC_INPUT.Text + "\\" + WoW_Launch_Combo.Text);
+            Process.Start(LOC_INPUT.Text + "\\WoW.exe");
+        }
+
+        // Launch WoW64 button
+        private void LAUNCH_WOW64_Click(object sender, EventArgs e)
+        {
+            Process.Start(LOC_INPUT.Text + "\\WoW64.exe");
         }
 
         // Install / Update Button
@@ -56,6 +63,20 @@ namespace NerdPackToolBox
             BuildToolData();
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            using (var folderDialog = new FolderBrowserDialog())
+            {
+                if (folderDialog.ShowDialog() == DialogResult.OK)
+                {
+                    LOC_INPUT.Text = folderDialog.SelectedPath;
+                }
+            }
+        }
 
+        private void DONATE_BT_Click(object sender, EventArgs e)
+        {
+            Process.Start("http://goo.gl/yrctPO");
+        }
     }
 }

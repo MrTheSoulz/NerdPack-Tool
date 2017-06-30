@@ -217,6 +217,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\paypal1.png" />
     <None Include="Resources\NEPlogo.png" />
     <Content Include="FodyWeavers.xml" />
     <Content Include="NePIco.ico" />
