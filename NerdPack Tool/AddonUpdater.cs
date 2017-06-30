@@ -24,70 +24,70 @@ namespace NerdPackToolBox
             DownloadAddon("MrTheSoulz", "NerdPack");
             // Protected
             if (PROTECTED_CHECK.Checked)
-            {
                 DownloadAddon("MrTheSoulz", "NerdPack-Protected");
-            }
+
             // Combat Routines
             foreach (DataGridViewRow row in CR_DATA.Rows)
-            {
                 if ((Boolean)row.Cells["CheckBox"].Value == true)
                 {
                     string owner = (string)row.Cells["OWNER"].Value;
                     string repo = (string)row.Cells["REPO"].Value;
                     DownloadAddon(owner, repo);
                 }
-            }
+            
             // Modules
             foreach (DataGridViewRow row in MOD_DATA.Rows)
-            {
                 if ((Boolean)row.Cells["dataGridViewCheckBoxColumn1"].Value == true)
                 {
                     string owner = (string)row.Cells["dataGridViewTextBoxColumn4"].Value;
                     string repo = (string)row.Cells["dataGridViewTextBoxColumn5"].Value;
                     DownloadAddon(owner, repo);
                 }
-            }
         }
 
         // Download
         public async void DownloadAddon(string owner, string _repo)
         {
             tcount = tcount + 1;
-                var repo = await client.Repository.Get(owner, _repo);
-                string name = repo.Name;
-                string uri = repo.HtmlUrl;
-                string fileName = name + ".zip";
-                string tPath = LOC_INPUT.Text + "\\Interface\\AddOns\\" + name;
-                string text = "0.0";
-                try
-                     {
-                    // check if we need to update
-                    if (File.Exists(tPath + "\\Version.txt"))
+            var repo = await client.Repository.Get(owner, _repo);
+            string name = repo.Name;
+            string uri = repo.HtmlUrl;
+            string fileName = name + ".zip";
+            string tPath = LOC_INPUT.Text + "\\Interface\\AddOns\\" + name;
+            string text = "0.0";
+            try
+            {
+                // check if we need to update
+                if (File.Exists(tPath + "\\Version.txt"))
+                {
+                    text = File.ReadAllText(tPath + "\\Version.txt");
+                }
+                // Update IF needed
+                if (!text.Contains(repo.PushedAt.ToString()))
+                {
+                    WriteToLog("Found update for: " + name);
+                    //delete the old folder if any
+                    if (Directory.Exists(tPath))
                     {
-                        text = File.ReadAllText(tPath + "\\Version.txt");
+                        // make a backup
+                        if (BACKUPS_CHECK.Checked)
+                            BackUpFolder(tPath, name);
+
+                        DeleteRecursiveFolder(tPath); ;
                     }
-                    // Update IF needed
-                    if (!text.Contains(repo.PushedAt.ToString())) {
-                        WriteToLog("Found update for: " + name);
-                        //delete the old folder if any
-                        if (Directory.Exists(tPath))
-                        {
-                            // make a backup
-                            if (BACKUPS_CHECK.Checked)
-                            {
-                                BackUpFolder(tPath, name);
-                            }
-                            DeleteRecursiveFolder(tPath); ;
-                        }
-                        // Download using lib2Sharp
-                        LibGit2Sharp.Repository.Clone(repo.CloneUrl, tPath);
-                        // Add or version file
-                        WriteToFile(tPath + "//Version.txt", repo.PushedAt.ToString());
-                        WriteToLog("Done with:" + name);
-                } else {
-                        WriteToLog(name + " Is Up-to-date!");
-                    }
-                } catch { WriteToLog("Error while " + name); }
+                    // Download using lib2Sharp
+                    LibGit2Sharp.Repository.Clone(repo.CloneUrl, tPath);
+                    // Add or version file
+                    WriteToFile(tPath + "//Version.txt", repo.PushedAt.ToString());
+                    WriteToLog("Done with:" + name);
+                }
+                else
+                    WriteToLog(name + " Is Up-to-date!");
+            }
+            catch
+            {
+                WriteToLog("Error while " + name);
+            }
         }
 
         //Build Core Info
@@ -100,15 +100,41 @@ namespace NerdPackToolBox
                 STARS_TEXT.Text = "" + repo.StargazersCount;
                 FORKS_TEXT.Text = "" + repo.ForksCount;
                 GIT_BT.Click += (sender, args) =>
-                {
-                    Process.Start("" + repo.HtmlUrl + "/issues");
-                };
+                Process.Start("" + repo.HtmlUrl + "/issues");
             }
             catch
             {
                 UPDATED_TEXT.Text = "UNAVAILABLE";
                 STARS_TEXT.Text = "UNAVAILABLE";
                 FORKS_TEXT.Text = "UNAVAILABLE";
+            }
+        }
+
+        private async Task Build_CRAsync(string Owner, string Repo)
+        {
+            try
+            {
+                var repo = await client.Repository.Get(Owner, Repo);
+                var installed = File.Exists(LOC_INPUT.Text + "\\Interface\\AddOns\\" + repo.Name + "\\Version.txt");
+                CR_DATA.Rows.Add(installed, repo.Name, repo.Description, repo.StargazersCount, Owner, Repo);
+            }
+            catch
+            {
+                WriteToLog("ERROR: CR " + Owner + "/" + Repo + " is missing!");
+            }
+        }
+
+        private async Task Build_NodulesAsync(string Owner, string Repo)
+        {
+            try
+            {
+                var repo = await client.Repository.Get(Owner, Repo);
+                bool installed = File.Exists(LOC_INPUT.Text + "\\Interface\\AddOns\\" + repo.Name + "\\Version.txt");
+                MOD_DATA.Rows.Add(installed, repo.Name, repo.Description, repo.StargazersCount, Owner, Repo);
+            }
+            catch
+            {
+                WriteToLog("ERROR: Module " + Owner + "/" + Repo + " is missing!");
             }
         }
 
@@ -124,6 +150,7 @@ namespace NerdPackToolBox
             {
                 XmlDocument xdcDocument = new XmlDocument();
                 xdcDocument.Load(RemoteData); //found in tools.cs
+
                 //Routines
                 XmlElement xelRoot = xdcDocument.DocumentElement;
                 XmlNodeList xnlNodes = xelRoot.SelectNodes("/ToolboxData/CombatRoutines/Button");
@@ -131,34 +158,22 @@ namespace NerdPackToolBox
                 {
                     string Owner = xndNode["Owner"].InnerText;
                     string Repo = xndNode["Repo"].InnerText;
-
-                    var repo = await client.Repository.Get(Owner, Repo);
-                    var installed = false;
-                    // Check if we have it installed
-                    if (File.Exists(LOC_INPUT.Text + "\\Interface\\AddOns\\" + repo.Name + "\\Version.txt"))
-                    {
-                        installed = true;
-                    }
-                    CR_DATA.Rows.Add(installed, repo.Name, repo.Description, repo.StargazersCount, Owner, Repo);
+                    await Build_CRAsync(Owner, Repo);
                 }
+
                 // Modules
-                XmlElement xelRoot2 = xdcDocument.DocumentElement;
-                XmlNodeList xnlNodes2 = xelRoot2.SelectNodes("/ToolboxData/Plugins/Button");
-                foreach (XmlNode xndNode in xnlNodes2)
+                xnlNodes = xelRoot.SelectNodes("/ToolboxData/Plugins/Button");
+                foreach (XmlNode xndNode in xnlNodes)
                 {
                     string Owner = xndNode["Owner"].InnerText;
                     string Repo = xndNode["Repo"].InnerText;
-                    var repo = await client.Repository.Get(Owner, Repo);
-                    var installed = false;
-                    // Check if we have it installed
-                    if (File.Exists(LOC_INPUT.Text + "\\Interface\\AddOns\\" + repo.Name + "\\Version.txt"))
-                    {
-                        installed = true;
-                    }
-                    MOD_DATA.Rows.Add(installed, repo.Name, repo.Description, repo.StargazersCount, Owner, Repo);
+                    await Build_NodulesAsync(Owner, Repo);
                 }
             }
-            catch { }
+            catch
+            {
+                WriteToLog("ERROR: ´failed to load DB xml from " + RemoteData);
+            }
         }
 
     }
