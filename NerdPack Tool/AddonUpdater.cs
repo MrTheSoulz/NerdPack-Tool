@@ -29,7 +29,7 @@ namespace NerdPackToolBox
             return tcount + 1;
         }
 
-        public async Task UpdateAddonsAsync()
+        public async void UpdateAddonsAsync()
         {
             int tcount = _CountTotal();
             int current = 0;
@@ -132,7 +132,7 @@ namespace NerdPackToolBox
             }
         }
 
-        private async Task Build_CRAsync(string Owner, string Repo)
+        private async void Build_CRAsync(string Owner, string Repo)
         {
             try
             {
@@ -146,7 +146,7 @@ namespace NerdPackToolBox
             }
         }
 
-        private async Task Build_NodulesAsync(string Owner, string Repo)
+        private async void Build_NodulesAsync(string Owner, string Repo)
         {
             try
             {
@@ -180,7 +180,7 @@ namespace NerdPackToolBox
                 {
                     string Owner = xndNode["Owner"].InnerText;
                     string Repo = xndNode["Repo"].InnerText;
-                    await Build_CRAsync(Owner, Repo);
+                    Build_CRAsync(Owner, Repo);
                 }
 
                 // Modules
@@ -189,7 +189,7 @@ namespace NerdPackToolBox
                 {
                     string Owner = xndNode["Owner"].InnerText;
                     string Repo = xndNode["Repo"].InnerText;
-                    await Build_NodulesAsync(Owner, Repo);
+                    Build_NodulesAsync(Owner, Repo);
                 }
             }
             catch
