@@ -21,7 +21,6 @@ namespace NerdPackToolBox
             BACKUPS_CHECK.Checked = true;
             LAUNCH_WOW64.Enabled = Environment.Is64BitOperatingSystem;
             CORE_R_COMBO.SelectedItem = "Beta";
-            WoW_Launch_Combo.SelectedItem = "wow-64.exe";
             // Find WoW
             LOC_INPUT.Text = FindWoW();
             // Run our init stuff
@@ -73,10 +72,19 @@ namespace NerdPackToolBox
                 }
             }
         }
-
         private void DONATE_BT_Click(object sender, EventArgs e)
         {
             Process.Start("http://goo.gl/yrctPO");
+        }
+
+        private void DISCORD_BT_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://discord.gg/XtSZbjM");
+        }
+
+        private void WIKI_BT_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://github.com/MrTheSoulz/NerdPack-Tool/wiki");
         }
     }
 }
