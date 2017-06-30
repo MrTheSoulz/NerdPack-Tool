@@ -52,7 +52,7 @@ namespace NerdPackToolBox
             LOG_DATA.Rows.Clear();
             LOG_DATA.Refresh();
             LOG_DATA.Enabled = true;
-            UpdateAddons();
+            UpdateAddonsAsync();
         }
 
         //Refresh Button (Refresh data)

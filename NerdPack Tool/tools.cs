@@ -5,6 +5,7 @@ using System.IO;
 using System.IO.Compression;
 using System.Net;
 using System.Security.Principal;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace NerdPackToolBox
@@ -18,45 +19,53 @@ namespace NerdPackToolBox
         string RemoteData = "https://raw.githubusercontent.com/MrTheSoulz/NerdPack-Tool/master/NEP-DB.xml";
         float CurrentVersion;
 
-        public void WriteToFile(string pFolderPath, string toWrite)
+        public async Task WriteToFile(string pFolderPath, string toWrite)
         {
-            // if the version file Exists (user has one) remove it.
-            if (File.Exists(pFolderPath))
-                File.Delete(pFolderPath);
-
-            // add a version file
-            using (StreamWriter file = new StreamWriter(pFolderPath, true))
-                file.WriteLine(toWrite);
+            WriteToLog("Wrinting " + toWrite + " to " + pFolderPath);
+            await Task.Run(() =>
+            {
+                // add a version file
+                using (StreamWriter file = new StreamWriter(pFolderPath, false))
+                    file.WriteLine(toWrite);
+            });
         }
 
         // delete folder
-        public void DeleteRecursiveFolder(string pFolderPath)
+        public async Task DeleteRecursiveFolder(string pFolderPath)
         {
+            WriteToLog("Deleting " + pFolderPath);
             foreach (string Folder in Directory.GetDirectories(pFolderPath))
-                DeleteRecursiveFolder(Folder);
+                await DeleteRecursiveFolder(Folder);
 
-            foreach (string file in Directory.GetFiles(pFolderPath))
+            await Task.Run(() =>
             {
-                var pPath = Path.Combine(pFolderPath, file);
-                FileInfo fi = new FileInfo(pPath);
-                File.SetAttributes(pPath, FileAttributes.Normal);
-                File.Delete(file);
-            }
-            Directory.Delete(pFolderPath);
+                foreach (string file in Directory.GetFiles(pFolderPath))
+                {
+                    var pPath = Path.Combine(pFolderPath, file);
+                    FileInfo fi = new FileInfo(pPath);
+                    File.SetAttributes(pPath, FileAttributes.Normal);
+                    File.Delete(file);
+                }
+                Directory.Delete(pFolderPath);
+            });
         }
 
-        public void BackUpFolder(string pFolderPath, string name)
+        public async Task BackUpFolder(string pFolderPath, string name)
         {
-            string timestamp = "";
-            // Build the time
-            string FU = "" + DateTime.Now;
-            char[] delimiterChars = { '/', ':' };
-            string[] words = FU.Split(delimiterChars);
-            foreach (string s in words) { timestamp = timestamp + s; }
-            // create the backup folder if dosent exist
-            if (!Directory.Exists(exePath + "\\Backups"))
-                Directory.CreateDirectory(exePath + "\\Backups");
-            ZipFile.CreateFromDirectory(pFolderPath, exePath + "\\Backups\\" + name + " - " + timestamp + ".zip");
+            WriteToLog("Backing up " + name);
+            await Task.Run(() =>
+            {
+                string timestamp = "";
+                // Build the time
+                string FU = "" + DateTime.Now;
+                char[] delimiterChars = { '/', ':' };
+                string[] words = FU.Split(delimiterChars);
+                foreach (string s in words) { timestamp = timestamp + s; }
+                // create the backup folder if dosent exist
+                if (!Directory.Exists(exePath + "\\Backups"))
+                    Directory.CreateDirectory(exePath + "\\Backups");
+                ZipFile.CreateFromDirectory(pFolderPath, exePath + "\\Backups\\" + name + " - " + timestamp + ".zip");
+            });
         }
 
         public void CheckSelfUpdates()

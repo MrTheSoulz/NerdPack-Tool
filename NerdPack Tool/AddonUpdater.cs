@@ -14,17 +14,36 @@ namespace NerdPackToolBox
 
         static InMemoryCredentialStore credentials = new InMemoryCredentialStore(new Credentials("30056b2d3c0ae1b13319d6aa8d997e5ffc9cfcec"));
         static GitHubClient client = new GitHubClient(new ProductHeaderValue("NerdPack-Tool"), credentials);
-        int tcount = 0;
 
-        public void UpdateAddons()
+        private int _CountTotal()
         {
-            tcount = 0;
-            progressBar1.Value = 0;
+            int tcount = 0;
+            foreach (DataGridViewRow row in CR_DATA.Rows)
+                if ((Boolean)row.Cells["CheckBox"].Value == true)
+                    tcount++;
+            foreach (DataGridViewRow row in MOD_DATA.Rows)
+                if ((Boolean)row.Cells["dataGridViewCheckBoxColumn1"].Value == true)
+                    tcount++;
+            if (PROTECTED_CHECK.Checked)
+                tcount++;
+            return tcount + 1;
+        }
+
+        public async Task UpdateAddonsAsync()
+        {
+            int tcount = _CountTotal();
+            int current = 0;
+
             // Core
-            DownloadAddon("MrTheSoulz", "NerdPack");
+            await DownloadAddon("MrTheSoulz", "NerdPack");
+            current++;
+            progressBar1.Value = (current / tcount) * 100;
+
             // Protected
             if (PROTECTED_CHECK.Checked)
-                DownloadAddon("MrTheSoulz", "NerdPack-Protected");
+                await DownloadAddon("MrTheSoulz", "NerdPack-Protected");
+            current++;
+            progressBar1.Value = (current / tcount) * 100;
 
             // Combat Routines
             foreach (DataGridViewRow row in CR_DATA.Rows)
@@ -32,23 +51,26 @@ namespace NerdPackToolBox
                 {
                     string owner = (string)row.Cells["OWNER"].Value;
                     string repo = (string)row.Cells["REPO"].Value;
-                    DownloadAddon(owner, repo);
+                    await DownloadAddon(owner, repo);
+                    current++;
+                    progressBar1.Value = (current / tcount) * 100;
                 }
-            
+
             // Modules
             foreach (DataGridViewRow row in MOD_DATA.Rows)
                 if ((Boolean)row.Cells["dataGridViewCheckBoxColumn1"].Value == true)
                 {
                     string owner = (string)row.Cells["dataGridViewTextBoxColumn4"].Value;
                     string repo = (string)row.Cells["dataGridViewTextBoxColumn5"].Value;
-                    DownloadAddon(owner, repo);
+                    await DownloadAddon(owner, repo);
+                    current++;
+                    progressBar1.Value = (current / tcount) * 100;
                 }
         }
 
         // Download
-        public async void DownloadAddon(string owner, string _repo)
+        public async Task DownloadAddon(string owner, string _repo)
         {
-            tcount = tcount + 1;
             var repo = await client.Repository.Get(owner, _repo);
             string name = repo.Name;
             string uri = repo.HtmlUrl;
@@ -59,9 +81,8 @@ namespace NerdPackToolBox
             {
                 // check if we need to update
                 if (File.Exists(tPath + "\\Version.txt"))
-                {
                     text = File.ReadAllText(tPath + "\\Version.txt");
-                }
+
                 // Update IF needed
                 if (!text.Contains(repo.PushedAt.ToString()))
                 {
@@ -71,14 +92,15 @@ namespace NerdPackToolBox
                     {
                         // make a backup
                         if (BACKUPS_CHECK.Checked)
-                            BackUpFolder(tPath, name);
+                            await BackUpFolder(tPath, name);
 
-                        DeleteRecursiveFolder(tPath); ;
+                        await DeleteRecursiveFolder(tPath); ;
                     }
                     // Download using lib2Sharp
-                    LibGit2Sharp.Repository.Clone(repo.CloneUrl, tPath);
+                    WriteToLog("Downloading " + name);
+                    await Task.Run(() => LibGit2Sharp.Repository.Clone(repo.CloneUrl, tPath));
                     // Add or version file
-                    WriteToFile(tPath + "//Version.txt", repo.PushedAt.ToString());
+                    await WriteToFile(tPath + "//Version.txt", repo.PushedAt.ToString());
                     WriteToLog("Done with:" + name);
                 }
                 else
