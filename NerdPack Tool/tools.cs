@@ -22,23 +22,19 @@ namespace NerdPackToolBox
         {
             // if the version file Exists (user has one) remove it.
             if (File.Exists(pFolderPath))
-            {
                 File.Delete(pFolderPath);
-            }
+
             // add a version file
             using (StreamWriter file = new StreamWriter(pFolderPath, true))
-            {
                 file.WriteLine(toWrite);
-            }
         }
 
         // delete folder
         public void DeleteRecursiveFolder(string pFolderPath)
         {
             foreach (string Folder in Directory.GetDirectories(pFolderPath))
-            {
                 DeleteRecursiveFolder(Folder);
-            }
+
             foreach (string file in Directory.GetFiles(pFolderPath))
             {
                 var pPath = Path.Combine(pFolderPath, file);
@@ -59,9 +55,7 @@ namespace NerdPackToolBox
             foreach (string s in words) { timestamp = timestamp + s; }
             // create the backup folder if dosent exist
             if (!Directory.Exists(exePath + "\\Backups"))
-            {
                 Directory.CreateDirectory(exePath + "\\Backups");
-            }
             ZipFile.CreateFromDirectory(pFolderPath, exePath + "\\Backups\\" + name + " - " + timestamp + ".zip");
         }
 
@@ -92,10 +86,8 @@ namespace NerdPackToolBox
             if (CurrentVersion < rVersion && !debugger)
             {
                 WriteToConsole("Found Update (" + rVersion + "), downloadig:");
-                {
-                    WebClient Client = new WebClient();
-                    Client.DownloadFile(remoteZip, exePath + "\\NerdPack_ToolBox_Update.zip");
-                }
+                WebClient Client = new WebClient();
+                Client.DownloadFile(remoteZip, exePath + "\\NerdPack_ToolBox_Update.zip");
                 WriteToConsole("This will now close, extras:");
                 WriteToConsole(exePath + "\\NerdPack_ToolBox_Update.zip");
                 WriteToConsole("Closing in 5 seconds...");
@@ -103,9 +95,8 @@ namespace NerdPackToolBox
                 ExitTool();
             }
             else
-            {
                 WriteToConsole("No Update found...");
-            }
+
             System.Threading.Thread.Sleep(2000);
             Program.FreeConsole();
         }
@@ -140,7 +131,14 @@ namespace NerdPackToolBox
 
         public string FindWoW()
         {
-            var pKey = Registry.LocalMachine.OpenSubKey(@"Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall");
+            // reg location for wow
+            string reg_loc;
+            if (Environment.Is64BitOperatingSystem)
+                reg_loc = @"Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall";
+            else
+                reg_loc = @"Software\Microsoft\Windows\CurrentVersion\Uninstall";
+
+            var pKey = Registry.LocalMachine.OpenSubKey(reg_loc);
             string[] nameList = pKey.GetSubKeyNames();
             for (int i = 0; i < nameList.Length; i++)
             {
@@ -148,9 +146,7 @@ namespace NerdPackToolBox
                 try
                 {
                     if (regKey.GetValue("DisplayName").ToString() == "World of Warcraft")
-                    {
                         return regKey.GetValue("InstallLocation").ToString();
-                    }
                 }
                 catch { }
             }
@@ -160,15 +156,11 @@ namespace NerdPackToolBox
         public void ExitTool()
         {
             if (Application.MessageLoop)
-            {
                 // WinForms app
                 Application.Exit();
-            }
             else
-            {
                 // Console app
                 Environment.Exit(1);
-            }
         }
 
     }
