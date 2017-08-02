@@ -138,7 +138,7 @@ namespace NerdPackToolBox
             {
                 var repo = await client.Repository.Get(Owner, Repo);
                 var installed = File.Exists(LOC_INPUT.Text + "\\Interface\\AddOns\\" + repo.Name + "\\Version.txt");
-                CR_DATA.Rows.Add(installed, repo.Name, repo.Description, repo.StargazersCount, Owner, Repo);
+                CR_DATA.Rows.Add(installed, repo.Name, repo.Description, repo.StargazersCount, Owner, Repo, repo.UpdatedAt);
             }
             catch
             {
@@ -152,7 +152,7 @@ namespace NerdPackToolBox
             {
                 var repo = await client.Repository.Get(Owner, Repo);
                 bool installed = File.Exists(LOC_INPUT.Text + "\\Interface\\AddOns\\" + repo.Name + "\\Version.txt");
-                MOD_DATA.Rows.Add(installed, repo.Name, repo.Description, repo.StargazersCount, Owner, Repo);
+                MOD_DATA.Rows.Add(installed, repo.Name, repo.Description, repo.StargazersCount, Owner, Repo, repo.UpdatedAt);
             }
             catch
             {
