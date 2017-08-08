@@ -61,6 +61,10 @@
       <Owner>Kleei</Owner>
       <Repo>NerdPack-Kleei</Repo>
     </Button>
+    <Button>
+      <Owner>wink-</Owner>
+      <Repo>NerdPack-Camby</Repo>
+    </Button>
   </CombatRoutines>
   <Plugins>
     <Button>
