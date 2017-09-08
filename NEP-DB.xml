@@ -91,9 +91,5 @@
       <Owner>heistcode</Owner>
       <Repo>NerdPack-CustomKeybinds</Repo>
     </Button>
-    <Button>
-      <Owner>heistcode</Owner>
-      <Repo>NerdPack-TargetLock</Repo>
-    </Button>
   </Plugins>
 </ToolboxData>
