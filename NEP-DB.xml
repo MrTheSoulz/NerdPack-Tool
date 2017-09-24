@@ -65,6 +65,10 @@
       <Owner>wink-</Owner>
       <Repo>NerdPack-Camby</Repo>
     </Button>
+    <Button>
+      <Owner>Invalidnam3</Owner>
+      <Repo>NerdPack-Invalid</Repo>
+    </Button>
   </CombatRoutines>
   <Plugins>
     <Button>
