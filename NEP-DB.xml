@@ -69,6 +69,10 @@
       <Owner>Invalidnam3</Owner>
       <Repo>NerdPack-Invalid</Repo>
     </Button>
+    <Button>
+      <Owner>Bee-7</Owner>
+      <Repo>NerdPack-Bee7</Repo>
+    </Button>
   </CombatRoutines>
   <Plugins>
     <Button>
