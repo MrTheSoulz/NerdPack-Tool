@@ -62,6 +62,10 @@
       <Repo>NerdPack-Kleei</Repo>
     </Button>
     <Button>
+      <Owner>Kleei</Owner>
+      <Repo>NerdPack-Kleei-2.0</Repo>
+    </Button>
+    <Button>
       <Owner>wink-</Owner>
       <Repo>NerdPack-Camby</Repo>
     </Button>
