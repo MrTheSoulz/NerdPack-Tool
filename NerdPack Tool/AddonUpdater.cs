@@ -75,7 +75,7 @@ namespace NerdPackToolBox
             string name = repo.Name;
             string uri = repo.HtmlUrl;
             string fileName = name + ".zip";
-            string tPath = LOC_INPUT.Text + "\\Interface\\AddOns\\" + name;
+            string tPath = LOC_INPUT.Text + (legacyCB.Checked ? "" : "\\_retail_") + "\\Interface\\AddOns\\" + name;
             string text = "0.0";
             try
             {
@@ -132,7 +132,9 @@ namespace NerdPackToolBox
             }
         }
 
-        private async void Build_CRAsync(string Owner, string Repo)
+        private async 
+        Task
+Build_CRAsync(string Owner, string Repo)
         {
             try
             {
@@ -146,7 +148,9 @@ namespace NerdPackToolBox
             }
         }
 
-        private async void Build_NodulesAsync(string Owner, string Repo)
+        private async 
+        Task
+Build_NodulesAsync(string Owner, string Repo)
         {
             try
             {
@@ -180,7 +184,7 @@ namespace NerdPackToolBox
                 {
                     string Owner = xndNode["Owner"].InnerText;
                     string Repo = xndNode["Repo"].InnerText;
-                    Build_CRAsync(Owner, Repo);
+                    await Build_CRAsync(Owner, Repo);
                 }
 
                 // Modules
@@ -189,7 +193,7 @@ namespace NerdPackToolBox
                 {
                     string Owner = xndNode["Owner"].InnerText;
                     string Repo = xndNode["Repo"].InnerText;
-                    Build_NodulesAsync(Owner, Repo);
+                    await Build_NodulesAsync(Owner, Repo);
                 }
             }
             catch
